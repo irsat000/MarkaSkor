@@ -1,9 +1,11 @@
-import { MyHeader } from './components/Header';
+
+import { HomePage } from './pages/Home';
+import { DiscoverPage } from './pages/Home';
 
 const App = () => {
   return (
     <>
-      <MyHeader />
+      <HomePage />
     </>
   )
 }

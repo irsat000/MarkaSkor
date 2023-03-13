@@ -1,0 +1,20 @@
+:root,
+.darkmode {
+    --font-color1: #ffffff;
+    --body-bg: #292929;
+
+    //template
+    --search-bgcolor: #3d3d3d;
+    --search-bordercolor: #585858;
+    --account-icon: #EFEFEF;
+}
+
+.lightmode {
+    --font-color1: #282828;
+    --body-bg: #EFEEF3;
+
+    //template
+    --search-bgcolor: #EFEFEF;
+    --search-bordercolor: #a2a2a2;
+    --account-icon: #656565;
+}
