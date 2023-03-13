@@ -52,13 +52,12 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100vh;
 
     nav {
         flex-shrink: 0;
         width: 26%;
         max-width: 200px;
-        border-right: 1px solid #8B8B8B;
+        border-right: 1px solid var(--nav-border);
         display: none;
         flex-direction: column;
 
@@ -71,7 +70,7 @@ body {
         }
     }
 
-    aside {
+    section {
         flex-grow: 1;
     }
 }
@@ -136,21 +135,27 @@ header {
             flex-direction: row;
             align-items: center;
             gap: 14px;
+            margin-left: auto;
 
-            .search-desktop-cont {
+            .search-header_desktop-cont {
                 display: flex;
                 position: relative;
 
                 input {
                     all: unset;
-                    width: 200px;
+                    width: 160px;
                     padding: 11px 35px 10px 8px;
                     border-radius: 6px;
                     border: 1px solid var(--search-bordercolor);
                     background-color: var(--search-bgcolor);
+                    transition: width 0.1s ease;
+
+                    &:focus {
+                        width: 240px;
+                    }
                 }
 
-                .input_search-icon {
+                .search_input-icon {
                     height: 1.1rem;
                     width: 1.1rem;
                     position: absolute;
@@ -193,6 +198,102 @@ header {
 
 
 
+.main-sectors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+
+    .mainpage_heading {
+        width: 100%;
+        padding: 0px 10px 20px;
+        text-align: center;
+        font-size: 2rem;
+        font-family: 'Julius Sans One', sans-serif;
+    }
+
+    .search-main-cont {
+        display: flex;
+        position: relative;
+        width: 80%;
+        max-width: 500px;
+
+        input {
+            all: unset;
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 13px 50px 12px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--search-bordercolor);
+            background-color: var(--search-bgcolor);
+            transition: width 0.1s ease;
+        }
+
+        .search_input-icon {
+            height: 1.4rem;
+            width: 1.4rem;
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+        }
+    }
+
+    .sectors_heading {
+        text-align: center;
+        padding: 20px;
+        font-size: 1.7rem;
+        font-family: 'Laila', sans-serif;
+    }
+
+    article {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px 16px;
+
+        .sector_item {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Life Savers', cursive;
+            width: 100px;
+            border-radius: 6px;
+            background-color: var(--sectorItem-bgcolor);
+            border: 1px solid var(--sectorItem-bordercolor);
+            transition: all 0.1s ease;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--sectorItem-hover-bgcolor);
+                border: 1px solid var(--sectorItem-hover-bordercolor);
+            }
+
+            .sector_item_img-cont {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                padding-top: 10px;
+
+                img {
+                    width: 70%;
+                    height: auto;
+                }
+            }
+
+            span {
+                font-size: 1rem;
+                padding: 10px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+
+
 @media (min-width: 281px) {
     header {
         padding: 15px 18px;
@@ -212,7 +313,8 @@ header {
         nav {
             display: flex;
         }
-        aside {
+
+        section {
             padding: 15px 18px;
         }
     }
@@ -230,6 +332,22 @@ header {
             display: none;
         }
     }
+
+    .main-sectors {
+        margin: 30px 10px;
+
+        .mainpage_heading {
+            display: none;
+        }
+
+        .search-main-cont {
+            margin-bottom: 20px;
+
+            input {
+                padding: 17px 50px 15px 12px;
+            }
+        }
+    }
 }
 
 // Large devices (desktops, 992px and up)
@@ -237,8 +355,19 @@ header {
     .page_content {
         nav {
             max-width: 260px;
-            .nav_logo-cont{
+
+            .nav_logo-cont {
                 font-size: 1.4rem;
+            }
+        }
+    }
+
+    .main-sectors {
+        article {
+            max-width: 80%;
+
+            .sector_item {
+                width: 120px;
             }
         }
     }

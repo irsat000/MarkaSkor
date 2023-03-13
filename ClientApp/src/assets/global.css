@@ -50,13 +50,12 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100vh;
 }
 .page_content nav {
   flex-shrink: 0;
   width: 26%;
   max-width: 200px;
-  border-right: 1px solid #8B8B8B;
+  border-right: 1px solid var(--nav-border);
   display: none;
   flex-direction: column;
 }
@@ -67,7 +66,7 @@ body {
   font-size: 1rem;
   font-family: "Julius Sans One", sans-serif;
 }
-.page_content aside {
+.page_content section {
   flex-grow: 1;
 }
 
@@ -123,20 +122,25 @@ header .desktop_header .header_actions {
   flex-direction: row;
   align-items: center;
   gap: 14px;
+  margin-left: auto;
 }
-header .desktop_header .header_actions .search-desktop-cont {
+header .desktop_header .header_actions .search-header_desktop-cont {
   display: flex;
   position: relative;
 }
-header .desktop_header .header_actions .search-desktop-cont input {
+header .desktop_header .header_actions .search-header_desktop-cont input {
   all: unset;
-  width: 200px;
+  width: 160px;
   padding: 11px 35px 10px 8px;
   border-radius: 6px;
   border: 1px solid var(--search-bordercolor);
   background-color: var(--search-bgcolor);
+  transition: width 0.1s ease;
 }
-header .desktop_header .header_actions .search-desktop-cont .input_search-icon {
+header .desktop_header .header_actions .search-header_desktop-cont input:focus {
+  width: 240px;
+}
+header .desktop_header .header_actions .search-header_desktop-cont .search_input-icon {
   height: 1.1rem;
   width: 1.1rem;
   position: absolute;
@@ -169,6 +173,88 @@ header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   opacity: 1;
 }
 
+.main-sectors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.main-sectors .mainpage_heading {
+  width: 100%;
+  padding: 0px 10px 20px;
+  text-align: center;
+  font-size: 2rem;
+  font-family: "Julius Sans One", sans-serif;
+}
+.main-sectors .search-main-cont {
+  display: flex;
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+}
+.main-sectors .search-main-cont input {
+  all: unset;
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 13px 50px 12px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--search-bordercolor);
+  background-color: var(--search-bgcolor);
+  transition: width 0.1s ease;
+}
+.main-sectors .search-main-cont .search_input-icon {
+  height: 1.4rem;
+  width: 1.4rem;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+}
+.main-sectors .sectors_heading {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.7rem;
+  font-family: "Laila", sans-serif;
+}
+.main-sectors article {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 16px;
+}
+.main-sectors article .sector_item {
+  display: flex;
+  flex-direction: column;
+  font-family: "Life Savers", cursive;
+  width: 100px;
+  border-radius: 6px;
+  background-color: var(--sectorItem-bgcolor);
+  border: 1px solid var(--sectorItem-bordercolor);
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+.main-sectors article .sector_item:hover {
+  background-color: var(--sectorItem-hover-bgcolor);
+  border: 1px solid var(--sectorItem-hover-bordercolor);
+}
+.main-sectors article .sector_item .sector_item_img-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+.main-sectors article .sector_item .sector_item_img-cont img {
+  width: 70%;
+  height: auto;
+}
+.main-sectors article .sector_item span {
+  font-size: 1rem;
+  padding: 10px;
+  text-align: center;
+}
+
 @media (min-width: 281px) {
   header {
     padding: 15px 18px;
@@ -181,7 +267,7 @@ header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   .page_content nav {
     display: flex;
   }
-  .page_content aside {
+  .page_content section {
     padding: 15px 18px;
   }
   header {
@@ -195,6 +281,18 @@ header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   header .mobile_header {
     display: none;
   }
+  .main-sectors {
+    margin: 30px 10px;
+  }
+  .main-sectors .mainpage_heading {
+    display: none;
+  }
+  .main-sectors .search-main-cont {
+    margin-bottom: 20px;
+  }
+  .main-sectors .search-main-cont input {
+    padding: 17px 50px 15px 12px;
+  }
 }
 @media (min-width: 992px) {
   .page_content nav {
@@ -202,5 +300,11 @@ header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   }
   .page_content nav .nav_logo-cont {
     font-size: 1.4rem;
+  }
+  .main-sectors article {
+    max-width: 80%;
+  }
+  .main-sectors article .sector_item {
+    width: 120px;
   }
 }/*# sourceMappingURL=global.css.map */
