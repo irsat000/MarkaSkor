@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #18ff00;
+      }
+
+      .cls-2 {
+        fill: #ecbd00;
+      }
+
+      .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-4, .cls-6 {
+        fill: red;
+      }
+
+      .cls-5 {
+        fill: #fff600;
+      }
+    </style>
+  </defs>
+  <circle id="Ellipse_3_copy" data-name="Ellipse 3 copy" class="cls-1" cx="512" cy="512" r="512"/>
+  <circle class="cls-2" cx="512" cy="512" r="481.656"/>
+  <path id="Line_1_copy" data-name="Line 1 copy" class="cls-3" d="M511.684,693V673H798.316v20H511.684Z"/>
+  <path id="Line_1_copy_2" data-name="Line 1 copy 2" class="cls-4" d="M224.684,693V673H511.316v20H224.684Z"/>
+  <path id="Line_1_copy_3" data-name="Line 1 copy 3" class="cls-4" d="M158.993,750.2l15.413,12.788,65.607-77.209L224.6,672.993Z"/>
+  <path id="Line_1_copy_4" data-name="Line 1 copy 4" class="cls-3" d="M865.007,615.8L849.594,603.01l-65.607,77.209L799.4,693.007Z"/>
+  <circle class="cls-1" cx="368.5" cy="373.5" r="98.5"/>
+  <circle id="Ellipse_2_copy_2" data-name="Ellipse 2 copy 2" class="cls-5" cx="368.5" cy="373.5" r="26.5"/>
+  <circle id="Ellipse_2_copy" data-name="Ellipse 2 copy" class="cls-6" cx="655.5" cy="373.5" r="98.5"/>
+  <circle id="Ellipse_2_copy_3" data-name="Ellipse 2 copy 3" class="cls-5" cx="655.5" cy="373.5" r="26.5"/>
+</svg>

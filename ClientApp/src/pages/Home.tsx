@@ -1,6 +1,8 @@
+import React from 'react';
 import { Search } from 'react-bootstrap-icons';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
+import sectorsData from '../data/sectors.json';
 
 export const HomePage = () => {
     return (
@@ -20,7 +22,23 @@ export const HomePage = () => {
                         <span>Sektörler</span>
                     </div>
                     <article>
-                        <div className='sector_item'>
+                        {sectorsData.map((sector) => (
+                            <div className='sector_item' key={sector.id}>
+                                <div className='sector_item_img-cont'>
+                                    <img src={require(`../assets/images/sectors/${sector.img}`)} alt={sector.sectorName} />
+                                </div>
+                                <span>{sector.sectorName}</span>
+                            </div>
+                        ))}
+                    </article>
+                </main>
+            </section>
+        </div>
+    )
+};
+
+
+                        /*<div className='sector_item'>
                             <div className='sector_item_img-cont'>
                                 <img src={require('../assets/images/sectors/goods.png')} alt='Tüketim' />
                             </div>
@@ -85,10 +103,4 @@ export const HomePage = () => {
                                 <img src={require('../assets/images/sectors/service.png')} alt='Servis' />
                             </div>
                             <span>Servis</span>
-                        </div>
-                    </article>
-                </main>
-            </section>
-        </div>
-    )
-};
+                        </div>*/

@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "img": "goods.png",
+        "sectorName": "Tüketim"
+    },
+    {
+        "id": 2,
+        "img": "technology.png",
+        "sectorName": "Teknoloji"
+    },
+    {
+        "id": 3,
+        "img": "fashion.png",
+        "sectorName": "Moda"
+    },
+    {
+        "id": 4,
+        "img": "retail.png",
+        "sectorName": "Perakende"
+    },
+    {
+        "id": 5,
+        "img": "automotive.png",
+        "sectorName": "Otomotiv"
+    },
+    {
+        "id": 6,
+        "img": "education.png",
+        "sectorName": "Eğitim"
+    },
+    {
+        "id": 7,
+        "img": "finance.png",
+        "sectorName": "Finans"
+    },
+    {
+        "id": 8,
+        "img": "energy.png",
+        "sectorName": "Enerji"
+    },
+    {
+        "id": 9,
+        "img": "travel.png",
+        "sectorName": "Seyahat"
+    },
+    {
+        "id": 10,
+        "img": "health.png",
+        "sectorName": "Sağlık"
+    },
+    {
+        "id": 11,
+        "img": "service.png",
+        "sectorName": "Servis"
+    }
+]

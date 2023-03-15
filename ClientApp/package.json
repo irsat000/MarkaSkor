@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react": "^18.0.28",
     "http-proxy-middleware": "^2.0.6",
     "merge": "^2.1.1",
     "oidc-client": "^1.11.5",
@@ -29,6 +30,7 @@
     "workbox-streams": "^6.5.4"
   },
   "devDependencies": {
+    "@types/react-dom": "^18.0.11",
     "ajv": "^8.11.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.22.0",

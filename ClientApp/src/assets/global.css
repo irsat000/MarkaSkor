@@ -51,7 +51,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
 }
-.page_content nav {
+.page_content .desktop_nav {
   flex-shrink: 0;
   width: 26%;
   max-width: 200px;
@@ -59,7 +59,7 @@ body {
   display: none;
   flex-direction: column;
 }
-.page_content nav .nav_logo-cont {
+.page_content .desktop_nav .nav_logo-cont {
   width: 100%;
   padding: 20px 10px;
   text-align: center;
@@ -107,6 +107,7 @@ header .desktop_header {
   justify-content: space-between;
   gap: 20px;
   overflow: hidden;
+  padding: 0 3%;
 }
 header .desktop_header .page_title {
   display: flex;
@@ -171,6 +172,38 @@ header .desktop_header .header_actions .menu-cont .dropdown_menu-icon {
 }
 header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   opacity: 1;
+}
+header .drawer-cont.active {
+  left: 0;
+  width: 100%;
+}
+header .drawer-cont.active .drawer {
+  width: 260px;
+}
+header .drawer-cont {
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -50px;
+  right: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4392156863);
+  z-index: 400;
+  width: 0;
+}
+header .drawer-cont .drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  max-width: 85%;
+  width: 0px;
+  background-color: #23958f;
+  transition: width 0.2s ease-in-out;
+  z-index: 401;
 }
 
 .main-sectors {
@@ -264,7 +297,7 @@ header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   html {
     font-size: 16px;
   }
-  .page_content nav {
+  .page_content .desktop_nav {
     display: flex;
   }
   .page_content section {
@@ -281,6 +314,9 @@ header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   header .mobile_header {
     display: none;
   }
+  header .drawer-cont {
+    display: none;
+  }
   .main-sectors {
     margin: 30px 10px;
   }
@@ -295,10 +331,10 @@ header .desktop_header .header_actions .menu-cont:hover .dropdown_menu-icon {
   }
 }
 @media (min-width: 992px) {
-  .page_content nav {
+  .page_content .desktop_nav {
     max-width: 260px;
   }
-  .page_content nav .nav_logo-cont {
+  .page_content .desktop_nav .nav_logo-cont {
     font-size: 1.4rem;
   }
   .main-sectors article {
