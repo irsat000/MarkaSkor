@@ -6,7 +6,7 @@ import { AppHeader } from '../components/template/Header';
 export const DiscoverPage = () => {
     return (
         <>
-            <AppHeader />
+            <AppHeader page="Discover"/>
         </>
     )
 };

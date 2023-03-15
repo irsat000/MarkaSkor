@@ -1,11 +1,16 @@
 :root,
 .darkmode {
   --font-color1: #ffffff;
+  --font-color2: #cecece;
   --body-bg: #292929;
   --nav-border: #5b5b5b;
   --search-bgcolor: #3d3d3d;
   --search-bordercolor: #585858;
   --account-icon: #EFEFEF;
+  --dropdownMenu-bgcolor: #3d3d3d;
+  --dropdownMenu-hover-bgcolor: #525252;
+  --dropdownMenu-bordercolor: #6b6b6b;
+  --dropdownMenu-fontcolor: #cecece;
   --sectorItem-bgcolor: #343434;
   --sectorItem-bordercolor: #545454;
   --sectorItem-hover-bgcolor: #4a4a4a;
@@ -14,11 +19,16 @@
 
 .lightmode {
   --font-color1: #282828;
+  --font-color2: #6f6f6f;
   --body-bg: #EFEEF3;
   --nav-border: #c4c4c4;
   --search-bgcolor: #EFEFEF;
   --search-bordercolor: #a2a2a2;
   --account-icon: #656565;
+  --dropdownMenu-bgcolor: #f5f5f5;
+  --dropdownMenu-hover-bgcolor: #ffffff;
+  --dropdownMenu-bordercolor: #c0c0c0;
+  --dropdownMenu-fontcolor: #6f6f6f;
   --sectorItem-bgcolor: #FBFBFB;
   --sectorItem-bordercolor: #dddddd;
   --sectorItem-hover-bgcolor: #ffffff;
