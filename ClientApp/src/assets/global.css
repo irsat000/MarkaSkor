@@ -58,13 +58,58 @@ body {
   border-right: 1px solid var(--nav-border);
   display: none;
   flex-direction: column;
+  padding-top: 20px;
 }
 .page_content .desktop_nav .nav_logo-cont {
-  width: 100%;
-  padding: 20px 10px;
-  text-align: center;
+  padding: 10px;
+  margin: 10px 0;
   font-size: 1rem;
   font-family: "Julius Sans One", sans-serif;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.page_content .desktop_nav .nav_logo-cont img {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.page_content .desktop_nav .nav_useful_links {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 20px 0;
+  gap: 16px;
+  max-width: 98%;
+}
+.page_content .desktop_nav .nav_useful_links li {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  cursor: pointer;
+  padding: 12px 24px;
+  transition: background-color 0.1s ease;
+  background-color: var(--nav-usefullinks-bgcolor);
+  border-radius: 5px;
+  border: 1px solid var(--nav-border);
+}
+.page_content .desktop_nav .nav_useful_links li:hover {
+  background-color: var(--nav-usefullinks-hover-bgcolor);
+}
+.page_content .desktop_nav .nav_useful_links li .nav_link_icon-cont {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+.page_content .desktop_nav .nav_useful_links li span {
+  font-size: 1.1rem;
+  white-space: nowrap;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
 }
 .page_content section {
   flex-grow: 1;
@@ -226,14 +271,14 @@ header .drawer-cont.active {
   width: 100%;
 }
 header .drawer-cont.active .drawer {
-  width: 260px;
+  left: 0;
 }
 header .drawer-cont {
   display: flex;
   position: fixed;
   top: 0;
   bottom: 0;
-  left: -50px;
+  left: -10px;
   right: 0;
   height: 100%;
   overflow: hidden;
@@ -245,13 +290,85 @@ header .drawer-cont .drawer {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  left: -270px;
+  width: 260px;
   height: 100%;
   max-width: 85%;
-  width: 0px;
-  background-color: #23958f;
-  transition: width 0.2s ease-in-out;
+  background-color: var(--drawer-bgcolor);
+  transition: all 0.2s ease-in-out;
   z-index: 401;
+  display: flex;
+  flex-direction: column;
+}
+header .drawer-cont .drawer .dr-account-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 16px;
+  background-color: #38985a;
+  margin-bottom: 10px;
+  position: relative;
+  color: #ffffff;
+}
+header .drawer-cont .drawer .dr-account-cont .dr-closeDrawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2.4rem;
+  display: flex;
+  padding: 10px;
+}
+header .drawer-cont .drawer .dr-account-cont .dr-profilePic-cont img {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+header .drawer-cont .drawer .dr-account-cont .dr-account_info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+header .drawer-cont .drawer .dr-account-cont .dr-account_info .dr-account_username {
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;
+}
+header .drawer-cont .drawer .dr-account-cont .dr-account_info .dr-account_email {
+  font-size: 0.9rem;
+  font-family: "Shantell Sans", cursive;
+}
+header .drawer-cont .drawer .dr-link_groups-cont {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_heading {
+  padding: 10px 12px 10px;
+  font-size: 1.2rem;
+  font-family: "Laila", sans-serif;
+  font-weight: 400;
+}
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_account,
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general {
+  display: flex;
+  flex-direction: column;
+}
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_account li a,
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_account li a .dr-link_icon,
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a .dr-link_icon {
+  font-size: 1.4rem;
+}
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_account li a span,
+header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
+  font-size: 1.4rem;
+  font-family: "Shantell Sans", cursive;
 }
 
 .main-sectors {
