@@ -85,7 +85,7 @@ const DesktopHeader = (props: {
     return (
         <div className='desktop_header'>
             <div className='page_title'>
-                <span>Anasayfa</span>
+                <span>{props.page}</span>
             </div>
             <div className='header_actions'>
                 {props.page !== 'Anasayfa' ?

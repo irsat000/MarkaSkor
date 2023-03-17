@@ -1,11 +1,11 @@
 import React from 'react';
-import { HomePage } from './pages/Home';
-import { DiscoverPage } from './pages/Discover';
+import { Page_Home } from './pages/Home';
+import { Page_Discover } from './pages/Discover';
 
 const App = () => {
   return (
     <>
-      <HomePage />
+      <Page_Discover />
     </>
   )
 }

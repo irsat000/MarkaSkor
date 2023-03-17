@@ -4,13 +4,13 @@ import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 import sectorsData from '../data/sectors.json';
 
-export const HomePage = () => {
+export const Page_Home = () => {
     return (
         <div className='page_content'>
             <NavDesktop />
             <section>
                 <AppHeader page="Anasayfa" />
-                <main className='main-sectors'>
+                <main className='main-index'>
                     <div className='mainpage_heading'>
                         <span>MarkaSkor</span>
                     </div>
