@@ -563,7 +563,8 @@ header {
         .d-category_item.active {
             .d-categorySymbol {
                 border: 2px solid #2284ca;
-                img{
+
+                img {
                     width: 70%;
                     height: 70%;
                 }
@@ -577,7 +578,7 @@ header {
             gap: 8px;
             cursor: pointer;
 
-            &:hover:not(.active) .d-categorySymbol{
+            &:hover:not(.active) .d-categorySymbol {
                 border: 1px solid var(--category-hover-bordercolor);
             }
 
@@ -591,7 +592,7 @@ header {
                 background-color: var(--category-bgcolor);
                 border: 1px solid var(--category-bgcolor);
                 transition: border 0.1s ease;
-            
+
                 img {
                     width: 60%;
                     height: 60%;
@@ -601,6 +602,65 @@ header {
             span {
                 font-size: 0.9rem;
                 font-family: 'Mina', sans-serif;
+            }
+        }
+    }
+
+    .d-brand_list {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px 0;
+        gap: 16px;
+
+        .d-brand_item {
+            padding: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid var(--brand-bordercolor);
+            background-color: var(--brand-bgcolor);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            gap: 8px;
+
+            &:hover{
+                background-color: var(--brand-hover-bgcolor);
+            }
+
+            .brand_logo-cont {
+                display: flex;
+                align-items: center;
+                margin-bottom: 8px;
+
+                img {
+                    height: auto;
+                    width: auto;
+                    max-width: 150px;
+                    max-height: 36px;
+                }
+            }
+
+            .brand_name {
+                max-width: 300px;
+                font-size: 1.1rem;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .brand_evaluation-cont {
+                font-family: 'Mali', cursive;
+
+                .brand_evaluation {
+                    font-size: 1.1rem;
+
+                    .brand_maxRate {
+                        font-size: 0.7rem;
+                    }
+                }
             }
         }
     }
@@ -617,7 +677,29 @@ header {
 }
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+    .main-discover {
+        .d-brand_list {
+            .d-brand_item {
+                padding: 10px 18px;
+                flex-direction: row;
+                gap: unset;
+
+                .brand_logo-cont {
+                    margin-bottom: unset;
+                }
+
+                .brand_name {
+                    padding: 0 40px 0 20px;
+                }
+
+                .brand_evaluation-cont {
+                    padding-bottom: 2px;
+                }
+            }
+        }
+    }
+}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
@@ -686,7 +768,13 @@ header {
             }
         }
     }
-    
+
+    .main-discover {
+        .d-brand_list {
+            justify-content: flex-start;
+        }
+    }
+
 }
 
 // Large devices (desktops, 992px and up)

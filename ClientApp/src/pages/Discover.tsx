@@ -45,6 +45,24 @@ export const Page_Discover = () => {
                         </div>
                         <span>Markalar</span>
                     </div>
+
+                    <div className='d-brand_list'>
+                        {Array.from(Array(10), (e, i) => {
+                            return (
+                                <div className='d-brand_item'>
+                                    <div className='brand_logo-cont'>
+                                        <img src={require('../assets/images/brands_temp/cocacola.png')} alt="Coca Cola" />
+                                    </div>
+                                    <span className='brand_name'>
+                                        Coca Cola
+                                    </span>
+                                    <div className='brand_evaluation-cont'>
+                                        <span className='brand_evaluation'>3.5<span className='brand_maxRate'>/5</span></span>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </main>
             </section>
         </div>

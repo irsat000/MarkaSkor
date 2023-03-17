@@ -523,10 +523,75 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   font-size: 0.9rem;
   font-family: "Mina", sans-serif;
 }
+.main-discover .d-brand_list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  gap: 16px;
+}
+.main-discover .d-brand_list .d-brand_item {
+  padding: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid var(--brand-bordercolor);
+  background-color: var(--brand-bgcolor);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
+}
+.main-discover .d-brand_list .d-brand_item:hover {
+  background-color: var(--brand-hover-bgcolor);
+}
+.main-discover .d-brand_list .d-brand_item .brand_logo-cont {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.main-discover .d-brand_list .d-brand_item .brand_logo-cont img {
+  height: auto;
+  width: auto;
+  max-width: 150px;
+  max-height: 36px;
+}
+.main-discover .d-brand_list .d-brand_item .brand_name {
+  max-width: 300px;
+  font-size: 1.1rem;
+  font-family: "Montserrat", sans-serif;
+}
+.main-discover .d-brand_list .d-brand_item .brand_evaluation-cont {
+  font-family: "Mali", cursive;
+}
+.main-discover .d-brand_list .d-brand_item .brand_evaluation-cont .brand_evaluation {
+  font-size: 1.1rem;
+}
+.main-discover .d-brand_list .d-brand_item .brand_evaluation-cont .brand_evaluation .brand_maxRate {
+  font-size: 0.7rem;
+}
 
 @media (min-width: 281px) {
   header {
     padding: 15px 18px;
+  }
+}
+@media (min-width: 576px) {
+  .main-discover .d-brand_list .d-brand_item {
+    padding: 10px 18px;
+    flex-direction: row;
+    gap: unset;
+  }
+  .main-discover .d-brand_list .d-brand_item .brand_logo-cont {
+    margin-bottom: unset;
+  }
+  .main-discover .d-brand_list .d-brand_item .brand_name {
+    padding: 0 40px 0 20px;
+  }
+  .main-discover .d-brand_list .d-brand_item .brand_evaluation-cont {
+    padding-bottom: 2px;
   }
 }
 @media (min-width: 768px) {
@@ -574,6 +639,9 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   }
   .main-index .search-main-cont input {
     padding: 17px 50px 15px 12px;
+  }
+  .main-discover .d-brand_list {
+    justify-content: flex-start;
   }
 }
 @media (min-width: 992px) {
