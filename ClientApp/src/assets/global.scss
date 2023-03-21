@@ -628,7 +628,7 @@ header {
             flex-direction: column;
             gap: 8px;
 
-            &:hover{
+            &:hover {
                 background-color: var(--brand-hover-bgcolor);
             }
 
@@ -666,7 +666,246 @@ header {
     }
 }
 
+.main-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
 
+    .brand_info_section {
+        display: flex;
+        flex-direction: column;
+
+        .brand_primary {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+
+            .b_logo {
+                display: flex;
+                padding: 10px;
+
+                img {
+                    width: auto;
+                    height: auto;
+                    max-width: 100%;
+                    max-height: 100px;
+                    /*max-width: 300px;
+                    max-height: 200px;*/
+                }
+            }
+
+            .b_name {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 10px;
+
+                .icon {
+                    font-size: 1.3rem;
+                }
+
+                span {
+                    font-size: 1.4rem;
+                    font-family: 'Montserrat', sans-serif;
+                }
+            }
+
+            .b_details-cont {
+                display: flex;
+                gap: 15px 20px;
+                margin-top: 14px;
+                flex-wrap: wrap;
+
+                .b_category {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .b_date {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .icon {
+                    font-size: 0.8rem;
+                }
+
+                span {
+                    font-size: 0.9rem;
+                    font-family: 'Montserrat', sans-serif;
+                }
+            }
+
+            .b_rating_min {
+                display: flex;
+                gap: 10px;
+                font-size: 1.3rem;
+                margin-top: 14px;
+                color: #d1cb1e;
+            }
+        }
+
+        .brand_products {
+            display: none;
+            flex-direction: column;
+            margin-top: 20px;
+            padding: 0 5%;
+
+            .b_products_heading {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .icon {
+                    font-size: 1.3rem;
+                }
+
+                h3 {
+                    font-size: 1.4rem;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 400;
+                }
+            }
+
+            .b_products_list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                font-size: 1rem;
+                align-items: flex-start;
+                margin-top: 14px;
+                padding: 0 10px;
+
+                a:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .review_section {
+        display: flex;
+        flex-direction: column;
+
+        .brand_subpage_nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 1px solid var(--reviewSection_bordercolor);
+
+            span {
+                padding: 6px 20px;
+                font-size: 1.6rem;
+                border-bottom: 2px solid var(--body-bg);
+                cursor: pointer;
+                font-family: 'Laila', sans-serif;
+            }
+
+            span.active {
+                border-bottom: 2px solid #2595ae;
+            }
+        }
+
+        .brand_subpage {
+            display: flex;
+
+            .b_userReview {
+                display: none !important;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+                padding: 3rem 10px;
+
+                .b_userRating {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+
+                    h5 {
+                        all: unset;
+                        font-size: 1.8rem;
+                        font-weight: 400;
+                        font-family: 'Shantell Sans', cursive;
+                    }
+
+                    .b_rate-wrap {
+                        display: flex;
+                        gap: 20px;
+                        font-size: 2.4rem;
+                        color: #d1cb1e;
+
+                        .icon {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .b_userCommenting {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+
+                    h6 {
+                        all: unset;
+                        font-size: 1.3rem;
+                        font-weight: 400;
+                        font-family: 'Shantell Sans', cursive;
+                    }
+
+                    .b_comment-wrap {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+                        overflow: hidden;
+
+                        textarea {
+                            outline: transparent;
+                            width: 100%;
+                            min-height: 140px;
+                            border-radius: 4px 4px 0 4px;
+                            background-color: var(--reviewSection_comment-bgcolor);
+                            border: 1px solid var(--reviewSection_comment-bordercolor);
+                            color: var(--font-color1);
+                            padding: 14px;
+                            resize: vertical;
+                            font-size: 0.9rem;
+                        }
+
+                        button {
+                            outline: transparent;
+                            border: none;
+                            padding: 7px 20px;
+                            border-radius: 0 0 4px 4px;
+                            color: #ffffff;
+                            font-family: 'Shantell Sans', cursive;
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                            transition: background-color 0.2s ease;
+                            background-color: var(--reviewSection_button-bgcolor);
+
+                            &:hover {
+                                background-color: var(--reviewSection_button-hover-bgcolor);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .b_reviews{
+                
+            }
+        }
+    }
+}
 
 
 
@@ -775,6 +1014,23 @@ header {
         }
     }
 
+    .main-brand {
+        .brand_info_section {
+            .brand_primary {
+                align-items: flex-start;
+
+                .b_name,
+                .b_details-cont,
+                .b_rating_min {
+                    padding: 0 4%;
+                }
+            }
+
+            .brand_products {
+                display: flex;
+            }
+        }
+    }
 }
 
 // Large devices (desktops, 992px and up)
@@ -796,6 +1052,18 @@ header {
             .sector_item {
                 width: 120px;
             }
+        }
+    }
+
+    .main-brand {
+        flex-direction: row;
+
+        .brand_info_section {
+            width: 50%;
+        }
+
+        .review_section {
+            width: 50%;
         }
     }
 }

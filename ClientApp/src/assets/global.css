@@ -573,6 +573,207 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   font-size: 0.7rem;
 }
 
+.main-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+}
+.main-brand .brand_info_section {
+  display: flex;
+  flex-direction: column;
+}
+.main-brand .brand_info_section .brand_primary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.main-brand .brand_info_section .brand_primary .b_logo {
+  display: flex;
+  padding: 10px;
+}
+.main-brand .brand_info_section .brand_primary .b_logo img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100px;
+  /*max-width: 300px;
+  max-height: 200px;*/
+}
+.main-brand .brand_info_section .brand_primary .b_name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.main-brand .brand_info_section .brand_primary .b_name .icon {
+  font-size: 1.3rem;
+}
+.main-brand .brand_info_section .brand_primary .b_name span {
+  font-size: 1.4rem;
+  font-family: "Montserrat", sans-serif;
+}
+.main-brand .brand_info_section .brand_primary .b_details-cont {
+  display: flex;
+  gap: 15px 20px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.main-brand .brand_info_section .brand_primary .b_details-cont .b_category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.main-brand .brand_info_section .brand_primary .b_details-cont .b_date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.main-brand .brand_info_section .brand_primary .b_details-cont .icon {
+  font-size: 0.8rem;
+}
+.main-brand .brand_info_section .brand_primary .b_details-cont span {
+  font-size: 0.9rem;
+  font-family: "Montserrat", sans-serif;
+}
+.main-brand .brand_info_section .brand_primary .b_rating_min {
+  display: flex;
+  gap: 10px;
+  font-size: 1.3rem;
+  margin-top: 14px;
+  color: #d1cb1e;
+}
+.main-brand .brand_info_section .brand_products {
+  display: none;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 0 5%;
+}
+.main-brand .brand_info_section .brand_products .b_products_heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.main-brand .brand_info_section .brand_products .b_products_heading .icon {
+  font-size: 1.3rem;
+}
+.main-brand .brand_info_section .brand_products .b_products_heading h3 {
+  font-size: 1.4rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+.main-brand .brand_info_section .brand_products .b_products_list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1rem;
+  align-items: flex-start;
+  margin-top: 14px;
+  padding: 0 10px;
+}
+.main-brand .brand_info_section .brand_products .b_products_list a:hover {
+  text-decoration: underline;
+}
+.main-brand .review_section {
+  display: flex;
+  flex-direction: column;
+}
+.main-brand .review_section .brand_subpage_nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--reviewSection_bordercolor);
+}
+.main-brand .review_section .brand_subpage_nav span {
+  padding: 6px 20px;
+  font-size: 1.6rem;
+  border-bottom: 2px solid var(--body-bg);
+  cursor: pointer;
+  font-family: "Laila", sans-serif;
+}
+.main-brand .review_section .brand_subpage_nav span.active {
+  border-bottom: 2px solid #2595ae;
+}
+.main-brand .review_section .brand_subpage {
+  display: flex;
+}
+.main-brand .review_section .brand_subpage .b_userReview {
+  display: none !important;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 3rem 10px;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userRating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userRating h5 {
+  all: unset;
+  font-size: 1.8rem;
+  font-weight: 400;
+  font-family: "Shantell Sans", cursive;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userRating .b_rate-wrap {
+  display: flex;
+  gap: 20px;
+  font-size: 2.4rem;
+  color: #d1cb1e;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userRating .b_rate-wrap .icon {
+  cursor: pointer;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userCommenting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userCommenting h6 {
+  all: unset;
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-family: "Shantell Sans", cursive;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userCommenting .b_comment-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userCommenting .b_comment-wrap textarea {
+  outline: transparent;
+  width: 100%;
+  min-height: 140px;
+  border-radius: 4px 4px 0 4px;
+  background-color: var(--reviewSection_comment-bgcolor);
+  border: 1px solid var(--reviewSection_comment-bordercolor);
+  color: var(--font-color1);
+  padding: 14px;
+  resize: vertical;
+  font-size: 0.9rem;
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userCommenting .b_comment-wrap button {
+  outline: transparent;
+  border: none;
+  padding: 7px 20px;
+  border-radius: 0 0 4px 4px;
+  color: #ffffff;
+  font-family: "Shantell Sans", cursive;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: var(--reviewSection_button-bgcolor);
+}
+.main-brand .review_section .brand_subpage .b_userReview .b_userCommenting .b_comment-wrap button:hover {
+  background-color: var(--reviewSection_button-hover-bgcolor);
+}
 @media (min-width: 281px) {
   header {
     padding: 15px 18px;
@@ -643,6 +844,17 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   .main-discover .d-brand_list {
     justify-content: flex-start;
   }
+  .main-brand .brand_info_section .brand_primary {
+    align-items: flex-start;
+  }
+  .main-brand .brand_info_section .brand_primary .b_name,
+  .main-brand .brand_info_section .brand_primary .b_details-cont,
+  .main-brand .brand_info_section .brand_primary .b_rating_min {
+    padding: 0 4%;
+  }
+  .main-brand .brand_info_section .brand_products {
+    display: flex;
+  }
 }
 @media (min-width: 992px) {
   .page_content .desktop_nav {
@@ -656,5 +868,14 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   }
   .main-index article .sector_item {
     width: 120px;
+  }
+  .main-brand {
+    flex-direction: row;
+  }
+  .main-brand .brand_info_section {
+    width: 50%;
+  }
+  .main-brand .review_section {
+    width: 50%;
   }
 }/*# sourceMappingURL=global.css.map */

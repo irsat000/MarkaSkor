@@ -1,10 +1,12 @@
 import React from 'react';
 import { Tag, Pentagon } from 'react-bootstrap-icons';
+import { Link, useParams } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 
 
 export const Page_Discover = () => {
+    const { sectorKey } = useParams();
     return (
         <div className='page_content'>
             <NavDesktop />
@@ -21,14 +23,12 @@ export const Page_Discover = () => {
                     <div className='d-category_list'>
                         {Array.from(Array(10), (e, i) => {
                             return (
-                                <>
-                                    <div className='d-category_item'>
-                                        <div className='d-categorySymbol'>
-                                            <img src={require('../assets/images/SiteIcon.png')} alt="Category name" />
-                                        </div>
-                                        <span>Hepsi</span>
+                                <div className='d-category_item' key={i}>
+                                    <div className='d-categorySymbol'>
+                                        <img src={require('../assets/images/SiteIcon.png')} alt="Category name" />
                                     </div>
-                                </>
+                                    <span>Hepsi</span>
+                                </div>
                             )
                         })}
                         <div className='d-category_item'>
@@ -49,7 +49,7 @@ export const Page_Discover = () => {
                     <div className='d-brand_list'>
                         {Array.from(Array(10), (e, i) => {
                             return (
-                                <div className='d-brand_item'>
+                                <Link to={`/b/${i}`} className='d-brand_item' key={i}>
                                     <div className='brand_logo-cont'>
                                         <img src={require('../assets/images/brands_temp/cocacola.png')} alt="Coca Cola" />
                                     </div>
@@ -59,7 +59,7 @@ export const Page_Discover = () => {
                                     <div className='brand_evaluation-cont'>
                                         <span className='brand_evaluation'>3.5<span className='brand_maxRate'>/5</span></span>
                                     </div>
-                                </div>
+                                </Link>
                             )
                         })}
                     </div>

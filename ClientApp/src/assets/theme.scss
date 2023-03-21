@@ -27,6 +27,12 @@
     --brand-bgcolor: #303030;
     --brand-hover-bgcolor: #373737;
     --brand-bordercolor: #5b5b5b;
+    //brand
+    --reviewSection_bordercolor: #404040;
+    --reviewSection_comment-bgcolor: #343434;
+    --reviewSection_comment-bordercolor: #545454;
+    --reviewSection_button-bgcolor: #31986d;
+    --reviewSection_button-hover-bgcolor: #42b383;
 }
 
 .lightmode {
@@ -57,4 +63,10 @@
     --brand-bgcolor: #f6f6f6;
     --brand-hover-bgcolor: #ffffff;
     --brand-bordercolor: #c4c4c4;
+    //brand
+    --reviewSection_bordercolor: #d4d4d4;
+    --reviewSection_comment-bgcolor: #FBFBFB;
+    --reviewSection_comment-bordercolor: #dddddd;
+    --reviewSection_button-bgcolor: #47C08D;
+    --reviewSection_button-hover-bgcolor: #3ba579;
 }
