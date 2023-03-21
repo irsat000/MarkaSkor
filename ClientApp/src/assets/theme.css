@@ -28,6 +28,7 @@
   --reviewSection_comment-bordercolor: #545454;
   --reviewSection_button-bgcolor: #31986d;
   --reviewSection_button-hover-bgcolor: #42b383;
+  --reviewSection_ratingsBar-bgcolor: #5b5b5b;
 }
 
 .lightmode {
@@ -59,4 +60,5 @@
   --reviewSection_comment-bordercolor: #dddddd;
   --reviewSection_button-bgcolor: #47C08D;
   --reviewSection_button-hover-bgcolor: #3ba579;
+  --reviewSection_ratingsBar-bgcolor: #c4c4c4;
 }/*# sourceMappingURL=theme.css.map */

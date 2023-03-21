@@ -116,24 +116,106 @@ export const Page_Brand = () => {
                                     </div>
                                 </div>
                                 <div className='b_ratingDetails'>
-                                    <div className='b_rt-row'>
-                                        <div className='b_rt_stars'>
-                                            <StarFill className='icon' />
-                                            <StarFill className='icon' />
-                                            <StarFill className='icon' />
-                                            <StarFill className='icon' />
-                                            <StarFill className='icon' />
-                                        </div>
-                                        <div className='b_rt_bar'>
-                                            <div className='b_rt_bar_fill'></div>
-                                        </div>
-                                        <div className='b_rt_count'>
-                                            <span>(240)</span>
-                                        </div>
-                                    </div>
+                                    <table cellSpacing="0" cellPadding="0">
+                                        <tr>
+                                            <td className='b_rt_stars-col'>
+                                                <div className='b_rt_stars'>
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_bar-col'>
+                                                <div className='b_rt_bar'>
+                                                    <div className='b_rt_bar_fill'></div>
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_count-col'>
+                                                <div className='b_rt_count'>
+                                                    <span>(240)</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className='b_rt_stars-col'>
+                                                <div className='b_rt_stars'>
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_bar-col'>
+                                                <div className='b_rt_bar'>
+                                                    <div className='b_rt_bar_fill'></div>
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_count-col'>
+                                                <div className='b_rt_count'>
+                                                    <span>(65)</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className='b_rt_stars-col'>
+                                                <div className='b_rt_stars'>
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_bar-col'>
+                                                <div className='b_rt_bar'>
+                                                    <div className='b_rt_bar_fill'></div>
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_count-col'>
+                                                <div className='b_rt_count'>
+                                                    <span>(24)</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className='b_rt_stars-col'>
+                                                <div className='b_rt_stars'>
+                                                    <StarFill className='icon' />
+                                                    <StarFill className='icon' />
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_bar-col'>
+                                                <div className='b_rt_bar'>
+                                                    <div className='b_rt_bar_fill'></div>
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_count-col'>
+                                                <div className='b_rt_count'>
+                                                    <span>(8)</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className='b_rt_stars-col'>
+                                                <div className='b_rt_stars'>
+                                                    <StarFill className='icon' />
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_bar-col'>
+                                                <div className='b_rt_bar'>
+                                                    <div className='b_rt_bar_fill'></div>
+                                                </div>
+                                            </td>
+                                            <td className='b_rt_count-col'>
+                                                <div className='b_rt_count'>
+                                                    <span>(50)</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <div className='b_reviewList_heading'>
-                                    <ChatLeft /><h4>Yorumlar</h4><span>(26)</span>
+                                    <ChatLeft className='icon' /><span>Yorumlar (26)</span>
                                 </div>
                                 <div className='b_reviewList'>
 
@@ -146,3 +228,4 @@ export const Page_Brand = () => {
         </div>
     )
 };
+

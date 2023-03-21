@@ -713,9 +713,10 @@ header {
 
             .b_details-cont {
                 display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
                 gap: 15px 20px;
                 margin-top: 14px;
-                flex-wrap: wrap;
 
                 .b_category {
                     display: flex;
@@ -799,7 +800,7 @@ header {
             border-bottom: 1px solid var(--reviewSection_bordercolor);
 
             span {
-                padding: 6px 20px;
+                padding: 10px 20px 0;
                 font-size: 1.6rem;
                 border-bottom: 2px solid var(--body-bg);
                 cursor: pointer;
@@ -813,6 +814,7 @@ header {
 
         .brand_subpage {
             display: flex;
+            flex-direction: column;
 
             .b_userReview {
                 display: none !important;
@@ -901,7 +903,117 @@ header {
             }
 
             .b_reviews{
-                
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                width: 100%;
+
+                .b_ratingSummary{
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    margin-top: 20px;
+                    padding: 0 10px;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    
+                    .b_ratingNumber{
+                        font-family: 'Margarine', cursive;
+                        > span {
+                            font-size: 2.4rem;
+                            > span{
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+                    .b_rating-cont{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 6px;
+
+                        .b_rating{
+                            display: flex;
+                            justify-content: space-between;
+                            font-size: 2.2rem;
+                            color: #d1cb1e;
+                            gap: 5%;
+                        }
+                        span{
+                            font-family: 'Kameron', serif;
+                            font-size: 0.9rem;
+                            padding-left: 6px;
+                        }
+                    }
+                }
+                .b_ratingDetails{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 10px;
+                    
+                    table{
+                        border: none;
+                        tr{
+                            td{
+                                border-bottom: 10px solid transparent;
+                            }
+                            .b_rt_stars-col{
+                                .b_rt_stars{
+                                    display: flex;
+                                    gap: 6px;
+                                    align-items: center;
+                                    justify-content: flex-end;
+                                    color: #b9b547;
+                                }
+                            }
+                            .b_rt_bar-col{
+                                width: 100%;
+                                padding: 6px 4%;
+                                
+                                .b_rt_bar{
+                                    height: 6px;
+                                    width: 100%;
+                                    background-color: var(--nav-border);
+                                    border-radius: 2px;
+                                    overflow: hidden;
+
+                                    .b_rt_bar_fill{
+                                        height: 100%;
+                                        width: 60%;
+                                        background-color: red;
+                                    }
+                                }
+                            }
+                            .b_rt_count-col{
+                                .b_rt_count{
+                                    font-size: 1rem;
+                                    font-family: 'Josefin Sans', sans-serif;
+                                    font-weight: 300;
+                                    padding-top: 1px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .b_reviewList_heading{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-end;
+                    justify-content: center;
+                    gap: 20px;
+                    font-family: 'Klee One', cursive;
+
+                    .icon{
+                        font-size: 1.5rem;
+                    }
+                    span{
+                        font-size: 1.4rem;
+                        font-weight: 400;
+                    }
+                }
+                .b_reviewList{
+                    display: flex;
+                    flex-direction: column;
+                }
             }
         }
     }
@@ -937,6 +1049,30 @@ header {
                 }
             }
         }
+    }
+    .main-brand{
+        .review_section{
+            .brand_subpage{
+                .b_reviews{
+                    .b_ratingSummary{
+                        .b_ratingNumber{
+                            padding: 0 10px;
+                            > span {
+                                font-size: 3rem;
+                                > span{
+                                    font-size: 1.4rem;
+                                }
+                            }
+                        }
+                        .b_rating-cont{
+                            .b_rating{
+                                font-size: 2.4rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }  
     }
 }
 
@@ -1030,6 +1166,16 @@ header {
                 display: flex;
             }
         }
+        .review_section{
+            .brand_subpage{
+                .b_reviews{
+                    .b_ratingSummary{
+                        justify-content: flex-start;
+                        gap: 5%;
+                    }
+                }
+            }
+        }  
     }
 }
 

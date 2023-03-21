@@ -615,9 +615,10 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
 }
 .main-brand .brand_info_section .brand_primary .b_details-cont {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 15px 20px;
   margin-top: 14px;
-  flex-wrap: wrap;
 }
 .main-brand .brand_info_section .brand_primary .b_details-cont .b_category {
   display: flex;
@@ -687,7 +688,7 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   border-bottom: 1px solid var(--reviewSection_bordercolor);
 }
 .main-brand .review_section .brand_subpage_nav span {
-  padding: 6px 20px;
+  padding: 10px 20px 0;
   font-size: 1.6rem;
   border-bottom: 2px solid var(--body-bg);
   cursor: pointer;
@@ -698,6 +699,7 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
 }
 .main-brand .review_section .brand_subpage {
   display: flex;
+  flex-direction: column;
 }
 .main-brand .review_section .brand_subpage .b_userReview {
   display: none !important;
@@ -774,6 +776,107 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
 .main-brand .review_section .brand_subpage .b_userReview .b_userCommenting .b_comment-wrap button:hover {
   background-color: var(--reviewSection_button-hover-bgcolor);
 }
+.main-brand .review_section .brand_subpage .b_reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_ratingNumber {
+  font-family: "Margarine", cursive;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_ratingNumber > span {
+  font-size: 2.4rem;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_ratingNumber > span > span {
+  font-size: 1.2rem;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_rating-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_rating-cont .b_rating {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.2rem;
+  color: #d1cb1e;
+  gap: 5%;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_rating-cont span {
+  font-family: "Kameron", serif;
+  font-size: 0.9rem;
+  padding-left: 6px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table {
+  border: none;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr td {
+  border-bottom: 10px solid transparent;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_stars-col .b_rt_stars {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+  color: #b9b547;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_bar-col {
+  width: 100%;
+  padding: 6px 4%;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_bar-col .b_rt_bar {
+  height: 6px;
+  width: 100%;
+  background-color: var(--nav-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_bar-col .b_rt_bar .b_rt_bar_fill {
+  height: 100%;
+  width: 60%;
+  background-color: red;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_count-col .b_rt_count {
+  font-size: 1rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 300;
+  padding-top: 1px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList_heading {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 20px;
+  font-family: "Klee One", cursive;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList_heading .icon {
+  font-size: 1.5rem;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList_heading span {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 281px) {
   header {
     padding: 15px 18px;
@@ -793,6 +896,18 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   }
   .main-discover .d-brand_list .d-brand_item .brand_evaluation-cont {
     padding-bottom: 2px;
+  }
+  .main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_ratingNumber {
+    padding: 0 10px;
+  }
+  .main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_ratingNumber > span {
+    font-size: 3rem;
+  }
+  .main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_ratingNumber > span > span {
+    font-size: 1.4rem;
+  }
+  .main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary .b_rating-cont .b_rating {
+    font-size: 2.4rem;
   }
 }
 @media (min-width: 768px) {
@@ -854,6 +969,10 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   }
   .main-brand .brand_info_section .brand_products {
     display: flex;
+  }
+  .main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary {
+    justify-content: flex-start;
+    gap: 5%;
   }
 }
 @media (min-width: 992px) {
