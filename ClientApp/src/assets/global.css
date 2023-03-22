@@ -694,17 +694,25 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   cursor: pointer;
   font-family: "Laila", sans-serif;
 }
+.main-brand .review_section .brand_subpage_nav span:hover {
+  border-bottom: 2px solid var(--reviewSection_bordercolor);
+}
 .main-brand .review_section .brand_subpage_nav span.active {
   border-bottom: 2px solid #2595ae;
+}
+.main-brand .review_section .brand_subpage.userReviewActive .b_userReview {
+  display: flex;
+}
+.main-brand .review_section .brand_subpage.showReviewsActive .b_reviews {
+  display: flex;
 }
 .main-brand .review_section .brand_subpage {
   display: flex;
   flex-direction: column;
 }
 .main-brand .review_section .brand_subpage .b_userReview {
-  display: none !important;
   width: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 40px;
   padding: 3rem 10px;
@@ -715,9 +723,9 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   align-items: center;
   gap: 20px;
 }
-.main-brand .review_section .brand_subpage .b_userReview .b_userRating h5 {
+.main-brand .review_section .brand_subpage .b_userReview .b_userRating h6 {
   all: unset;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 400;
   font-family: "Shantell Sans", cursive;
 }
@@ -776,11 +784,17 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
 .main-brand .review_section .brand_subpage .b_userReview .b_userCommenting .b_comment-wrap button:hover {
   background-color: var(--reviewSection_button-hover-bgcolor);
 }
+.main-brand .review_section .brand_subpage .b_userReview .b_userCommenting .b_comment_warning {
+  display: block;
+  color: #a82727;
+  font-family: "Roboto", cursive;
+  font-weight: 300;
+}
 .main-brand .review_section .brand_subpage .b_reviews {
-  display: flex;
+  width: 100%;
+  display: none;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
 }
 .main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary {
   display: flex;
@@ -833,7 +847,7 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   gap: 6px;
   align-items: center;
   justify-content: flex-end;
-  color: #b9b547;
+  color: #d1cb1e;
 }
 .main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_bar-col {
   width: 100%;
@@ -848,14 +862,29 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
 }
 .main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_bar-col .b_rt_bar .b_rt_bar_fill {
   height: 100%;
+  border-radius: 2px;
   width: 60%;
-  background-color: red;
 }
 .main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_count-col .b_rt_count {
   font-size: 1rem;
   font-family: "Josefin Sans", sans-serif;
   font-weight: 300;
   padding-top: 1px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table .b_rt_five .b_rt_bar_fill {
+  background-color: #26DD16;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table .b_rt_four .b_rt_bar_fill {
+  background-color: #A1E01B;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table .b_rt_three .b_rt_bar_fill {
+  background-color: #DEEF19;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table .b_rt_two .b_rt_bar_fill {
+  background-color: #F8A72E;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table .b_rt_one .b_rt_bar_fill {
+  background-color: #DE1515;
 }
 .main-brand .review_section .brand_subpage .b_reviews .b_reviewList_heading {
   display: flex;
@@ -875,6 +904,72 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
 .main-brand .review_section .brand_subpage .b_reviews .b_reviewList {
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item:last-child {
+  border-bottom: unset;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--reviewSection_bordercolor);
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header .b_r_profile {
+  flex-shrink: 0;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header .b_r_profile img {
+  width: 50px;
+  height: 50px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header .b_r_info-cont {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header .b_r_info-cont .b_r_username {
+  font-family: "KoHo", sans-serif;
+  font-size: 1.1rem;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header .b_r_info-cont .b_r_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header .b_r_info-cont .b_r_info .b_r_evaluation {
+  display: flex;
+  gap: 6px;
+  font-size: 1rem;
+  color: #d1cb1e;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header .b_r_info-cont .b_r_info .b_r_date {
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_body {
+  padding: 0 10px;
+}
+.main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_body p {
+  font-family: "Roboto", cursive;
+  font-weight: 300;
+  font-size: 1rem;
+  text-indent: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 @media (min-width: 281px) {

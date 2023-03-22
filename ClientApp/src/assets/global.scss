@@ -78,8 +78,6 @@ body {
                 width: 1.8rem;
                 height: 1.8rem;
             }
-
-            span {}
         }
 
         .nav_useful_links {
@@ -805,6 +803,10 @@ header {
                 border-bottom: 2px solid var(--body-bg);
                 cursor: pointer;
                 font-family: 'Laila', sans-serif;
+
+                &:hover {
+                    border-bottom: 2px solid var(--reviewSection_bordercolor);
+                }
             }
 
             span.active {
@@ -812,14 +814,21 @@ header {
             }
         }
 
+        .brand_subpage.userReviewActive .b_userReview {
+            display: flex;
+        }
+
+        .brand_subpage.showReviewsActive .b_reviews {
+            display: flex;
+        }
+
         .brand_subpage {
             display: flex;
             flex-direction: column;
 
             .b_userReview {
-                display: none !important;
                 width: 100%;
-                display: flex;
+                display: none;
                 flex-direction: column;
                 gap: 40px;
                 padding: 3rem 10px;
@@ -830,9 +839,9 @@ header {
                     align-items: center;
                     gap: 20px;
 
-                    h5 {
+                    h6 {
                         all: unset;
-                        font-size: 1.8rem;
+                        font-size: 1.6rem;
                         font-weight: 400;
                         font-family: 'Shantell Sans', cursive;
                     }
@@ -899,16 +908,23 @@ header {
                             }
                         }
                     }
+
+                    .b_comment_warning {
+                        display: block;
+                        color: #a82727;
+                        font-family: 'Roboto', cursive;
+                        font-weight: 300;
+                    }
                 }
             }
 
-            .b_reviews{
-                display: flex;
+            .b_reviews {
+                width: 100%;
+                display: none;
                 flex-direction: column;
                 gap: 16px;
-                width: 100%;
 
-                .b_ratingSummary{
+                .b_ratingSummary {
                     display: flex;
                     justify-content: space-evenly;
                     align-items: center;
@@ -916,75 +932,84 @@ header {
                     padding: 0 10px;
                     flex-wrap: wrap;
                     gap: 10px;
-                    
-                    .b_ratingNumber{
+
+                    .b_ratingNumber {
                         font-family: 'Margarine', cursive;
-                        > span {
+
+                        >span {
                             font-size: 2.4rem;
-                            > span{
+
+                            >span {
                                 font-size: 1.2rem;
                             }
                         }
                     }
-                    .b_rating-cont{
+
+                    .b_rating-cont {
                         display: flex;
                         flex-direction: column;
                         gap: 6px;
 
-                        .b_rating{
+                        .b_rating {
                             display: flex;
                             justify-content: space-between;
                             font-size: 2.2rem;
                             color: #d1cb1e;
                             gap: 5%;
                         }
-                        span{
+
+                        span {
                             font-family: 'Kameron', serif;
                             font-size: 0.9rem;
                             padding-left: 6px;
                         }
                     }
                 }
-                .b_ratingDetails{
+
+                .b_ratingDetails {
                     display: flex;
                     flex-direction: column;
                     padding: 0 10px;
-                    
-                    table{
+
+                    table {
                         border: none;
-                        tr{
-                            td{
+
+                        tr {
+                            td {
                                 border-bottom: 10px solid transparent;
                             }
-                            .b_rt_stars-col{
-                                .b_rt_stars{
+
+                            .b_rt_stars-col {
+                                .b_rt_stars {
                                     display: flex;
                                     gap: 6px;
                                     align-items: center;
                                     justify-content: flex-end;
-                                    color: #b9b547;
+                                    color: #d1cb1e;
                                 }
                             }
-                            .b_rt_bar-col{
+
+                            .b_rt_bar-col {
                                 width: 100%;
                                 padding: 6px 4%;
-                                
-                                .b_rt_bar{
+
+                                .b_rt_bar {
                                     height: 6px;
                                     width: 100%;
                                     background-color: var(--nav-border);
                                     border-radius: 2px;
                                     overflow: hidden;
 
-                                    .b_rt_bar_fill{
+                                    .b_rt_bar_fill {
                                         height: 100%;
-                                        width: 60%;
-                                        background-color: red;
+                                        border-radius: 2px;
+                                        width: 60%; //temp
                                     }
                                 }
                             }
-                            .b_rt_count-col{
-                                .b_rt_count{
+
+                            .b_rt_count-col {
+                                .b_rt_count {
                                     font-size: 1rem;
                                     font-family: 'Josefin Sans', sans-serif;
                                     font-weight: 300;
@@ -992,9 +1017,30 @@ header {
                                 }
                             }
                         }
+
+                        .b_rt_five .b_rt_bar_fill {
+                            background-color: #26DD16;
+                        }
+
+                        .b_rt_four .b_rt_bar_fill {
+                            background-color: #A1E01B;
+                        }
+
+                        .b_rt_three .b_rt_bar_fill {
+                            background-color: #DEEF19;
+                        }
+
+                        .b_rt_two .b_rt_bar_fill {
+                            background-color: #F8A72E;
+                        }
+
+                        .b_rt_one .b_rt_bar_fill {
+                            background-color: #DE1515;
+                        }
                     }
                 }
-                .b_reviewList_heading{
+
+                .b_reviewList_heading {
                     display: flex;
                     flex-direction: row;
                     align-items: flex-end;
@@ -1002,17 +1048,98 @@ header {
                     gap: 20px;
                     font-family: 'Klee One', cursive;
 
-                    .icon{
+                    .icon {
                         font-size: 1.5rem;
                     }
-                    span{
+
+                    span {
                         font-size: 1.4rem;
                         font-weight: 400;
                     }
                 }
-                .b_reviewList{
+
+                .b_reviewList {
                     display: flex;
                     flex-direction: column;
+                    padding-top: 10px;
+
+                    .b_review_item:last-child {
+                        border-bottom: unset;
+                    }
+
+                    .b_review_item {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                        padding-bottom: 14px;
+                        margin-bottom: 16px;
+                        border-bottom: 1px solid var(--reviewSection_bordercolor);
+
+                        .b_r_header {
+                            padding: 0 10px;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 14px;
+
+                            .b_r_profile {
+                                flex-shrink: 0;
+
+                                img {
+                                    width: 50px;
+                                    height: 50px;
+                                }
+                            }
+
+                            .b_r_info-cont {
+                                flex-grow: 1;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 4px;
+
+                                .b_r_username {
+                                    font-family: 'KoHo', sans-serif;
+                                    font-size: 1.1rem;
+                                }
+
+                                .b_r_info {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+
+                                    .b_r_evaluation {
+                                        display: flex;
+                                        gap: 6px;
+                                        font-size: 1rem;
+                                        color: #d1cb1e;
+                                    }
+
+                                    .b_r_date {
+                                        font-family: 'Kalam', cursive;
+                                        font-weight: 400;
+                                        font-size: 1rem;
+                                    }
+                                }
+                            }
+                        }
+
+                        .b_r_body {
+                            padding: 0 10px;
+
+                            p {
+                                font-family: 'Roboto', cursive;
+                                font-weight: 300;
+                                font-size: 1rem;
+                                text-indent: 12px;
+
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 5;
+                                -webkit-box-orient: vertical;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1050,29 +1177,33 @@ header {
             }
         }
     }
-    .main-brand{
-        .review_section{
-            .brand_subpage{
-                .b_reviews{
-                    .b_ratingSummary{
-                        .b_ratingNumber{
+
+    .main-brand {
+        .review_section {
+            .brand_subpage {
+                .b_reviews {
+                    .b_ratingSummary {
+                        .b_ratingNumber {
                             padding: 0 10px;
-                            > span {
+
+                            >span {
                                 font-size: 3rem;
-                                > span{
+
+                                >span {
                                     font-size: 1.4rem;
                                 }
                             }
                         }
-                        .b_rating-cont{
-                            .b_rating{
+
+                        .b_rating-cont {
+                            .b_rating {
                                 font-size: 2.4rem;
                             }
                         }
                     }
                 }
             }
-        }  
+        }
     }
 }
 
@@ -1166,16 +1297,17 @@ header {
                 display: flex;
             }
         }
-        .review_section{
-            .brand_subpage{
-                .b_reviews{
-                    .b_ratingSummary{
+
+        .review_section {
+            .brand_subpage {
+                .b_reviews {
+                    .b_ratingSummary {
                         justify-content: flex-start;
                         gap: 5%;
                     }
                 }
             }
-        }  
+        }
     }
 }
 

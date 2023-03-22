@@ -1,11 +1,207 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tag, Pentagon, Calendar, Star, StarHalf, StarFill, ListUl, ChatLeft } from 'react-bootstrap-icons';
 import { useParams, Link } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 
+
+const UserReview_Section = (props: {
+
+}) => {
+    //<h6>Puanla</h6> //There is no need to repeat myself I guess
+    return (
+        <div className={`b_userReview`}>
+            <div className='b_userRating'>
+                <div className='b_rate-wrap'>
+                    <StarFill className='icon' />
+                    <StarFill className='icon' />
+                    <StarHalf className='icon' />
+                    <Star className='icon' />
+                    <Star className='icon' />
+                </div>
+            </div>
+            <div className='b_userCommenting'>
+                <h6>Yorum yap</h6>
+                <div className='b_comment-wrap'>
+                    <textarea placeholder='Yorum yap!' />
+                    <button type='button'>Gönder</button>
+                </div>
+                <span className='b_comment_warning'>*Yorum yapmadan önce puanla*</span>
+            </div>
+        </div>
+    )
+};
+
+const Reviews_Section = (props: {
+
+}) => {
+    return (
+        <div className={`b_reviews`}>
+            <div className='b_ratingSummary'>
+                <div className='b_ratingNumber'>
+                    <span>4.3<span>/5</span></span>
+                </div>
+                <div className='b_rating-cont'>
+                    <div className='b_rating'>
+                        <StarFill className='icon' />
+                        <StarFill className='icon' />
+                        <StarFill className='icon' />
+                        <StarFill className='icon' />
+                        <Star className='icon' />
+                    </div>
+                    <span>Toplam 387 oy</span>
+                </div>
+            </div>
+            <div className='b_ratingDetails'>
+                <table cellSpacing="0" cellPadding="0">
+                    <tr className='b_rt_five'>
+                        <td className='b_rt_stars-col'>
+                            <div className='b_rt_stars'>
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                            </div>
+                        </td>
+                        <td className='b_rt_bar-col'>
+                            <div className='b_rt_bar'>
+                                <div className='b_rt_bar_fill'></div>
+                            </div>
+                        </td>
+                        <td className='b_rt_count-col'>
+                            <div className='b_rt_count'>
+                                <span>(240)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr className='b_rt_four'>
+                        <td className='b_rt_stars-col'>
+                            <div className='b_rt_stars'>
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                            </div>
+                        </td>
+                        <td className='b_rt_bar-col'>
+                            <div className='b_rt_bar'>
+                                <div className='b_rt_bar_fill'></div>
+                            </div>
+                        </td>
+                        <td className='b_rt_count-col'>
+                            <div className='b_rt_count'>
+                                <span>(65)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr className='b_rt_three'>
+                        <td className='b_rt_stars-col'>
+                            <div className='b_rt_stars'>
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                            </div>
+                        </td>
+                        <td className='b_rt_bar-col'>
+                            <div className='b_rt_bar'>
+                                <div className='b_rt_bar_fill'></div>
+                            </div>
+                        </td>
+                        <td className='b_rt_count-col'>
+                            <div className='b_rt_count'>
+                                <span>(24)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr className='b_rt_two'>
+                        <td className='b_rt_stars-col'>
+                            <div className='b_rt_stars'>
+                                <StarFill className='icon' />
+                                <StarFill className='icon' />
+                            </div>
+                        </td>
+                        <td className='b_rt_bar-col'>
+                            <div className='b_rt_bar'>
+                                <div className='b_rt_bar_fill'></div>
+                            </div>
+                        </td>
+                        <td className='b_rt_count-col'>
+                            <div className='b_rt_count'>
+                                <span>(8)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr className='b_rt_one'>
+                        <td className='b_rt_stars-col'>
+                            <div className='b_rt_stars'>
+                                <StarFill className='icon' />
+                            </div>
+                        </td>
+                        <td className='b_rt_bar-col'>
+                            <div className='b_rt_bar'>
+                                <div className='b_rt_bar_fill'></div>
+                            </div>
+                        </td>
+                        <td className='b_rt_count-col'>
+                            <div className='b_rt_count'>
+                                <span>(50)</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div className='b_reviewList_heading'>
+                <ChatLeft className='icon' /><span>Yorumlar (6)</span>
+            </div>
+            <div className='b_reviewList'>
+
+                {Array.from(Array(6), (e, i) => {
+                    return (
+                        <div className='b_review_item' key={i}>
+                            <div className='b_r_header'>
+                                <div className="b_r_profile">
+                                    <img src={require('../assets/images/SiteIcon.png')} alt='Profile picture of reviewer' />
+                                </div>
+                                <div className="b_r_info-cont">
+                                    <span className='b_r_username'>MrBombastic Fantastic</span>
+                                    <div className='b_r_info'>
+                                        <div className="b_r_evaluation">
+                                            <StarFill className='icon' />
+                                            <StarFill className='icon' />
+                                            <StarFill className='icon' />
+                                        </div>
+                                        <span className='b_r_date'>13 gün önce</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='b_r_body'>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium omnis non quibusdam consequatur ducimus hic, expedita voluptatum quos, vel sapiente fugit porro quod accusamus aperiam ullam amet animi. Doloribus.
+                                </p>
+                            </div>
+                        </div>
+                    )
+                })}
+
+            </div>
+        </div>
+    )
+};
+
+
 export const Page_Brand = () => {
     const { brandId } = useParams();
+
+    const [activeSubpage, setActiveSubpage] = useState('userReview');
+
+    const handleUserReviewClick = () => {
+        setActiveSubpage('userReview');
+    }
+
+    const handleShowReviewsClick = () => {
+        setActiveSubpage('showReviews');
+    }
 
     return (
         <div className='page_content'>
@@ -75,152 +271,12 @@ export const Page_Brand = () => {
                     </div>
                     <div className='review_section'>
                         <div className='brand_subpage_nav'>
-                            <span className='b_reviewing-btn'>Puanla</span>
-                            <span className='b_showReviews-btn'>Skor</span>
+                            <span className={`b_reviewing-btn${activeSubpage === "userReview" ? ' active' : ''}`} onClick={handleUserReviewClick}>Oyla</span>
+                            <span className={`b_showReviews-btn${activeSubpage === "showReviews" ? ' active' : ''}`} onClick={handleShowReviewsClick}>Skor</span>
                         </div>
-                        <div className='brand_subpage'>
-                            <div className='b_userReview'>
-                                <div className='b_userRating'>
-                                    <h5>Değerlendir</h5>
-                                    <div className='b_rate-wrap'>
-                                        <StarFill className='icon' />
-                                        <StarFill className='icon' />
-                                        <StarHalf className='icon' />
-                                        <Star className='icon' />
-                                        <Star className='icon' />
-                                    </div>
-                                </div>
-                                <div className='b_userCommenting'>
-                                    <h6>Yorum yap</h6>
-                                    <div className='b_comment-wrap'>
-                                        <textarea placeholder='Yorum yap!' />
-                                        <button type='button'>Gönder</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='b_reviews'>
-                                <div className='b_ratingSummary'>
-                                    <div className='b_ratingNumber'>
-                                        <span>4.3<span>/5</span></span>
-                                    </div>
-                                    <div className='b_rating-cont'>
-                                        <div className='b_rating'>
-                                            <StarFill className='icon' />
-                                            <StarFill className='icon' />
-                                            <StarFill className='icon' />
-                                            <StarFill className='icon' />
-                                            <Star className='icon' />
-                                        </div>
-                                        <span>Toplam 387 oy</span>
-                                    </div>
-                                </div>
-                                <div className='b_ratingDetails'>
-                                    <table cellSpacing="0" cellPadding="0">
-                                        <tr>
-                                            <td className='b_rt_stars-col'>
-                                                <div className='b_rt_stars'>
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_bar-col'>
-                                                <div className='b_rt_bar'>
-                                                    <div className='b_rt_bar_fill'></div>
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_count-col'>
-                                                <div className='b_rt_count'>
-                                                    <span>(240)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='b_rt_stars-col'>
-                                                <div className='b_rt_stars'>
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_bar-col'>
-                                                <div className='b_rt_bar'>
-                                                    <div className='b_rt_bar_fill'></div>
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_count-col'>
-                                                <div className='b_rt_count'>
-                                                    <span>(65)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='b_rt_stars-col'>
-                                                <div className='b_rt_stars'>
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_bar-col'>
-                                                <div className='b_rt_bar'>
-                                                    <div className='b_rt_bar_fill'></div>
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_count-col'>
-                                                <div className='b_rt_count'>
-                                                    <span>(24)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='b_rt_stars-col'>
-                                                <div className='b_rt_stars'>
-                                                    <StarFill className='icon' />
-                                                    <StarFill className='icon' />
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_bar-col'>
-                                                <div className='b_rt_bar'>
-                                                    <div className='b_rt_bar_fill'></div>
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_count-col'>
-                                                <div className='b_rt_count'>
-                                                    <span>(8)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className='b_rt_stars-col'>
-                                                <div className='b_rt_stars'>
-                                                    <StarFill className='icon' />
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_bar-col'>
-                                                <div className='b_rt_bar'>
-                                                    <div className='b_rt_bar_fill'></div>
-                                                </div>
-                                            </td>
-                                            <td className='b_rt_count-col'>
-                                                <div className='b_rt_count'>
-                                                    <span>(50)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div className='b_reviewList_heading'>
-                                    <ChatLeft className='icon' /><span>Yorumlar (26)</span>
-                                </div>
-                                <div className='b_reviewList'>
-
-                                </div>
-                            </div>
+                        <div className={`brand_subpage ${activeSubpage === 'userReview' ? 'userReviewActive' : 'showReviewsActive'}`}>
+                            <UserReview_Section />
+                            <Reviews_Section />
                         </div>
                     </div>
                 </main>
