@@ -23,6 +23,8 @@
   --brand-bgcolor: #303030;
   --brand-hover-bgcolor: #373737;
   --brand-bordercolor: #5b5b5b;
+  --brandPrimary_bgcolor: #2f2f2f;
+  --brandPrimary_bordercolor: #454545;
   --reviewSection_bordercolor: #404040;
   --reviewSection_comment-bgcolor: #343434;
   --reviewSection_comment-bordercolor: #545454;
@@ -55,6 +57,8 @@
   --brand-bgcolor: #f6f6f6;
   --brand-hover-bgcolor: #ffffff;
   --brand-bordercolor: #c4c4c4;
+  --brandPrimary_bgcolor: #f7f7f7;
+  --brandPrimary_bordercolor: #dfdfdf;
   --reviewSection_bordercolor: #d4d4d4;
   --reviewSection_comment-bgcolor: #FBFBFB;
   --reviewSection_comment-bordercolor: #dddddd;

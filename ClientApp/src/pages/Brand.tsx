@@ -54,101 +54,103 @@ const Reviews_Section = (props: {
             </div>
             <div className='b_ratingDetails'>
                 <table cellSpacing="0" cellPadding="0">
-                    <tr className='b_rt_five'>
-                        <td className='b_rt_stars-col'>
-                            <div className='b_rt_stars'>
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                            </div>
-                        </td>
-                        <td className='b_rt_bar-col'>
-                            <div className='b_rt_bar'>
-                                <div className='b_rt_bar_fill'></div>
-                            </div>
-                        </td>
-                        <td className='b_rt_count-col'>
-                            <div className='b_rt_count'>
-                                <span>(240)</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className='b_rt_four'>
-                        <td className='b_rt_stars-col'>
-                            <div className='b_rt_stars'>
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                            </div>
-                        </td>
-                        <td className='b_rt_bar-col'>
-                            <div className='b_rt_bar'>
-                                <div className='b_rt_bar_fill'></div>
-                            </div>
-                        </td>
-                        <td className='b_rt_count-col'>
-                            <div className='b_rt_count'>
-                                <span>(65)</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className='b_rt_three'>
-                        <td className='b_rt_stars-col'>
-                            <div className='b_rt_stars'>
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                            </div>
-                        </td>
-                        <td className='b_rt_bar-col'>
-                            <div className='b_rt_bar'>
-                                <div className='b_rt_bar_fill'></div>
-                            </div>
-                        </td>
-                        <td className='b_rt_count-col'>
-                            <div className='b_rt_count'>
-                                <span>(24)</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className='b_rt_two'>
-                        <td className='b_rt_stars-col'>
-                            <div className='b_rt_stars'>
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                            </div>
-                        </td>
-                        <td className='b_rt_bar-col'>
-                            <div className='b_rt_bar'>
-                                <div className='b_rt_bar_fill'></div>
-                            </div>
-                        </td>
-                        <td className='b_rt_count-col'>
-                            <div className='b_rt_count'>
-                                <span>(8)</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className='b_rt_one'>
-                        <td className='b_rt_stars-col'>
-                            <div className='b_rt_stars'>
-                                <StarFill className='icon' />
-                            </div>
-                        </td>
-                        <td className='b_rt_bar-col'>
-                            <div className='b_rt_bar'>
-                                <div className='b_rt_bar_fill'></div>
-                            </div>
-                        </td>
-                        <td className='b_rt_count-col'>
-                            <div className='b_rt_count'>
-                                <span>(50)</span>
-                            </div>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr className='b_rt_five'>
+                            <td className='b_rt_stars-col'>
+                                <div className='b_rt_stars'>
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                </div>
+                            </td>
+                            <td className='b_rt_bar-col'>
+                                <div className='b_rt_bar'>
+                                    <div className='b_rt_bar_fill'></div>
+                                </div>
+                            </td>
+                            <td className='b_rt_count-col'>
+                                <div className='b_rt_count'>
+                                    <span>(240)</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr className='b_rt_four'>
+                            <td className='b_rt_stars-col'>
+                                <div className='b_rt_stars'>
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                </div>
+                            </td>
+                            <td className='b_rt_bar-col'>
+                                <div className='b_rt_bar'>
+                                    <div className='b_rt_bar_fill'></div>
+                                </div>
+                            </td>
+                            <td className='b_rt_count-col'>
+                                <div className='b_rt_count'>
+                                    <span>(65)</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr className='b_rt_three'>
+                            <td className='b_rt_stars-col'>
+                                <div className='b_rt_stars'>
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                </div>
+                            </td>
+                            <td className='b_rt_bar-col'>
+                                <div className='b_rt_bar'>
+                                    <div className='b_rt_bar_fill'></div>
+                                </div>
+                            </td>
+                            <td className='b_rt_count-col'>
+                                <div className='b_rt_count'>
+                                    <span>(24)</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr className='b_rt_two'>
+                            <td className='b_rt_stars-col'>
+                                <div className='b_rt_stars'>
+                                    <StarFill className='icon' />
+                                    <StarFill className='icon' />
+                                </div>
+                            </td>
+                            <td className='b_rt_bar-col'>
+                                <div className='b_rt_bar'>
+                                    <div className='b_rt_bar_fill'></div>
+                                </div>
+                            </td>
+                            <td className='b_rt_count-col'>
+                                <div className='b_rt_count'>
+                                    <span>(8)</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr className='b_rt_one'>
+                            <td className='b_rt_stars-col'>
+                                <div className='b_rt_stars'>
+                                    <StarFill className='icon' />
+                                </div>
+                            </td>
+                            <td className='b_rt_bar-col'>
+                                <div className='b_rt_bar'>
+                                    <div className='b_rt_bar_fill'></div>
+                                </div>
+                            </td>
+                            <td className='b_rt_count-col'>
+                                <div className='b_rt_count'>
+                                    <span>(50)</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div className='b_reviewList_heading'>
@@ -203,6 +205,9 @@ export const Page_Brand = () => {
         setActiveSubpage('showReviews');
     }
 
+    //document.querySelector('.brand_primary').style.marginTop = (document.querySelector('.b_logo').offsetHeight / 2) + 'px';
+    //document.querySelector('.brand_primary').style.paddingTop = ((document.querySelector('.b_logo').offsetHeight / 2) + 10) + 'px';
+
     return (
         <div className='page_content'>
             <NavDesktop />
@@ -225,7 +230,7 @@ export const Page_Brand = () => {
                                 </div>
                                 <div className='b_date'>
                                     <Calendar className='icon' />
-                                    <span>08/05/1886</span>
+                                    <span>08 / 05 / 1886</span>
                                 </div>
                             </div>
                             <div className='b_rating_min'>
@@ -235,38 +240,6 @@ export const Page_Brand = () => {
                                 <StarHalf className='icon' />
                                 <Star className='icon' />
                             </div>
-                        </div>
-                        <div className='brand_products'>
-                            <div className='b_products_heading'>
-                                <ListUl className='icon' /><h3>Ürünler</h3>
-                            </div>
-                            <ul className='b_products_list'>
-                                <li>
-                                    <Link to={''}>
-                                        Coca Cola (250ml - 3lt)
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={''}>
-                                        Coca Cola Zero Sugar
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={''}>
-                                        Coca Cola Cherry Vanilla
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={''}>
-                                        Coca Cola Cherry Vanilla Zero Sugar
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={''}>
-                                        Coca Cola Creation
-                                    </Link>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                     <div className='review_section'>

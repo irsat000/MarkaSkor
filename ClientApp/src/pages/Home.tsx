@@ -34,7 +34,7 @@ export const Page_Home = () => {
                                 .replace('ö', 'o')
                                 .replace('ü', 'u');*/
                             return (
-                                <Link to={`/d/${sector.sectorKey}`} className='sector_item' key={sector.id}>
+                                <Link to={`/di/${sector.sectorKey}`} className='sector_item' key={sector.id}>
                                     <div className='sector_item_img-cont'>
                                         <img src={require(`../assets/images/sectors/${sector.img}`)} alt={sector.sectorName} />
                                     </div>
