@@ -261,7 +261,8 @@ header .desktop_header .header_actions .dropdown_menu li .dm_icon-cont {
   display: flex;
   align-items: center;
 }
-header .desktop_header .header_actions .dropdown_menu li span {
+header .desktop_header .header_actions .dropdown_menu li span,
+header .desktop_header .header_actions .dropdown_menu li a {
   font-size: 1.4rem;
   white-space: nowrap;
   font-family: "Roboto", sans-serif;
@@ -945,6 +946,77 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   -webkit-box-orient: vertical;
 }
 
+.main-register {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+  padding: 10px 14px;
+}
+.main-register .register_form {
+  display: flex;
+  flex-direction: column;
+}
+.main-register .register_form .re-user_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.main-register .register_form .re-user_info > span {
+  margin-top: 6px;
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  color: var(--font-color2);
+}
+.main-register .register_form .re-user_info > span > span {
+  margin-left: 8px;
+  font-size: 1.1rem;
+  font-family: "Roboto", sans-serif;
+  color: var(--font-color2);
+}
+.main-register .register_form .re-user_info .re-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px 14px;
+}
+.main-register .register_form .re-user_info .re-row .re-input-cont {
+  width: 100%;
+}
+.main-register .register_form .re-user_info .re-row .re-input-cont input[type=text],
+.main-register .register_form .re-user_info .re-row .re-input-cont input[type=password] {
+  width: 100%;
+  padding: 12px 16px 12px 8px;
+  outline: transparent;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  border: 1px solid var(--registerInputs_bordercolor);
+  background-color: var(--registerInputs_bgcolor);
+  color: var(--font-color1);
+}
+.main-register .register_form .re-user_info .re-row > select {
+  padding: 8px;
+  outline: transparent;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  border: 1px solid var(--registerInputs_bordercolor);
+  background-color: var(--registerInputs_bgcolor);
+  color: var(--font-color1);
+}
+.main-register .register_form .re-finish {
+  display: flex;
+  justify-content: center;
+  padding: 26px 0;
+}
+.main-register .register_form .re-finish button {
+  padding: 14px 20px;
+  outline: transparent;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  border: 1px solid var(--registerInputs_bordercolor);
+  background-color: var(--registerInputs_bgcolor);
+  color: var(--font-color1);
+}
+
 @media (min-width: 281px) {
   header {
     padding: 15px 18px;
@@ -1051,6 +1123,16 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   .main-brand .review_section .brand_subpage .b_reviews .b_ratingSummary {
     justify-content: flex-start;
     gap: 5%;
+  }
+  .main-register {
+    padding: 20px;
+  }
+  .main-register .register_form .re-user_info .re-row {
+    flex-direction: row;
+    align-items: unset;
+  }
+  .main-register .register_form .re-user_info .re-row .re-input-cont {
+    max-width: 500px;
   }
 }
 @media (min-width: 992px) {

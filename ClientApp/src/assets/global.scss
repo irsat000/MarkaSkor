@@ -296,7 +296,8 @@ header {
                         align-items: center;
                     }
 
-                    span {
+                    span,
+                    a {
                         font-size: 1.4rem;
                         white-space: nowrap;
                         font-family: 'Roboto', sans-serif;
@@ -432,6 +433,8 @@ header {
 
 
 
+// INDEX
+
 .main-index {
     display: flex;
     flex-direction: column;
@@ -525,6 +528,8 @@ header {
         }
     }
 }
+
+// DISCOVER
 
 .main-discover {
     display: flex;
@@ -667,6 +672,8 @@ header {
         }
     }
 }
+
+// BRAND
 
 .main-brand {
     display: flex;
@@ -1118,6 +1125,93 @@ header {
     }
 }
 
+// REGISTER
+
+.main-register {
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
+    padding: 10px 14px;
+
+    .register_form {
+        display: flex;
+        flex-direction: column;
+
+        .re-user_info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            >span {
+                margin-top: 6px;
+                font-size: 1.4rem;
+                font-family: 'Roboto', sans-serif;
+                color: var(--font-color2);
+
+                >span {
+                    margin-left: 8px;
+                    font-size: 1.1rem;
+                    font-family: 'Roboto', sans-serif;
+                    color: var(--font-color2);
+                }
+            }
+
+            .re-row {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px 14px;
+
+                .re-input-cont {
+                    width: 100%;
+
+                    input[type="text"],
+                    input[type="password"] {
+                        width: 100%;
+                        padding: 12px 16px 12px 8px;
+                        outline: transparent;
+                        border-radius: 4px;
+                        font-size: 1.2rem;
+                        border: 1px solid var(--registerInputs_bordercolor);
+                        background-color: var(--registerInputs_bgcolor);
+                        color: var(--font-color1);
+                    }
+                }
+
+                >select {
+                    padding: 8px;
+                    outline: transparent;
+                    border-radius: 4px;
+                    font-size: 1.2rem;
+                    border: 1px solid var(--registerInputs_bordercolor);
+                    background-color: var(--registerInputs_bgcolor);
+                    color: var(--font-color1);
+                }
+            }
+        }
+
+        .re-finish {
+            display: flex;
+            justify-content: center;
+            padding: 26px 0;
+
+            button {
+                padding: 14px 20px;
+                outline: transparent;
+                border-radius: 4px;
+                font-size: 1.4rem;
+                border: 1px solid var(--registerInputs_bordercolor);
+                background-color: var(--registerInputs_bgcolor);
+                color: var(--font-color1);
+            }
+        }
+    }
+}
+
+
+
+
+// RESPONSIVE
 
 
 @media (min-width: 281px) {
@@ -1285,6 +1379,23 @@ header {
                     .b_ratingSummary {
                         justify-content: flex-start;
                         gap: 5%;
+                    }
+                }
+            }
+        }
+    }
+
+    .main-register {
+        padding: 20px;
+
+        .register_form {
+            .re-user_info {
+                .re-row {
+                    flex-direction: row;
+                    align-items: unset;
+
+                    .re-input-cont {
+                        max-width: 500px;
                     }
                 }
             }

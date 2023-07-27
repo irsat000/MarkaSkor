@@ -37,32 +37,8 @@
     },
     {
         "id": 7,
-        "img": "finance.png",
-        "sectorKey": "finans",
-        "sectorName": "Finans"
-    },
-    {
-        "id": 8,
-        "img": "energy.png",
-        "sectorKey": "enerji",
-        "sectorName": "Enerji"
-    },
-    {
-        "id": 9,
         "img": "travel.png",
         "sectorKey": "seyahat",
         "sectorName": "Seyahat"
-    },
-    {
-        "id": 10,
-        "img": "health.png",
-        "sectorKey": "saglik",
-        "sectorName": "Sağlık"
-    },
-    {
-        "id": 11,
-        "img": "service.png",
-        "sectorKey": "servis",
-        "sectorName": "Servis"
     }
 ]

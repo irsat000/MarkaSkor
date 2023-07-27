@@ -10,13 +10,13 @@ export const Page_Home = () => {
         <div className='page_content'>
             <NavDesktop />
             <section>
-                <AppHeader page="Anasayfa" />
+                <AppHeader page='Anasayfa' />
                 <main className='main-index'>
                     <div className='mainpage_heading'>
                         <span>MarkaSkor</span>
                     </div>
-                    <div className="search-main-cont">
-                        <input type="text" placeholder="Marka ara" />
+                    <div className='search-main-cont'>
+                        <input type='text' placeholder='Marka ara' />
                         <Search className='search_input-icon' />
                     </div>
                     <div className='sectors_heading'>
@@ -34,7 +34,7 @@ export const Page_Home = () => {
                                 .replace('ö', 'o')
                                 .replace('ü', 'u');*/
                             return (
-                                <Link to={`/di/${sector.sectorKey}`} className='sector_item' key={sector.id}>
+                                <Link to={`/sektor/${sector.sectorKey}`} className='sector_item' key={sector.id}>
                                     <div className='sector_item_img-cont'>
                                         <img src={require(`../assets/images/sectors/${sector.img}`)} alt={sector.sectorName} />
                                     </div>

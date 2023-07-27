@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, List, PersonCircle, CaretDownFill, Gear, Shuffle, Newspaper, ArrowLeftShort } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 
 
@@ -42,7 +43,7 @@ const Drawer = (props: {
                     <span className='dr-group_heading'>Account</span>
                     <ul className='dr-group_account'>
                         <li><a href='/'><PersonCircle className='dr-link_icon' /><span>Giriş yap</span></a></li>
-                        <li><a href='/'><PersonCircle className='dr-link_icon' /><span>Kayıt ol</span></a></li>
+                        <li><Link to='/kaydol'><PersonCircle className='dr-link_icon' /><span>Kayıt ol</span></Link></li>
                     </ul>
                     <span className='dr-group_heading'>Genel</span>
                     <ul className='dr-group_general'>
@@ -109,7 +110,7 @@ const DesktopHeader = (props: {
                     </li>
                     <li>
                         <div className='dm_icon-cont'><PersonCircle /></div>
-                        <span>Kayıt ol</span>
+                        <Link to='/kaydol'>Kayıt ol</Link>
                     </li>
                     <li>
                         <div className='dm_icon-cont'><Gear /></div>

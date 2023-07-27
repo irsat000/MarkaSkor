@@ -11,10 +11,6 @@ export const NavDesktop = () => {
             </Link>
             <ul className='nav_useful_links'>
                 <li>
-                    <div className='nav_link_icon-cont'><Shuffle /></div>
-                    <span>Marka kıyasla</span>
-                </li>
-                <li>
                     <div className='nav_link_icon-cont'><Newspaper /></div>
                     <span>Haberler</span>
                 </li>
@@ -26,3 +22,8 @@ export const NavDesktop = () => {
         </nav>
     )
 };
+
+/*<li>
+    <div className='nav_link_icon-cont'><Shuffle /></div>
+    <span>Marka kıyasla</span>
+</li>*/

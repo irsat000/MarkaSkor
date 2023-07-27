@@ -31,6 +31,8 @@
   --reviewSection_button-bgcolor: #31986d;
   --reviewSection_button-hover-bgcolor: #42b383;
   --reviewSection_ratingsBar-bgcolor: #5b5b5b;
+  --registerInputs_bgcolor: #2f2f2f;
+  --registerInputs_bordercolor: #5b5b5b;
 }
 
 .lightmode {

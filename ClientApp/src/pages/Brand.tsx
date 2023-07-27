@@ -195,7 +195,7 @@ const Reviews_Section = (props: {
 export const Page_Brand = () => {
     const { brandId } = useParams();
 
-    const [activeSubpage, setActiveSubpage] = useState('userReview');
+    const [activeSubpage, setActiveSubpage] = useState('showReviews');
 
     const handleUserReviewClick = () => {
         setActiveSubpage('userReview');

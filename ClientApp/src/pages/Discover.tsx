@@ -49,7 +49,7 @@ export const Page_Discover = () => {
                     <div className='d-brand_list'>
                         {Array.from(Array(10), (e, i) => {
                             return (
-                                <Link to={`/br/${i}`} className='d-brand_item' key={i}>
+                                <Link to={`/marka/${i}`} className='d-brand_item' key={i}>
                                     <div className='brand_logo-cont'>
                                         <img src={require('../assets/images/brands_temp/cocacola.png')} alt="Coca Cola" />
                                     </div>
