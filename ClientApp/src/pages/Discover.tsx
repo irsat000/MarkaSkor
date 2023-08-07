@@ -3,6 +3,7 @@ import { Tag, Pentagon } from 'react-bootstrap-icons';
 import { Link, useParams } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
+import sectorsData from '../data/sectors.json';
 
 
 export const Page_Discover = () => {

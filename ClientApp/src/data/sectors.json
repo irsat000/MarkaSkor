@@ -3,7 +3,24 @@
         "id": 1,
         "img": "goods.png",
         "sectorKey": "tuketim",
-        "sectorName": "Tüketim"
+        "sectorName": "Tüketim",
+        "categories": [
+            {
+                "cateKey": "yiyecek",
+                "cateName": "Yiyecek",
+                "img": "c_yiyecek.png"
+            },
+            {
+                "cateKey": "icecek",
+                "cateName": "İçecek",
+                "img": "c_icecek.png"
+            },
+            {
+                "cateKey": "hijyen",
+                "cateName": "Hijyen",
+                "img": "c_hijyen.png"
+            }
+        ]
     },
     {
         "id": 2,

@@ -115,7 +115,7 @@ body {
                     font-size: 1.0rem;
                 }
 
-                span {
+                span, a {
                     font-size: 1.1rem;
                     white-space: nowrap;
                     font-family: 'Roboto', sans-serif;
@@ -1206,12 +1206,17 @@ header {
                 cursor: pointer;
                 transition: background-color 0.1s ease;
 
-                &:hover{
+                &:hover {
                     background-color: var(--registerInputs_hover_bgcolor);
                 }
             }
         }
     }
+}
+
+// SETTINGS
+.main-settings {
+
 }
 
 
@@ -1405,7 +1410,8 @@ header {
                     }
                 }
             }
-            .re-finish{
+
+            .re-finish {
                 justify-content: flex-start;
             }
         }

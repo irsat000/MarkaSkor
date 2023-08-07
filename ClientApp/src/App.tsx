@@ -4,6 +4,8 @@ import { Page_Home } from './pages/Home';
 import { Page_Discover } from './pages/Discover';
 import { Page_Brand } from './pages/Brand';
 import { Page_Register } from './pages/Register';
+import { Page_Settings } from './pages/Settings';
+
 
 const App = () => {
   return (
@@ -12,6 +14,7 @@ const App = () => {
       <Route path="/sektor/:sectorKey" element={<Page_Discover />} />
       <Route path="/marka/:brandId" element={<Page_Brand />} />
       <Route path="/kaydol" element={<Page_Register />} />
+      <Route path="/ayarlar" element={<Page_Settings />} />
     </Routes>
   )
 }

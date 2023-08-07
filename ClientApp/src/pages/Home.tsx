@@ -24,15 +24,6 @@ export const Page_Home = () => {
                     </div>
                     <article>
                         {sectorsData.map((sector) => {
-                            /*const sectorName = sector.sectorName
-                                .toLowerCase()
-                                .replace('ş', 's')
-                                .replace('ğ', 'g')
-                                .replace('ç', 'c')
-                                .replace('ı', 'i')
-                                .replace('İ', 'i')
-                                .replace('ö', 'o')
-                                .replace('ü', 'u');*/
                             return (
                                 <Link to={`/sektor/${sector.sectorKey}`} className='sector_item' key={sector.id}>
                                     <div className='sector_item_img-cont'>

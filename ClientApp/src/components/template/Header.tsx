@@ -114,7 +114,7 @@ const DesktopHeader = (props: {
                     </li>
                     <li>
                         <div className='dm_icon-cont'><Gear /></div>
-                        <span>Ayarlar</span>
+                        <Link to='/ayarlar'>Ayarlar</Link>
                     </li>
                 </ul>
             </div>

@@ -16,7 +16,7 @@ export const NavDesktop = () => {
                 </li>
                 <li>
                     <div className='nav_link_icon-cont'><Gear /></div>
-                    <span>Ayarlar</span>
+                    <Link to='/ayarlar'>Ayarlar</Link>
                 </li>
             </ul>
         </nav>
