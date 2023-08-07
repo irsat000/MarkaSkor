@@ -1015,6 +1015,11 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   border: 1px solid var(--registerInputs_bordercolor);
   background-color: var(--registerInputs_bgcolor);
   color: var(--font-color1);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+.main-register .register_form .re-finish button:hover {
+  background-color: var(--registerInputs_hover_bgcolor);
 }
 
 @media (min-width: 281px) {
@@ -1133,6 +1138,9 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   }
   .main-register .register_form .re-user_info .re-row .re-input-cont {
     max-width: 500px;
+  }
+  .main-register .register_form .re-finish {
+    justify-content: flex-start;
   }
 }
 @media (min-width: 992px) {

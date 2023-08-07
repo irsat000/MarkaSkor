@@ -3,6 +3,44 @@ import { useParams, Link } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 
+// Phone number input that takes care of formatting.
+// With this method, user can safely enter their number without making mistakes.
+const PhoneNumberInput: React.FC = () => {
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const formatPhoneNumber = (input: string) => {
+        const cleanedInput = input.replace(/\D/g, '');
+        let formattedValue = '';
+
+        if (cleanedInput.length > 0) {
+            formattedValue = '(' + cleanedInput.substring(0, 3);
+        }
+        if (cleanedInput.length > 3) {
+            formattedValue += ') ' + cleanedInput.substring(3, 6);
+        }
+        if (cleanedInput.length > 6) {
+            formattedValue += '-' + cleanedInput.substring(6, 10);
+        }
+
+        return formattedValue;
+    };
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        const formattedInput = formatPhoneNumber(input);
+        setPhoneNumber(formattedInput);
+    };
+
+    return (
+        <input
+            type='text'
+            placeholder='Örn; (535) 615 4895'
+            value={phoneNumber}
+            onChange={handleInputChange}
+        />
+    );
+};
+
 
 export const Page_Register = () => {
 
@@ -17,7 +55,7 @@ export const Page_Register = () => {
                             <span>Numara</span>
                             <div className='re-row'>
                                 <div className='re-input-cont'>
-                                    <input type='text' placeholder='Örn; (535) 615 48 95' />
+                                    <PhoneNumberInput />
                                 </div>
                                 <select>
                                     <option>TR (+90)</option>
@@ -29,7 +67,7 @@ export const Page_Register = () => {
                             <span>E-Posta</span>
                             <div className='re-row'>
                                 <div className='re-input-cont'>
-                                    <input type='text' placeholder='Örn; gokhandenizli321' />
+                                    <input type='text' placeholder='Örn; kemalsunal321' />
                                 </div>
                                 <select>
                                     <option>@gmail.com</option>
@@ -46,7 +84,7 @@ export const Page_Register = () => {
                             <span>Ad - Soyad<span>(İsteğe bağlı)</span></span>
                             <div className='re-row'>
                                 <div className='re-input-cont'>
-                                    <input type='text' placeholder='Örn; Gökhan Denizli' />
+                                    <input type='text' placeholder='Örn; Kemal Sunal' />
                                 </div>
                             </div>
                         </div>

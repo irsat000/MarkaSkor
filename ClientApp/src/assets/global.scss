@@ -1203,6 +1203,12 @@ header {
                 border: 1px solid var(--registerInputs_bordercolor);
                 background-color: var(--registerInputs_bgcolor);
                 color: var(--font-color1);
+                cursor: pointer;
+                transition: background-color 0.1s ease;
+
+                &:hover{
+                    background-color: var(--registerInputs_hover_bgcolor);
+                }
             }
         }
     }
@@ -1398,6 +1404,9 @@ header {
                         max-width: 500px;
                     }
                 }
+            }
+            .re-finish{
+                justify-content: flex-start;
             }
         }
     }
