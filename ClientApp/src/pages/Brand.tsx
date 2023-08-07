@@ -5,6 +5,35 @@ import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 
 
+
+
+const RatingBar = ({ totalRating, starRatingCount }: { totalRating: number, starRatingCount: number }) => {
+    // Calculates the width percentage based on the number of people rated
+    let widthPercentage = (starRatingCount / totalRating) * 100;
+
+    // Adds a portion of remaining percentage for UX
+    if (widthPercentage > 30) {
+        widthPercentage = widthPercentage + ((100 - widthPercentage) / 2);
+    }
+    else if (widthPercentage > 20) {
+        widthPercentage = widthPercentage + ((100 - widthPercentage) / 3);
+    }
+    else if (widthPercentage > 10) {
+        widthPercentage = widthPercentage + ((100 - widthPercentage) / 4);
+    }
+
+    return (
+        <td className='b_rt_bar-col'>
+            <div className='b_rt_bar'>
+                <div className='b_rt_bar_fill' style={{ width: `${widthPercentage}%` }}></div>
+            </div>
+        </td>
+    );
+};
+
+
+
+
 const UserReview_Section = (props: {
 
 }) => {
@@ -49,7 +78,7 @@ const Reviews_Section = (props: {
                         <StarFill className='icon' />
                         <Star className='icon' />
                     </div>
-                    <span>Toplam 387 oy</span>
+                    <span>Toplam 100 oy</span>
                 </div>
             </div>
             <div className='b_ratingDetails'>
@@ -65,14 +94,10 @@ const Reviews_Section = (props: {
                                     <StarFill className='icon' />
                                 </div>
                             </td>
-                            <td className='b_rt_bar-col'>
-                                <div className='b_rt_bar'>
-                                    <div className='b_rt_bar_fill'></div>
-                                </div>
-                            </td>
+                            <RatingBar totalRating={100} starRatingCount={25} />
                             <td className='b_rt_count-col'>
                                 <div className='b_rt_count'>
-                                    <span>(240)</span>
+                                    <span>(25)</span>
                                 </div>
                             </td>
                         </tr>
@@ -85,14 +110,10 @@ const Reviews_Section = (props: {
                                     <StarFill className='icon' />
                                 </div>
                             </td>
-                            <td className='b_rt_bar-col'>
-                                <div className='b_rt_bar'>
-                                    <div className='b_rt_bar_fill'></div>
-                                </div>
-                            </td>
+                            <RatingBar totalRating={100} starRatingCount={15} />
                             <td className='b_rt_count-col'>
                                 <div className='b_rt_count'>
-                                    <span>(65)</span>
+                                    <span>(15)</span>
                                 </div>
                             </td>
                         </tr>
@@ -104,14 +125,10 @@ const Reviews_Section = (props: {
                                     <StarFill className='icon' />
                                 </div>
                             </td>
-                            <td className='b_rt_bar-col'>
-                                <div className='b_rt_bar'>
-                                    <div className='b_rt_bar_fill'></div>
-                                </div>
-                            </td>
+                            <RatingBar totalRating={100} starRatingCount={20} />
                             <td className='b_rt_count-col'>
                                 <div className='b_rt_count'>
-                                    <span>(24)</span>
+                                    <span>(20)</span>
                                 </div>
                             </td>
                         </tr>
@@ -122,14 +139,10 @@ const Reviews_Section = (props: {
                                     <StarFill className='icon' />
                                 </div>
                             </td>
-                            <td className='b_rt_bar-col'>
-                                <div className='b_rt_bar'>
-                                    <div className='b_rt_bar_fill'></div>
-                                </div>
-                            </td>
+                            <RatingBar totalRating={100} starRatingCount={10} />
                             <td className='b_rt_count-col'>
                                 <div className='b_rt_count'>
-                                    <span>(8)</span>
+                                    <span>(10)</span>
                                 </div>
                             </td>
                         </tr>
@@ -139,14 +152,10 @@ const Reviews_Section = (props: {
                                     <StarFill className='icon' />
                                 </div>
                             </td>
-                            <td className='b_rt_bar-col'>
-                                <div className='b_rt_bar'>
-                                    <div className='b_rt_bar_fill'></div>
-                                </div>
-                            </td>
+                            <RatingBar totalRating={100} starRatingCount={30} />
                             <td className='b_rt_count-col'>
                                 <div className='b_rt_count'>
-                                    <span>(50)</span>
+                                    <span>(30)</span>
                                 </div>
                             </td>
                         </tr>

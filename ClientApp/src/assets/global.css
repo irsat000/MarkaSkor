@@ -837,7 +837,7 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
 .main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_bar-col .b_rt_bar .b_rt_bar_fill {
   height: 100%;
   border-radius: 2px;
-  width: 60%;
+  width: 0;
 }
 .main-brand .review_section .brand_subpage .b_reviews .b_ratingDetails table tr .b_rt_count-col .b_rt_count {
   font-size: 1rem;
