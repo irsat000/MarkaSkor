@@ -34,7 +34,7 @@ const PhoneNumberInput: React.FC<{ setFormData: (e: any) => void }> = ({ setForm
 
         setFormData((prevData: any) => ({
             ...prevData,
-            ["phoneNumber"]: phoneNumber,
+            phoneNumber: phoneNumber,
         }));
     };
 
