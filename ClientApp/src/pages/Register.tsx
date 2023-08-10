@@ -7,8 +7,7 @@ import { NavDesktop } from '../components/template/NavDesktop';
 
 // Phone number input that takes care of formatting.
 // With this method, user can safely enter their number without making mistakes.
-const PhoneNumberInput: React.FC<{ setFormData: (e: any) => void }> = ({ setFormData }) => {
-    const [phoneNumber, setPhoneNumber] = useState('');
+const PhoneNumberInput: React.FC<{ phoneNumber: string, setFormData: (e: any) => void }> = ({ phoneNumber, setFormData }) => {
 
     const formatPhoneNumber = (input: string) => {
         const cleanedInput = input.replace(/\D/g, '');
@@ -30,11 +29,10 @@ const PhoneNumberInput: React.FC<{ setFormData: (e: any) => void }> = ({ setForm
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
         const formattedInput = formatPhoneNumber(input);
-        setPhoneNumber(formattedInput);
 
         setFormData((prevData: any) => ({
             ...prevData,
-            phoneNumber: phoneNumber
+            phoneNumber: formattedInput
         }));
     };
 
@@ -131,7 +129,7 @@ const RegistrationForm: React.FC = () => {
                 <span>Numara</span>
                 <div className='re-row'>
                     <div className='re-input-cont'>
-                        <PhoneNumberInput setFormData={setFormData} />
+                        <PhoneNumberInput phoneNumber={formData.phoneNumber} setFormData={setFormData} />
                     </div>
                     <select name="countryCode" value={formData.countryCode} onChange={handleChange}>
                         <option value='90'>TR (+90)</option>
