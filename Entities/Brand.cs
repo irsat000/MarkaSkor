@@ -7,15 +7,15 @@ public partial class Brand
 {
     public int id { get; set; }
 
+    public string brandKey { get; set; } = null!;
+
     public string brandName { get; set; } = null!;
 
     public string? logo { get; set; }
 
     public string? icon { get; set; }
 
-    public string? brandDesc { get; set; }
-
-    public virtual ICollection<BrandReview> BrandReviews { get; } = new List<BrandReview>();
-
     public virtual ICollection<Brand__Category> Brand__Categories { get; } = new List<Brand__Category>();
+
+    public virtual ICollection<Review> Reviews { get; } = new List<Review>();
 }

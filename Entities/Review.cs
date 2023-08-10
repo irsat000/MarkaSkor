@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace MarkaSkor.Entities;
 
-public partial class BrandReview
+public partial class Review
 {
     public int id { get; set; }
 
     public string? comment { get; set; }
 
-    public byte stars { get; set; }
+    public byte? rating { get; set; }
 
     public int brandId { get; set; }
 
-    public int accountId { get; set; }
-
-    public virtual Account account { get; set; } = null!;
+    public int userId { get; set; }
 
     public virtual Brand brand { get; set; } = null!;
+
+    public virtual User user { get; set; } = null!;
 }

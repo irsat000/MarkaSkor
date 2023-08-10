@@ -7,7 +7,11 @@ public partial class Category
 {
     public int id { get; set; }
 
+    public string cateKey { get; set; } = null!;
+
     public string cateName { get; set; } = null!;
+
+    public string icon { get; set; } = null!;
 
     public int sectorId { get; set; }
 
