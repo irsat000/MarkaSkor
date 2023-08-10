@@ -34,7 +34,7 @@ const PhoneNumberInput: React.FC<{ setFormData: (e: any) => void }> = ({ setForm
 
         setFormData((prevData: any) => ({
             ...prevData,
-            phoneNumber: phoneNumber,
+            phoneNumber: phoneNumber
         }));
     };
 
@@ -55,60 +55,74 @@ const RegistrationForm: React.FC = () => {
         emailPrefix: '',
         emailDomain: '@gmail.com',
         password: '',
-        fullName: '',
+        fullName: ''
     });
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: value
         }));
     };
+
+    const refactorPhoneNumber = (countryCode: string, phoneNumber: string): string => {
+        return (countryCode + phoneNumber).replace(/[\(\) \-]/g, "");
+    };
+
+    /*const checkReponse = async (response: any) : Promise<any> => {
+        return response.ok ? response.json() : Promise.reject();
+    }*/
+
+    const handleFetchResponse = (response: Response): Promise<any> => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    }
+
+    const handleFetchCatch = (error: any) => {
+        console.log(error);
+    }
+
+    const defaultFetchHeaders = {
+        'Content-Type': 'application/json'
+    }
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        const apiPayload = {
-            phoneNumber: formData.phoneNumber,
-            countryCode: formData.countryCode,
+        const payload = {
+            phoneNumber: (formData.countryCode + formData.phoneNumber).replace(/[\(\) \-]/g, ""),
             email: formData.emailPrefix + formData.emailDomain,
             password: formData.password,
-            fullName: formData.fullName,
+            username: formData.fullName != "" ? formData.fullName : null
         };
 
-        console.log(apiPayload);
+        await fetch('https://localhost:7165/api/register', {
+            method: 'POST',
+            headers: defaultFetchHeaders,
+            body: JSON.stringify(payload)
+        })
+            .then(handleFetchResponse)
+            .then((data) => {
+                if (1 == 1) {
+                    console.log(data);
 
-        /*
-        try {
-            await fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(apiPayload),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    if (1 == 1) {
-                        console.log('Registration successful:', data);
+                    setFormData({
+                        phoneNumber: '',
+                        countryCode: '',
+                        emailPrefix: '',
+                        emailDomain: '',
+                        password: '',
+                        fullName: ''
+                    });
+                } else {
+                    console.error('Error registering:', data);
+                    // Handle registration error, show appropriate messages to the user
+                }
+            }).catch(handleFetchCatch);
 
-                        setFormData({
-                            phoneNumber: '',
-                            countryCode: '',
-                            emailPrefix: '',
-                            emailDomain: '',
-                            password: '',
-                            fullName: '',
-                        });
-                    } else {
-                        console.error('Error registering:', data);
-                        // Handle registration error, show appropriate messages to the user
-                    }
-                });
-        } catch (error) {
-            console.error('Error registering:', error);
-        }*/
     };
 
     return (

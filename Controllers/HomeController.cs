@@ -3,7 +3,7 @@
 namespace MarkaSkor.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api")]
 public class HomeController : ControllerBase
 {
     private readonly ILogger<HomeController> _logger;

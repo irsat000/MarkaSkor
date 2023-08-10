@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using MarkaSkor.Dtos;
 
 namespace MarkaSkor.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api")]
 public class AccountController : ControllerBase
 {
     private readonly ILogger<AccountController> _logger;
@@ -13,10 +14,22 @@ public class AccountController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Register([FromBody] string asdf)
+    [HttpGet]
+    public IActionResult Get()
     {
+        // Implement your logic here
+        return Ok(new { message = "Hello from .NET API" });
+    }
 
-        return Ok();
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterUserDto userDto)
+    {
+        var responseData = new
+        {
+            Message = "Registration successful",
+            UserId = "asdf"
+        };
+
+        return Ok(responseData);
     }
 }
