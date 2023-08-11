@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
+import { handleError, defaultFetchHeaders, strPayload, refactorPhoneNumber } from '../utility/fetchUtils';
 
 
 
@@ -56,6 +57,11 @@ const RegistrationForm: React.FC = () => {
         fullName: ''
     });
 
+    const [formErrors, setFormErrors] = useState({
+        emailPrefix: false,
+        password: false
+    });
+
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -64,34 +70,39 @@ const RegistrationForm: React.FC = () => {
         }));
     };
 
-    const refactorPhoneNumber = (countryCode: string, phoneNumber: string): string => {
-        return (countryCode + phoneNumber).replace(/[\(\) \-]/g, "");
-    };
-
-    /*const checkReponse = async (response: any) : Promise<any> => {
-        return response.ok ? response.json() : Promise.reject();
-    }*/
-
-    const handleFetchResponse = (response: Response): Promise<any> => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    }
-
-    const handleFetchCatch = (error: any) => {
-        console.log(error);
-    }
-
-    const defaultFetchHeaders = {
-        'Content-Type': 'application/json'
-    }
-
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
+        // Reset all input errors to false at every submit
+        setFormErrors({
+            emailPrefix: false,
+            password: false
+        });
+
+        // Check if required fields are empty
+        let updatedErrors = {};
+        if (formData.emailPrefix.trim().length < 3) {
+            updatedErrors = {
+                ...updatedErrors,
+                emailPrefix: true
+            };
+        }
+        if (formData.password.trim().length < 3) {
+            updatedErrors = {
+                ...updatedErrors,
+                password: true
+            };
+        }
+        if (Object.keys(updatedErrors).length > 0) {
+            setFormErrors(prevErrors => ({
+                ...prevErrors,
+                ...updatedErrors
+            }));
+            return;
+        }
+
         const payload = {
-            phoneNumber: (formData.countryCode + formData.phoneNumber).replace(/[\(\) \-]/g, ""),
+            phoneNumber: refactorPhoneNumber(formData.countryCode, formData.phoneNumber),
             email: formData.emailPrefix + formData.emailDomain,
             password: formData.password,
             username: formData.fullName != "" ? formData.fullName : null
@@ -100,27 +111,30 @@ const RegistrationForm: React.FC = () => {
         await fetch('https://localhost:7165/api/register', {
             method: 'POST',
             headers: defaultFetchHeaders,
-            body: JSON.stringify(payload)
+            body: strPayload(payload)
         })
-            .then(handleFetchResponse)
-            .then((data) => {
-                if (1 == 1) {
-                    console.log(data);
-
-                    setFormData({
-                        phoneNumber: '',
-                        countryCode: '',
-                        emailPrefix: '',
-                        emailDomain: '',
-                        password: '',
-                        fullName: ''
-                    });
+            .then((res) => {
+                if (res.status === 404) {
+                    throw new Error('Not found');
+                } else if (res.status === 500) {
+                    throw new Error('Server error');
+                } else if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
                 } else {
-                    console.error('Error registering:', data);
-                    // Handle registration error, show appropriate messages to the user
+                    return res.json();
                 }
-            }).catch(handleFetchCatch);
-
+            })
+            .then((data) => {
+                console.log(data.message);
+                setFormData({
+                    phoneNumber: '',
+                    countryCode: '',
+                    emailPrefix: '',
+                    emailDomain: '',
+                    password: '',
+                    fullName: ''
+                });
+            }).catch(handleError);
     };
 
     return (
@@ -147,6 +161,7 @@ const RegistrationForm: React.FC = () => {
                             value={formData.emailPrefix}
                             onChange={handleChange}
                             placeholder='Örn; kemalsunal321'
+                            className={`${formErrors.emailPrefix ? 'input_error' : ''}`}
                         />
                     </div>
                     <select name="emailDomain" value={formData.emailDomain} onChange={handleChange}>
@@ -164,6 +179,7 @@ const RegistrationForm: React.FC = () => {
                             value={formData.password}
                             onChange={handleChange}
                             placeholder='Örn; 123123321'
+                            className={`${formErrors.password ? 'input_error' : ''}`}
                         />
                     </div>
                 </div>

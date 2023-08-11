@@ -115,7 +115,8 @@ body {
                     font-size: 1.0rem;
                 }
 
-                span, a {
+                span,
+                a {
                     font-size: 1.1rem;
                     white-space: nowrap;
                     font-family: 'Roboto', sans-serif;
@@ -272,36 +273,38 @@ header {
                 box-shadow: -1px 2px 13px 0px rgba(0, 0, 0, 0.1);
 
                 li {
-                    display: flex;
-                    align-items: center;
-                    flex-direction: row;
                     width: 100%;
-                    gap: 12px;
-                    padding: 10px 14px;
                     border-bottom: 1px solid var(--dropdownMenu-bordercolor);
-                    cursor: pointer;
-                    transition: background-color 0.1s ease;
-
-                    &:hover {
-                        background-color: var(--dropdownMenu-hover-bgcolor);
-                    }
 
                     &:last-child {
                         border-bottom: unset;
                     }
 
-                    .dm_icon-cont {
-                        font-size: 1.3rem;
+                    >a {
+                        cursor: pointer;
+                        transition: background-color 0.1s ease;
                         display: flex;
                         align-items: center;
-                    }
+                        flex-direction: row;
+                        gap: 12px;
+                        padding: 10px 14px;
 
-                    span,
-                    a {
-                        font-size: 1.4rem;
-                        white-space: nowrap;
-                        font-family: 'Roboto', sans-serif;
-                        font-weight: 300;
+                        &:hover {
+                            background-color: var(--dropdownMenu-hover-bgcolor);
+                        }
+
+                        .dm_icon-cont {
+                            font-size: 1.3rem;
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        span {
+                            font-size: 1.4rem;
+                            white-space: nowrap;
+                            font-family: 'Roboto', sans-serif;
+                            font-weight: 300;
+                        }
                     }
                 }
             }
@@ -1188,6 +1191,10 @@ header {
                     color: var(--font-color1);
                 }
             }
+
+            input.input_error{
+                border: 2px solid #bc2525 !important;
+            }
         }
 
         .re-finish {
@@ -1215,9 +1222,7 @@ header {
 }
 
 // SETTINGS
-.main-settings {
-
-}
+.main-settings {}
 
 
 

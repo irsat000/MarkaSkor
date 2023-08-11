@@ -24,12 +24,7 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterUserDto userDto)
     {
-        var responseData = new
-        {
-            Message = "Registration successful",
-            UserId = "asdf"
-        };
-
-        return Ok(responseData);
+        return NotFound();
+        return Ok(new { message = "Success." });
     }
 }

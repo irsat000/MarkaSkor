@@ -105,16 +105,22 @@ const DesktopHeader = (props: {
                 </div>
                 <ul ref={refDropdownMenu} className={`dropdown_menu${dropdownMenuActive ? ' active' : ''}`}>
                     <li>
-                        <div className='dm_icon-cont'><PersonCircle /></div>
-                        <span>Giriş yap</span>
+                        <a>
+                            <div className='dm_icon-cont'><PersonCircle /></div>
+                            <span>Giriş yap</span>
+                        </a>
                     </li>
                     <li>
-                        <div className='dm_icon-cont'><PersonCircle /></div>
-                        <Link to='/kaydol'>Kayıt ol</Link>
+                        <Link to='/kaydol'>
+                            <div className='dm_icon-cont'><PersonCircle /></div>
+                            <span>Kayıt ol</span>
+                        </Link>
                     </li>
                     <li>
-                        <div className='dm_icon-cont'><Gear /></div>
-                        <Link to='/ayarlar'>Ayarlar</Link>
+                        <Link to='/ayarlar'>
+                            <div className='dm_icon-cont'><Gear /></div>
+                            <span>Ayarlar</span>
+                        </Link>
                     </li>
                 </ul>
             </div>

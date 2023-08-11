@@ -105,7 +105,8 @@ body {
   align-items: center;
   font-size: 1rem;
 }
-.page_content .desktop_nav .nav_useful_links li span, .page_content .desktop_nav .nav_useful_links li a {
+.page_content .desktop_nav .nav_useful_links li span,
+.page_content .desktop_nav .nav_useful_links li a {
   font-size: 1.1rem;
   white-space: nowrap;
   font-family: "Roboto", sans-serif;
@@ -240,29 +241,30 @@ header .desktop_header .header_actions .dropdown_menu {
   box-shadow: -1px 2px 13px 0px rgba(0, 0, 0, 0.1);
 }
 header .desktop_header .header_actions .dropdown_menu li {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
   width: 100%;
-  gap: 12px;
-  padding: 10px 14px;
   border-bottom: 1px solid var(--dropdownMenu-bordercolor);
-  cursor: pointer;
-  transition: background-color 0.1s ease;
-}
-header .desktop_header .header_actions .dropdown_menu li:hover {
-  background-color: var(--dropdownMenu-hover-bgcolor);
 }
 header .desktop_header .header_actions .dropdown_menu li:last-child {
   border-bottom: unset;
 }
-header .desktop_header .header_actions .dropdown_menu li .dm_icon-cont {
+header .desktop_header .header_actions .dropdown_menu li > a {
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+  padding: 10px 14px;
+}
+header .desktop_header .header_actions .dropdown_menu li > a:hover {
+  background-color: var(--dropdownMenu-hover-bgcolor);
+}
+header .desktop_header .header_actions .dropdown_menu li > a .dm_icon-cont {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
 }
-header .desktop_header .header_actions .dropdown_menu li span,
-header .desktop_header .header_actions .dropdown_menu li a {
+header .desktop_header .header_actions .dropdown_menu li > a span {
   font-size: 1.4rem;
   white-space: nowrap;
   font-family: "Roboto", sans-serif;
@@ -1001,6 +1003,9 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   border: 1px solid var(--registerInputs_bordercolor);
   background-color: var(--registerInputs_bgcolor);
   color: var(--font-color1);
+}
+.main-register .register_form .re-user_info input.input_error {
+  border: 2px solid #bc2525 !important;
 }
 .main-register .register_form .re-finish {
   display: flex;
