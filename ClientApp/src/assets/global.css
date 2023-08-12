@@ -968,12 +968,19 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
   color: var(--font-color2);
+  display: inline-block;
 }
 .main-register .register_form .re-user_info > span > span {
+  display: inline-block;
   margin-left: 8px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-family: "Roboto", sans-serif;
   color: var(--font-color2);
+}
+.main-register .register_form .re-user_info > span .re-input-warning {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #af4343;
 }
 .main-register .register_form .re-user_info .re-row {
   display: flex;

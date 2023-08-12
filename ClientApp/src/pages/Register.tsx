@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 import { handleError, defaultFetchHeaders, strPayload, refactorPhoneNumber } from '../utility/fetchUtils';
@@ -8,7 +8,7 @@ import { handleError, defaultFetchHeaders, strPayload, refactorPhoneNumber } fro
 
 // Phone number input that takes care of formatting.
 // With this method, user can safely enter their number without making mistakes.
-const PhoneNumberInput: React.FC<{ phoneNumber: string, setFormData: (e: any) => void }> = ({ phoneNumber, setFormData }) => {
+const PhoneNumberInput: React.FC<{ phoneNumber: string, setFormData: (e: any) => void, phoneNumberError: boolean }> = ({ phoneNumber, setFormData, phoneNumberError }) => {
 
     const formatPhoneNumber = (input: string) => {
         const cleanedInput = input.replace(/\D/g, '');
@@ -43,22 +43,27 @@ const PhoneNumberInput: React.FC<{ phoneNumber: string, setFormData: (e: any) =>
             placeholder='Örn; (535) 615 4895'
             value={phoneNumber}
             onChange={handleInputChange}
+            className={`${phoneNumberError ? 'input_error' : ''}`}
         />
     );
 };
 
 const RegistrationForm: React.FC = () => {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         phoneNumber: '',
         countryCode: '90',
+        username: '',
+        password: '',
         emailPrefix: '',
         emailDomain: '@gmail.com',
-        password: '',
         fullName: ''
     });
 
     const [formErrors, setFormErrors] = useState({
-        emailPrefix: false,
+        phoneNumber: false,
+        username: false,
         password: false
     });
 
@@ -75,19 +80,26 @@ const RegistrationForm: React.FC = () => {
 
         // Reset all input errors to false at every submit
         setFormErrors({
-            emailPrefix: false,
+            phoneNumber: false,
+            username: false,
             password: false
         });
 
         // Check if required fields are empty
         let updatedErrors = {};
-        if (formData.emailPrefix.trim().length < 3) {
+        if (formData.phoneNumber.trim().length < 5) {
             updatedErrors = {
                 ...updatedErrors,
-                emailPrefix: true
+                phoneNumber: true
             };
         }
-        if (formData.password.trim().length < 3) {
+        if (formData.username.trim().length < 3) {
+            updatedErrors = {
+                ...updatedErrors,
+                username: true
+            };
+        }
+        if (formData.password.trim().length < 4) {
             updatedErrors = {
                 ...updatedErrors,
                 password: true
@@ -103,19 +115,20 @@ const RegistrationForm: React.FC = () => {
 
         const payload = {
             phoneNumber: refactorPhoneNumber(formData.countryCode, formData.phoneNumber),
-            email: formData.emailPrefix + formData.emailDomain,
-            password: formData.password,
-            username: formData.fullName != "" ? formData.fullName : null
+            username: formData.username.trim(),
+            email: formData.emailPrefix.trim() != "" ? formData.emailPrefix.trim() + formData.emailDomain : null
         };
 
-        await fetch('https://localhost:7165/api/register', {
+        await fetch('https://localhost:7165/api/pre-register', {
             method: 'POST',
             headers: defaultFetchHeaders,
             body: strPayload(payload)
         })
             .then((res) => {
-                if (res.status === 404) {
-                    throw new Error('Not found');
+                if (res.status === 409) {
+                    throw new Error('The username, phone number or email is already in use');
+                } else if (res.status === 429) {
+                    throw new Error('Too many activation code requests');
                 } else if (res.status === 500) {
                     throw new Error('Server error');
                 } else if (!res.ok) {
@@ -125,16 +138,51 @@ const RegistrationForm: React.FC = () => {
                 }
             })
             .then((data) => {
-                console.log(data.message);
-                setFormData({
-                    phoneNumber: '',
-                    countryCode: '',
-                    emailPrefix: '',
-                    emailDomain: '',
-                    password: '',
-                    fullName: ''
-                });
+                console.log(data);
             }).catch(handleError);
+
+        async function asdf() {
+            const payload = {
+                phoneNumber: refactorPhoneNumber(formData.countryCode, formData.phoneNumber),
+                username: formData.username.trim(),
+                password: formData.password,
+                email: formData.emailPrefix.trim() + formData.emailDomain,
+                fullname: formData.fullName.trim() != "" ? formData.fullName.trim() : null,
+                activationCode: null
+            };
+            await fetch('https://localhost:7165/api/register', {
+                method: 'POST',
+                headers: defaultFetchHeaders,
+                body: strPayload(payload)
+            })
+                .then((res) => {
+                    if (res.status === 409) {
+                        throw new Error('The username, phone number or email is already in use');
+                    } else if (res.status === 400) {
+                        throw new Error('Activation code is incorrect');
+                    } else if (res.status === 500) {
+                        throw new Error('Server error');
+                    } else if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    } else {
+                        return res.json();
+                    }
+                })
+                .then((data) => {
+                    console.log(data.message);
+                    setFormData({
+                        phoneNumber: '',
+                        countryCode: '90',
+                        username: '',
+                        password: '',
+                        emailPrefix: '',
+                        emailDomain: '@gmail.com',
+                        fullName: ''
+                    });
+                    navigate("/");
+                }).catch(handleError);
+        }
+
     };
 
     return (
@@ -143,7 +191,7 @@ const RegistrationForm: React.FC = () => {
                 <span>Numara</span>
                 <div className='re-row'>
                     <div className='re-input-cont'>
-                        <PhoneNumberInput phoneNumber={formData.phoneNumber} setFormData={setFormData} />
+                        <PhoneNumberInput phoneNumber={formData.phoneNumber} setFormData={setFormData} phoneNumberError={formErrors.phoneNumber} />
                     </div>
                     <select name="countryCode" value={formData.countryCode} onChange={handleChange}>
                         <option value='90'>TR (+90)</option>
@@ -152,23 +200,18 @@ const RegistrationForm: React.FC = () => {
                         <option value='7'>RU (+7)</option>
                     </select>
                 </div>
-                <span>E-Posta</span>
+                <span>Kullanıcı Adı</span>
                 <div className='re-row'>
                     <div className='re-input-cont'>
                         <input
                             type='text'
-                            name="emailPrefix"
-                            value={formData.emailPrefix}
+                            name="username"
+                            value={formData.username}
                             onChange={handleChange}
-                            placeholder='Örn; kemalsunal321'
-                            className={`${formErrors.emailPrefix ? 'input_error' : ''}`}
+                            placeholder='Örn; kemalsunal345'
+                            className={`${formErrors.username ? 'input_error' : ''}`}
                         />
                     </div>
-                    <select name="emailDomain" value={formData.emailDomain} onChange={handleChange}>
-                        <option value='@gmail.com'>@gmail.com</option>
-                        <option value='@hotmail.com'>@hotmail.com</option>
-                        <option value='@outlook.com'>@outlook.com</option>
-                    </select>
                 </div>
                 <span>Şifre</span>
                 <div className='re-row'>
@@ -182,6 +225,23 @@ const RegistrationForm: React.FC = () => {
                             className={`${formErrors.password ? 'input_error' : ''}`}
                         />
                     </div>
+                </div>
+                <span>E-Posta<span>(İsteğe bağlı)</span><span className='re-input-warning'>Şifre yenileme için gerekli.</span></span>
+                <div className='re-row'>
+                    <div className='re-input-cont'>
+                        <input
+                            type='text'
+                            name="emailPrefix"
+                            value={formData.emailPrefix}
+                            onChange={handleChange}
+                            placeholder='Örn; kemalsunal321'
+                        />
+                    </div>
+                    <select name="emailDomain" value={formData.emailDomain} onChange={handleChange}>
+                        <option value='@gmail.com'>@gmail.com</option>
+                        <option value='@hotmail.com'>@hotmail.com</option>
+                        <option value='@outlook.com'>@outlook.com</option>
+                    </select>
                 </div>
                 <span>Ad - Soyad<span>(İsteğe bağlı)</span></span>
                 <div className='re-row'>
