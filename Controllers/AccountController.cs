@@ -67,7 +67,7 @@ public class AccountController : ControllerBase
         await _db.UserActivations.AddAsync(newCodeEntry);
         await _db.SaveChangesAsync();
 
-        return Ok(new { message = $"Activation code sent: {newCode}" });
+        return Ok(new { message = $"Activation code sent: {newCode}" }); // Message will be replaced obviously
     }
 
     //Phone number verification

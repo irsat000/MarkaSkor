@@ -48,18 +48,8 @@ const PhoneNumberInput: React.FC<{ phoneNumber: string, setFormData: (e: any) =>
     );
 };
 
-const RegistrationForm: React.FC = () => {
+const RegistrationForm: React.FC<{ formData: any, setFormData: (a: any) => void, activateAForm: () => void }> = ({ formData, setFormData, activateAForm }) => {
     const navigate = useNavigate();
-
-    const [formData, setFormData] = useState({
-        phoneNumber: '',
-        countryCode: '90',
-        username: '',
-        password: '',
-        emailPrefix: '',
-        emailDomain: '@gmail.com',
-        fullName: ''
-    });
 
     const [formErrors, setFormErrors] = useState({
         phoneNumber: false,
@@ -69,7 +59,7 @@ const RegistrationForm: React.FC = () => {
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
+        setFormData((prevData: any) => ({
             ...prevData,
             [name]: value
         }));
@@ -105,6 +95,9 @@ const RegistrationForm: React.FC = () => {
                 password: true
             };
         }
+
+        // If there are empty fields or other types of errors, stop the function
+        // It will warn the user with red input borders automatically
         if (Object.keys(updatedErrors).length > 0) {
             setFormErrors(prevErrors => ({
                 ...prevErrors,
@@ -113,7 +106,7 @@ const RegistrationForm: React.FC = () => {
             return;
         }
 
-        const payload = {
+        const payload_preRegister = {
             phoneNumber: refactorPhoneNumber(formData.countryCode, formData.phoneNumber),
             username: formData.username.trim(),
             email: formData.emailPrefix.trim() != "" ? formData.emailPrefix.trim() + formData.emailDomain : null
@@ -122,7 +115,7 @@ const RegistrationForm: React.FC = () => {
         await fetch('https://localhost:7165/api/pre-register', {
             method: 'POST',
             headers: defaultFetchHeaders,
-            body: strPayload(payload)
+            body: strPayload(payload_preRegister)
         })
             .then((res) => {
                 if (res.status === 409) {
@@ -139,10 +132,11 @@ const RegistrationForm: React.FC = () => {
             })
             .then((data) => {
                 console.log(data);
+                activateAForm();
             }).catch(handleError);
 
         async function asdf() {
-            const payload = {
+            const payload_register = {
                 phoneNumber: refactorPhoneNumber(formData.countryCode, formData.phoneNumber),
                 username: formData.username.trim(),
                 password: formData.password,
@@ -153,7 +147,7 @@ const RegistrationForm: React.FC = () => {
             await fetch('https://localhost:7165/api/register', {
                 method: 'POST',
                 headers: defaultFetchHeaders,
-                body: strPayload(payload)
+                body: strPayload(payload_register)
             })
                 .then((res) => {
                     if (res.status === 409) {
@@ -263,8 +257,40 @@ const RegistrationForm: React.FC = () => {
     );
 }
 
+const SmsActivationForm: React.FC<{ formData: any, activateRForm: () => void }> = ({ formData, activateRForm }) => {
+    function formDataLog() {
+        console.log(formData);
+    }
+    return (
+        <form>
+            <button type='button' onClick={formDataLog}>Log form data</button>
+        </form>
+    );
+}
+
 
 export const Page_Register = () => {
+    const [formData, setFormData] = useState({
+        phoneNumber: '',
+        countryCode: '90',
+        username: '',
+        password: '',
+        emailPrefix: '',
+        emailDomain: '@gmail.com',
+        fullName: ''
+    });
+
+    // Form switchers
+    const [rForm, setRForm] = useState(true);
+    const [aForm, setAForm] = useState(false);
+    const activateRForm = () => {
+        setRForm(true);
+        setAForm(false);
+    };
+    const activateAForm = () => {
+        setRForm(false);
+        setAForm(true);
+    };
 
     return (
         <div className='page_content'>
@@ -272,7 +298,8 @@ export const Page_Register = () => {
             <section>
                 <AppHeader page="Kayıt Ol" />
                 <main className='main-register'>
-                    <RegistrationForm />
+                    {rForm && <RegistrationForm formData={formData} setFormData={setFormData} activateAForm={activateAForm} />}
+                    {aForm && <SmsActivationForm formData={formData} activateRForm={activateRForm} />}
                 </main>
             </section>
         </div>
