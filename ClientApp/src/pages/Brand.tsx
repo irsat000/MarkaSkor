@@ -204,15 +204,13 @@ const Reviews_Section = (props: {
 export const Page_Brand = () => {
     const { brandId } = useParams();
 
-    const [activeSubpage, setActiveSubpage] = useState('showReviews');
-
-    const handleUserReviewClick = () => {
-        setActiveSubpage('userReview');
-    }
-
-    const handleShowReviewsClick = () => {
-        setActiveSubpage('showReviews');
-    }
+    // Form switchers
+    const [userRActive, setUserRActive] = useState(false);
+    const [showRActive, setShowRActive] = useState(true);
+    const switchReviewSection = () => {
+        setUserRActive(!userRActive);
+        setShowRActive(!showRActive);
+    };
 
     //document.querySelector('.brand_primary').style.marginTop = (document.querySelector('.b_logo').offsetHeight / 2) + 'px';
     //document.querySelector('.brand_primary').style.paddingTop = ((document.querySelector('.b_logo').offsetHeight / 2) + 10) + 'px';
@@ -253,12 +251,12 @@ export const Page_Brand = () => {
                     </div>
                     <div className='review_section'>
                         <div className='brand_subpage_nav'>
-                            <span className={`b_reviewing-btn${activeSubpage === "userReview" ? ' active' : ''}`} onClick={handleUserReviewClick}>Oyla</span>
-                            <span className={`b_showReviews-btn${activeSubpage === "showReviews" ? ' active' : ''}`} onClick={handleShowReviewsClick}>Skor</span>
+                            <span className={`b_reviewing-btn ${userRActive ? 'active' : ''}`} onClick={switchReviewSection}>Oyla</span>
+                            <span className={`b_showReviews-btn ${showRActive ? 'active' : ''}`} onClick={switchReviewSection}>Skor</span>
                         </div>
-                        <div className={`brand_subpage ${activeSubpage === 'userReview' ? 'userReviewActive' : 'showReviewsActive'}`}>
-                            <UserReview_Section />
-                            <Reviews_Section />
+                        <div className={`brand_subpage`}>
+                            {userRActive && <UserReview_Section />}
+                            {showRActive && <Reviews_Section />}
                         </div>
                     </div>
                 </main>

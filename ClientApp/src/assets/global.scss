@@ -796,21 +796,13 @@ header {
             }
         }
 
-        .brand_subpage.userReviewActive .b_userReview {
-            display: flex;
-        }
-
-        .brand_subpage.showReviewsActive .b_reviews {
-            display: flex;
-        }
-
         .brand_subpage {
             display: flex;
             flex-direction: column;
 
             .b_userReview {
                 width: 100%;
-                display: none;
+                display: flex;
                 flex-direction: column;
                 gap: 40px;
                 padding: 3rem 10px;
@@ -902,7 +894,7 @@ header {
 
             .b_reviews {
                 width: 100%;
-                display: none;
+                display: flex;
                 flex-direction: column;
                 gap: 16px;
 
