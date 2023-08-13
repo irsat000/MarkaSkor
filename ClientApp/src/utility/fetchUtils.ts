@@ -10,5 +10,5 @@ export const strPayload = (payload: any) => {
 }
 
 export const refactorPhoneNumber = (countryCode: string, phoneNumber: string): string => {
-    return (countryCode + phoneNumber).replace(/[() -]/g, "");
+    return "+" + (countryCode + phoneNumber).replace(/[() -]/g, "");
 };

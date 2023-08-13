@@ -9,11 +9,7 @@ public partial class User
 
     public string username { get; set; } = null!;
 
-    public string password { get; set; } = null!;
-
-    public string? phoneNumber { get; set; }
-
-    public bool phoneNumber_valid { get; set; }
+    public string? password { get; set; }
 
     public string? email { get; set; }
 
@@ -21,5 +17,11 @@ public partial class User
 
     public string? fullname { get; set; }
 
+    public string? oauthId { get; set; }
+
+    public string oauthProvider { get; set; } = null!;
+
     public virtual ICollection<Review> Reviews { get; } = new List<Review>();
+
+    public virtual ICollection<UserVerification> UserVerifications { get; } = new List<UserVerification>();
 }

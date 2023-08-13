@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 namespace MarkaSkor.Entities;
 
-public partial class UserActivation
+public partial class UserVerification
 {
     public int id { get; set; }
 
-    public string phoneNumber { get; set; } = null!;
+    public int userId { get; set; }
 
-    public string activationCode { get; set; } = null!;
+    public string verficationCode { get; set; } = null!;
 
     public DateTime creationDate { get; set; }
 
     public DateTime expirationDate { get; set; }
+
+    public virtual User user { get; set; } = null!;
 }
