@@ -4,6 +4,7 @@ using MarkaSkor.Entities;
 using Microsoft.EntityFrameworkCore;
 
 using BC = BCrypt.Net.BCrypt;
+using MarkaSkor.Services;
 
 namespace MarkaSkor.Controllers;
 
@@ -13,11 +14,13 @@ public class AccountController : ControllerBase
 {
     private readonly ILogger<AccountController> _logger;
     private readonly MarkaSkorContext _db;
+    private readonly IUtilityService _util;
 
-    public AccountController(ILogger<AccountController> logger, MarkaSkorContext db)
+    public AccountController(ILogger<AccountController> logger, MarkaSkorContext db, IUtilityService util)
     {
         _logger = logger;
         _db = db;
+        _util = util;
     }
 
     [HttpGet]
@@ -49,6 +52,7 @@ public class AccountController : ControllerBase
             }
 
             // Create new user
+            // Note: HashPassword() handles both hashing and salting
             var newUser = new User
             {
                 username = userDto.username,
@@ -80,8 +84,8 @@ public class AccountController : ControllerBase
 
     private async Task CreateAndSendVerificationCodeAsync(int userId)
     {
-        // Encrypt a verification code
-        string newVerificationCode = BC.HashPassword(userId + "--" + new Random().Next(12312, 123123).ToString());
+        // Create a random verification code
+        string newVerificationCode = _util.GenerateRandomCode(64);
 
         // Create a verification entry
         var newVerificationEntry = new UserVerification
@@ -126,9 +130,8 @@ public class AccountController : ControllerBase
 
 
 
-
-
-    //Phone number verification
+    // https://localhost:7165/api/email-verification?userid={userId}&code={code}
+    // Phone number verification
     [HttpGet("email-verification")]
     public async Task<IActionResult> EmailVerification([FromQuery] string userid, [FromQuery] string code)
     {

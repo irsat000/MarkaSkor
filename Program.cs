@@ -1,4 +1,5 @@
 using MarkaSkor.Entities;
+using MarkaSkor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader();
         });
 });
+builder.Services.AddScoped<IUtilityService, UtilityService>();
 
 
 var app = builder.Build();
