@@ -22,7 +22,7 @@ public class AuthController : ControllerBase
     {
         _logger = logger;
         _db = db;
-        _util = util;
+        _util = util; // Utility methods
     }
 
     [HttpGet]
@@ -87,7 +87,7 @@ public class AuthController : ControllerBase
     private async Task CreateAndSendVerificationCodeAsync(int userId)
     {
         // Create a random verification code
-        string newVerificationCode = _util.GenerateRandomCode(64);
+        string newVerificationCode = _util.GenerateRandom(64, "code");
 
         // Create a verification entry
         var newVerificationEntry = new UserVerification
@@ -191,6 +191,80 @@ public class AuthController : ControllerBase
             var token = handler.ReadJwtToken(oauth.credential);
             var claims = token.Claims;
 
+            // Get the required data from claims
+            string sub = claims.FirstOrDefault(c => c.Type == "sub")!.Value; // ID
+            string email = claims.FirstOrDefault(c => c.Type == "email")!.Value;
+            string iss = claims.FirstOrDefault(c => c.Type == "iss")!.Value; // Provider
+            string? name = claims.FirstOrDefault(c => c.Type == "name")?.Value;
+            string? firstName = claims.FirstOrDefault(c => c.Type == "given_name")?.Value;
+            string? lastName = claims.FirstOrDefault(c => c.Type == "family_name")?.Value;
+
+            if (await _db.Users.AnyAsync(u => u.oauthId == sub && u.oauthProvider == iss))
+            {
+                // If the user is registered, proceed to login
+            }
+            else if (await _db.Users.AnyAsync(u => u.email == email && u.email_valid == true && u.oauthProvider == "none"))
+            {
+                // If a user already has a verified account - Associate it with this - Then login to that account
+            }
+            else if (await _db.Users.AnyAsync(u => u.email == email && u.email_valid == true && u.oauthProvider != iss))
+            {
+                // If a user already has a verified account with other oauth options like Facebook
+            }
+            else
+            {
+                // If user is non-existent, register it and proceed to login
+
+                // Create the first part of username
+                string newUsername = (firstName ?? "") + (lastName ?? "") + "_";
+                if (newUsername == "_")
+                    newUsername = "user_";
+
+                // Creating unique username because user will not
+                // Set the max amount of tries before giving up
+                int maxTries = 5;
+                for (int tries = 1; tries <= maxTries; tries++)
+                {
+                    // Try giving less extra numbers to username at first, gradually increase
+                    int randomLength = 4;
+                    if (tries == 3)
+                        randomLength = 7;
+                    if (tries > 3)
+                        randomLength = 10;
+
+                    // Create test username with random numbers and check database
+                    string userNameTest = newUsername + _util.GenerateRandom(randomLength, "number");
+
+                    if (!await _db.Users.AnyAsync(u => u.username == userNameTest))
+                    {
+                        // We have a proper username that doesn't already exist now
+                        newUsername = userNameTest;
+                    }
+                    else if (tries == maxTries)
+                    {
+                        // Too many tries
+                        return Conflict();
+                    }
+                }
+
+                // Create new user
+                var newUser = new User
+                {
+                    username = newUsername,
+                    email = email,
+                    password = BC.HashPassword(_util.GenerateRandom(16, "code")), // Generate random pw - Not needed if login checks oauthProvider == "none"
+                    fullname = name, // Nullable
+                    email_valid = true, // true by default with oauth
+                    oauthId = sub,
+                    oauthProvider = iss
+                };
+
+                // Add the new user to the database
+                await _db.Users.AddAsync(newUser);
+                await _db.SaveChangesAsync();
+            }
+
+            // Get the list of claims in a presentable format and send to front end for testing
             List<Claim> claimArray = new List<Claim>();
             foreach (var claim in claims)
             {
@@ -200,9 +274,6 @@ public class AuthController : ControllerBase
                     Value = claim.Value
                 });
             }
-
-
-
             return Ok(new { claimArray });
         }
         catch (Exception ex)

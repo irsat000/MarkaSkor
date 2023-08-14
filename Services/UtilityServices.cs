@@ -6,15 +6,20 @@ namespace MarkaSkor.Services;
 
 public interface IUtilityService
 {
-    public string GenerateRandomCode(int length);
+    /// <summary>
+    /// Generates a random code of the specified length and type.
+    /// </summary>
+    /// <param name="length">The length of the random code to generate.</param>
+    /// <param name="type">Changes allowed chars, "code" or "number"</param>
+    /// <returns>A randomly generated code.</returns>
+    public string GenerateRandom(int length, string? type);
 }
 
 public class UtilityService : IUtilityService
 {
-    public string GenerateRandomCode(int length)
+    public string GenerateRandom(int length, string? type)
     {
-        const string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-
+        string allowedChars = type == "code" ? "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" : "1234567890";
         using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
         {
             byte[] randomBytes = new byte[length];
