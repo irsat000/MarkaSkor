@@ -1181,6 +1181,7 @@ header {
                 }
 
                 >select {
+                    cursor: pointer;
                     padding: 8px;
                     outline: transparent;
                     border-radius: 4px;
@@ -1198,7 +1199,10 @@ header {
 
         .re-finish {
             display: flex;
+            flex-direction: column;
+            gap: 20px 40px;
             justify-content: center;
+            align-items: center;
             padding: 26px 0;
 
             button {
@@ -1416,6 +1420,7 @@ header {
             }
 
             .re-finish {
+                flex-direction: row;
                 justify-content: flex-start;
             }
         }

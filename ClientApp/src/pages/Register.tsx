@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
-import { handleError, defaultFetchHeaders, strPayload, refactorPhoneNumber } from '../utility/fetchUtils';
+import { LoginWithGoogle } from '../components/GoogleLogin';
+import { handleError, defaultFetchPost } from '../utility/fetchUtils';
 
 
 // DEPRECATED
@@ -126,18 +127,14 @@ const RegistrationForm: React.FC<{ formData: any, setFormData: (a: any) => void,
             fullname: formData.fullName.trim() != "" ? formData.fullName.trim() : null
         };
 
-        console.log(formData);
-
-        await fetch('https://localhost:7165/api/register', {
-            method: 'POST',
-            headers: defaultFetchHeaders,
-            body: strPayload(payload_register)
-        })
+        await fetch('https://localhost:7165/api/register', defaultFetchPost(payload_register))
             .then((res) => {
                 if (res.status === 409) {
                     throw new Error('Username or email is already in use');
                 } else if (res.status === 429) {
                     throw new Error('Too many activation code requests');
+                } else if (res.status === 400) {
+                    throw new Error('Bad request');
                 } else if (res.status === 500) {
                     throw new Error('Server error');
                 } else if (!res.ok) {
@@ -147,15 +144,15 @@ const RegistrationForm: React.FC<{ formData: any, setFormData: (a: any) => void,
                 }
             })
             .then((data) => {
-                setFormData({
+                /*setFormData({
                     username: '',
                     emailPrefix: '',
                     emailDomain: '@gmail.com',
                     password: '',
                     fullName: ''
-                });
+                });*/
                 console.log(data);
-                //navigate("/");
+                navigate("/");
             }).catch(handleError);
 
     };
@@ -222,6 +219,7 @@ const RegistrationForm: React.FC<{ formData: any, setFormData: (a: any) => void,
             </div>
             <div className='re-finish'>
                 <button type='submit'>Kayıt ol</button>
+                <LoginWithGoogle />
             </div>
         </form>
     );

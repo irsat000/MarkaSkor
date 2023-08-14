@@ -1,5 +1,24 @@
 
-export const handleError = (err: any) => console.error(err);
+export const handleError = (err: any) => { throw new Error(err); };
+
+
+export const defaultFetchPost = (payload: any) => {
+    return {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }
+}
+export const defaultFetchGet = () => {
+    return {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+}
 
 export const defaultFetchHeaders = {
     'Content-Type': 'application/json'

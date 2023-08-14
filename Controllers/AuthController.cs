@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using MarkaSkor.Dtos;
 using MarkaSkor.Entities;
+using MarkaSkor.Models;
 using Microsoft.EntityFrameworkCore;
 
+using System.IdentityModel.Tokens.Jwt;
 using BC = BCrypt.Net.BCrypt;
 using MarkaSkor.Services;
 
@@ -10,13 +12,13 @@ namespace MarkaSkor.Controllers;
 
 [ApiController]
 [Route("api")]
-public class AccountController : ControllerBase
+public class AuthController : ControllerBase
 {
-    private readonly ILogger<AccountController> _logger;
+    private readonly ILogger<AuthController> _logger;
     private readonly MarkaSkorContext _db;
     private readonly IUtilityService _util;
 
-    public AccountController(ILogger<AccountController> logger, MarkaSkorContext db, IUtilityService util)
+    public AuthController(ILogger<AuthController> logger, MarkaSkorContext db, IUtilityService util)
     {
         _logger = logger;
         _db = db;
@@ -125,11 +127,6 @@ public class AccountController : ControllerBase
 
 
 
-
-
-
-
-
     // https://localhost:7165/api/email-verification?userid={userId}&code={code}
     // Phone number verification
     [HttpGet("email-verification")]
@@ -140,7 +137,7 @@ public class AccountController : ControllerBase
             // Validate input
             if (string.IsNullOrEmpty(userid) || string.IsNullOrEmpty(code))
             {
-                return BadRequest("User ID and verification code are required.");
+                return BadRequest("Invalid input data");
             }
 
             // Find verification record
@@ -178,7 +175,42 @@ public class AccountController : ControllerBase
 
 
 
+    [HttpPost("oauth-auth")]
+    public async Task<IActionResult> OauthAuthentication([FromBody] OauthCredential oauth)
+    {
+        try
+        {
+            // Validate input
+            if (oauth == null || string.IsNullOrWhiteSpace(oauth.credential))
+            {
+                return BadRequest("Invalid input data.");
+            }
 
+            // Decode the JWT credential
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(oauth.credential);
+            var claims = token.Claims;
+
+            List<Claim> claimArray = new List<Claim>();
+            foreach (var claim in claims)
+            {
+                claimArray.Add(new Claim
+                {
+                    Type = claim.Type,
+                    Value = claim.Value
+                });
+            }
+
+
+
+            return Ok(new { claimArray });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred during oauth authentication.");
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
 
 
 
@@ -315,4 +347,10 @@ public class AccountController : ControllerBase
 
 
 
+}
+
+public class Claim
+{
+    public string Type { get; set; }
+    public string Value { get; set; }
 }

@@ -14,3 +14,4 @@ public class RegisterUserDto
 
     public string? fullname { get; set; }
 }
+
