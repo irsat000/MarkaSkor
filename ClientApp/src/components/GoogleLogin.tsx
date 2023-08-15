@@ -10,16 +10,19 @@ const googleSuccess = async (credentialResponse: any) => {
 
     await fetch('https://localhost:7165/api/oauth-auth', defaultFetchPost(payloadGoogleAuth))
         .then((res) => {
-            if (res.status === 409) {
-                throw new Error('*');
-            } else if (res.status === 400) {
-                throw new Error('Bad request');
-            } else if (res.status === 500) {
-                throw new Error('Server error');
-            } else if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            } else {
-                return res.json();
+            switch (res.status) {
+                case 409:
+                    throw new Error('User has already registered with other oauth services using this email address');
+                case 508:
+                    throw new Error('Creating unique username has failed after many tries');
+                case 400:
+                    throw new Error('Bad request');
+                case 500:
+                    throw new Error('Server error');
+                case 200:
+                    return res.json();
+                default:
+                    throw new Error(`HTTP error! status: ${res.status}`);
             }
         })
         .then((data) => {

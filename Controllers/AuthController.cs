@@ -201,19 +201,31 @@ public class AuthController : ControllerBase
 
             if (await _db.Users.AnyAsync(u => u.oauthId == sub && u.oauthProvider == iss))
             {
-                // If the user is registered, proceed to login
+                // If the user is registered
             }
             else if (await _db.Users.AnyAsync(u => u.email == email && u.email_valid == true && u.oauthProvider == "none"))
             {
-                // If a user already has a verified account - Associate it with this - Then login to that account
+                // If a user already has a verified account - Associate it with this
+
+                // Get verified account that doesn't have oauth
+                var verifiedWithoutOauth = await _db.Users.FirstOrDefaultAsync(u =>
+                    u.email == email &&
+                    u.email_valid == true &&
+                    u.oauthProvider == "none");
+                verifiedWithoutOauth!.oauthId = sub;
+                verifiedWithoutOauth!.oauthProvider = iss;
+                await _db.SaveChangesAsync();
             }
             else if (await _db.Users.AnyAsync(u => u.email == email && u.email_valid == true && u.oauthProvider != iss))
             {
                 // If a user already has a verified account with other oauth options like Facebook
+                // It's important that previous if should have (oauthProvider == "none") condition
+
+                return Conflict("User has already registered with other oauth services using this email address");
             }
             else
             {
-                // If user is non-existent, register it and proceed to login
+                // If user is non-existent, register it
 
                 // Create the first part of username
                 string newUsername = (firstName ?? "") + (lastName ?? "") + "_";
@@ -227,10 +239,10 @@ public class AuthController : ControllerBase
                 {
                     // Try giving less extra numbers to username at first, gradually increase
                     int randomLength = 4;
-                    if (tries == 3)
-                        randomLength = 7;
-                    if (tries > 3)
-                        randomLength = 10;
+                    if (tries == 3) randomLength = 7;
+                    else if (tries > 3) randomLength = 10;
+
+                    Console.WriteLine("Random length: " + randomLength);
 
                     // Create test username with random numbers and check database
                     string userNameTest = newUsername + _util.GenerateRandom(randomLength, "number");
@@ -239,20 +251,24 @@ public class AuthController : ControllerBase
                     {
                         // We have a proper username that doesn't already exist now
                         newUsername = userNameTest;
+                        break;
                     }
                     else if (tries == maxTries)
                     {
-                        // Too many tries
-                        return Conflict();
+                        // Too many tries for a new unique username
+                        return StatusCode(StatusCodes.Status508LoopDetected);
                     }
                 }
+
+                // UNNECESSARY
+                // BC.HashPassword(_util.GenerateRandom(16, "code")); // Generate random pw - Not needed if login checks oauthProvider == "none"
 
                 // Create new user
                 var newUser = new User
                 {
                     username = newUsername,
                     email = email,
-                    password = BC.HashPassword(_util.GenerateRandom(16, "code")), // Generate random pw - Not needed if login checks oauthProvider == "none"
+                    password = null, // Pw not required for oauth
                     fullname = name, // Nullable
                     email_valid = true, // true by default with oauth
                     oauthId = sub,
@@ -264,11 +280,14 @@ public class AuthController : ControllerBase
                 await _db.SaveChangesAsync();
             }
 
+            // Login
+
+
             // Get the list of claims in a presentable format and send to front end for testing
-            List<Claim> claimArray = new List<Claim>();
+            List<ClaimKeyVal> claimArray = new List<ClaimKeyVal>();
             foreach (var claim in claims)
             {
-                claimArray.Add(new Claim
+                claimArray.Add(new ClaimKeyVal
                 {
                     Type = claim.Type,
                     Value = claim.Value
@@ -288,16 +307,9 @@ public class AuthController : ControllerBase
 
 
 
-
-
-
-
-
-
-
-
-    // DEPRECATED - Because full registration doesn't need verification anymore
+    // CAN BE USED FOR "SEND VERIFICATION EMAIL AGAIN" IN ACCOUNT SETTINGS
     // Reject if there are more than 3 waiting verification codes
+    // This could be upgraded to rejecting more than 3 per day by using creationDate property
     /*var existingVerificationCodes = _db.UserVerifications.Count(a =>
         a.userId == userDto.email &&
         a.expirationDate > DateTime.UtcNow);
@@ -306,7 +318,16 @@ public class AuthController : ControllerBase
         return StatusCode(StatusCodes.Status429TooManyRequests, "Too many verification code requests.");
     }*/
 
-    // DEPRECATED - Because expired codes won't verify
+
+
+
+
+
+
+
+
+
+    // DEPRECATED FOR LIFE - Because expired codes won't verify
     // Delete expired verification codes
     // Expired codes never verify, this is for cleaning the database table
     /*var expiredVerificationCodes = await _db.UserVerifications.Where(a =>
@@ -318,14 +339,6 @@ public class AuthController : ControllerBase
     }
     if (expiredVerificationCodes.Count > 0)
         await _db.SaveChangesAsync();*/
-
-
-
-
-
-
-
-
 
 
     /* DEPRECATED - PHONE VERIFICATION
@@ -418,10 +431,4 @@ public class AuthController : ControllerBase
 
 
 
-}
-
-public class Claim
-{
-    public string Type { get; set; }
-    public string Value { get; set; }
 }

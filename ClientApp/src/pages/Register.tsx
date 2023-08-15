@@ -4,6 +4,7 @@ import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 import { LoginWithGoogle } from '../components/GoogleLogin';
 import { handleError, defaultFetchPost } from '../utility/fetchUtils';
+import { cleanEmail } from '../utility/helperUtils';
 
 
 // DEPRECATED
@@ -123,24 +124,25 @@ const RegistrationForm: React.FC<{ formData: any, setFormData: (a: any) => void,
         const payload_register = {
             username: formData.username.trim(),
             password: formData.password,
-            email: formData.emailPrefix.trim() + formData.emailDomain,
+            email: cleanEmail(formData.emailPrefix, formData.emailDomain),
             fullname: formData.fullName.trim() != "" ? formData.fullName.trim() : null
         };
 
         await fetch('https://localhost:7165/api/register', defaultFetchPost(payload_register))
             .then((res) => {
-                if (res.status === 409) {
-                    throw new Error('Username or email is already in use');
-                } else if (res.status === 429) {
-                    throw new Error('Too many activation code requests');
-                } else if (res.status === 400) {
-                    throw new Error('Bad request');
-                } else if (res.status === 500) {
-                    throw new Error('Server error');
-                } else if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                } else {
-                    return res.json();
+                switch (res.status) {
+                    case 409:
+                        throw new Error('Username or email is already in use');
+                    case 429:
+                        throw new Error('Too many activation code requests');
+                    case 400:
+                        throw new Error('Bad request');
+                    case 500:
+                        throw new Error('Server error');
+                    case 200:
+                        return res.json();
+                    default:
+                        throw new Error(`HTTP error! status: ${res.status}`);
                 }
             })
             .then((data) => {

@@ -27,7 +27,3 @@ export const defaultFetchHeaders = {
 export const strPayload = (payload: any) => {
     return JSON.stringify(payload);
 }
-
-export const refactorPhoneNumber = (countryCode: string, phoneNumber: string): string => {
-    return "+" + (countryCode + phoneNumber).replace(/[() -]/g, "");
-};

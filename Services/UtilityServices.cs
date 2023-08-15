@@ -20,18 +20,13 @@ public class UtilityService : IUtilityService
     public string GenerateRandom(int length, string? type)
     {
         string allowedChars = type == "code" ? "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" : "1234567890";
-        using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+        StringBuilder result = new StringBuilder(length);
+        Random random = new Random();
+        for (int i = 0; i < length; i++)
         {
-            byte[] randomBytes = new byte[length];
-            rng.GetBytes(randomBytes);
-
-            StringBuilder sb = new StringBuilder(length);
-            foreach (byte b in randomBytes)
-            {
-                sb.Append(allowedChars[b % allowedChars.Length]);
-            }
-
-            return sb.ToString();
+            int randomIndex = random.Next(allowedChars.Length);
+            result.Append(allowedChars[randomIndex]);
         }
+        return result.ToString();
     }
 }
