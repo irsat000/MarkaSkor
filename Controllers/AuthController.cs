@@ -16,25 +16,16 @@ public class AuthController : ControllerBase
 {
     private readonly ILogger<AuthController> _logger;
     private readonly MarkaSkorContext _db;
-    private readonly IUtilityService _util;
-    private readonly IJwtService _jwtUtil;
+    private readonly IUtilityService _utils;
+    private readonly IJwtService _jwtUtils;
 
-    public AuthController(ILogger<AuthController> logger, MarkaSkorContext db, IUtilityService util, IJwtService jwtUtil)
+    public AuthController(ILogger<AuthController> logger, MarkaSkorContext db, IUtilityService utils, IJwtService jwtUtils)
     {
         _logger = logger;
-        _db = db;
-        _util = util; // Utility methods
-        _jwtUtil = jwtUtil;
+        _db = db; // DbContext
+        _utils = utils; // Utility methods
+        _jwtUtils = jwtUtils; // JWT utility methods
     }
-
-    [HttpGet]
-    public IActionResult Get()
-    {
-        // Implement your logic here
-        return Ok(new { message = "Hello from .NET API" });
-    }
-
-
 
 
 
@@ -76,7 +67,16 @@ public class AuthController : ControllerBase
             // This link will have id and verification code as query strings and it will verify the email
             await CreateAndSendVerificationCodeAsync(newUser.id);
 
-            return Ok(new { message = $"Registration successful. UserId: {newUser.id}" });
+            // Login
+            UserClaims userClaims = new()
+            {
+                id = newUser.id,
+                username = newUser.username,
+                email = newUser.email,
+                fullname = newUser.fullname
+            };
+            var JWT = _jwtUtils.GenerateJWT(userClaims);
+            return Ok(new { message = "Registration is successful", token = JWT });
         }
         catch (Exception ex)
         {
@@ -89,7 +89,7 @@ public class AuthController : ControllerBase
     private async Task CreateAndSendVerificationCodeAsync(int userId)
     {
         // Create a random verification code
-        string newVerificationCode = _util.GenerateRandom(64, "code");
+        string newVerificationCode = _utils.GenerateRandom(64, "code");
 
         // Create a verification entry
         var newVerificationEntry = new UserVerification
@@ -197,13 +197,25 @@ public class AuthController : ControllerBase
             string sub = claims.FirstOrDefault(c => c.Type == "sub")!.Value; // ID
             string email = claims.FirstOrDefault(c => c.Type == "email")!.Value;
             string iss = claims.FirstOrDefault(c => c.Type == "iss")!.Value; // Provider
-            string? name = claims.FirstOrDefault(c => c.Type == "name")?.Value;
+            string? fullname = claims.FirstOrDefault(c => c.Type == "name")?.Value;
             string? firstName = claims.FirstOrDefault(c => c.Type == "given_name")?.Value;
             string? lastName = claims.FirstOrDefault(c => c.Type == "family_name")?.Value;
+
+            // Initialization of userClaims
+            UserClaims userClaims = new();
 
             if (await _db.Users.AnyAsync(u => u.oauthId == sub && u.oauthProvider == iss))
             {
                 // If the user is registered
+
+                var getUser = await _db.Users.Where(u => u.oauthId == sub && u.oauthProvider == iss).Select(u => new { u.id, u.username, u.email, u.fullname }).FirstOrDefaultAsync();
+                userClaims = new()
+                {
+                    id = getUser!.id,
+                    username = getUser.username,
+                    email = getUser.email,
+                    fullname = getUser.fullname
+                };
             }
             else if (await _db.Users.AnyAsync(u => u.email == email && u.email_valid == true && u.oauthProvider == "none"))
             {
@@ -217,11 +229,19 @@ public class AuthController : ControllerBase
                 verifiedWithoutOauth!.oauthId = sub;
                 verifiedWithoutOauth!.oauthProvider = iss;
                 await _db.SaveChangesAsync();
+
+                userClaims = new()
+                {
+                    id = verifiedWithoutOauth.id,
+                    username = verifiedWithoutOauth.username,
+                    email = verifiedWithoutOauth.email,
+                    fullname = verifiedWithoutOauth.fullname
+                };
             }
             else if (await _db.Users.AnyAsync(u => u.email == email && u.email_valid == true && u.oauthProvider != iss))
             {
                 // If a user already has a verified account with other oauth options like Facebook
-                // It's important that previous if should have (oauthProvider == "none") condition
+                // It's important that previous if condition should have (oauthProvider == "none")
 
                 return Conflict("User has already registered with other oauth services using this email address");
             }
@@ -247,7 +267,7 @@ public class AuthController : ControllerBase
                     Console.WriteLine("Random length: " + randomLength);
 
                     // Create test username with random numbers and check database
-                    string userNameTest = newUsername + _util.GenerateRandom(randomLength, "number");
+                    string userNameTest = newUsername + _utils.GenerateRandom(randomLength, "number");
 
                     if (!await _db.Users.AnyAsync(u => u.username == userNameTest))
                     {
@@ -262,16 +282,13 @@ public class AuthController : ControllerBase
                     }
                 }
 
-                // UNNECESSARY
-                // BC.HashPassword(_util.GenerateRandom(16, "code")); // Generate random pw - Not needed if login checks oauthProvider == "none"
-
                 // Create new user
                 var newUser = new User
                 {
                     username = newUsername,
                     email = email,
                     password = null, // Pw not required for oauth
-                    fullname = name, // Nullable
+                    fullname = fullname, // Nullable
                     email_valid = true, // true by default with oauth
                     oauthId = sub,
                     oauthProvider = iss
@@ -280,22 +297,19 @@ public class AuthController : ControllerBase
                 // Add the new user to the database
                 await _db.Users.AddAsync(newUser);
                 await _db.SaveChangesAsync();
+
+                userClaims = new()
+                {
+                    id = newUser.id,
+                    username = newUser.username,
+                    email = newUser.email,
+                    fullname = fullname
+                };
             }
 
             // Login
-
-
-            // Get the list of claims in a presentable format and send to front end for testing
-            List<ClaimKeyVal> claimArray = new();
-            foreach (var claim in claims)
-            {
-                claimArray.Add(new ClaimKeyVal
-                {
-                    Type = claim.Type,
-                    Value = claim.Value
-                });
-            }
-            return Ok(new { claimArray });
+            var JWT = _jwtUtils.GenerateJWT(userClaims);
+            return Ok(new { message = "Login is successful", token = JWT });
         }
         catch (Exception ex)
         {
@@ -322,38 +336,34 @@ public class AuthController : ControllerBase
             if (!string.IsNullOrWhiteSpace(userDto.username))
             {
                 // If user uses username to login
-                query = query.Where(u => u.username == userDto.username && u.password == userDto.password);
+                query = query.Where(u => u.username == userDto.username);
             }
             else if (!string.IsNullOrWhiteSpace(userDto.email))
             {
                 // If user uses verified email to login
-                query = query.Where(u => u.email == userDto.email && u.email_valid == true && u.password == userDto.password);
+                query = query.Where(u => u.email == userDto.email && u.email_valid == true);
             }
 
             // Get user id if the user exists
-            var userId = await query
-                .Select(u => (int?)u.id)
+            var checkUser = await query
+                .Select(u => new { u.id, u.password, u.username, u.email, u.fullname })
                 .FirstOrDefaultAsync();
 
-            // Give error if user doesn't exist
-            if (userId == null)
+            // Give error if user doesn't exist or passwords don't match
+            if (checkUser == null || !BC.Verify(userDto.password, checkUser.password))
             {
                 return NotFound("User not found");
             }
 
-            // Get JWT created by if login is a success. Then send it to user
-            UserClaims claims = new()
+            // Login
+            UserClaims userClaims = new()
             {
-                id = Convert.ToInt32(userId)
+                id = checkUser.id,
+                username = checkUser.username,
+                email = checkUser.email,
+                fullname = checkUser.fullname
             };
-            var JWT = _jwtUtil.GenerateJWT(claims);
-
-            // Error if JWT is null (Possible if secret isn't found in config)
-            if (JWT == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
+            var JWT = _jwtUtils.GenerateJWT(userClaims);
             return Ok(new { message = "Login is successful", token = JWT });
         }
         catch (Exception ex)
@@ -382,10 +392,32 @@ public class AuthController : ControllerBase
 
 
 
+    // CAN BE USED IF WE ADD MORE INFO TO JWT PAYLOAD
+    /*UserClaims claims = new()
+    {
+        id = Convert.ToInt32()
+    };*/
 
 
 
 
+    // CAN BE USED FOR TESTING GOOGLE CLAIMS
+    // Get the list of claims in a presentable format and send to front end for testing
+    /*List<ClaimKeyVal> claimArray = new();
+    foreach (var claim in claims)
+    {
+        claimArray.Add(new ClaimKeyVal
+        {
+            Type = claim.Type,
+            Value = claim.Value
+        });
+    }
+    return Ok(new { claimArray });*/
+
+
+
+    // UNNECESSARY
+    // BC.HashPassword(_utils.GenerateRandom(16, "code")); // Generate random pw - Not needed if login checks oauthProvider == "none"
 
 
 

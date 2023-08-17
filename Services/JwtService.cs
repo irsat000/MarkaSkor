@@ -14,7 +14,7 @@ public interface IJwtService
     /// </summary>
     /// <param name="user">User information.</param>
     /// <returns>A JWT string or null.</returns>
-    public string? GenerateJWT(UserClaims user);
+    public string GenerateJWT(UserClaims user);
 }
 
 public class JwtService : IJwtService
@@ -25,29 +25,38 @@ public class JwtService : IJwtService
     {
         _logger = logger;
         _config = config;
-
-        if (string.IsNullOrWhiteSpace(_config["MyContext:JwtSecret"]))
-        {
-            _logger.LogError("JWT Secret not found");
-        }
     }
 
-    public string? GenerateJWT(UserClaims user)
+    public string GenerateJWT(UserClaims user)
     {
-        if(string.IsNullOrWhiteSpace(_config["MyContext:JwtSecret"])){
-            return null;
+        if (string.IsNullOrWhiteSpace(_config["MyContext:JwtSecret"]))
+        {
+            _logger.LogError("JWT secret key is missing or empty");
+            throw new ApplicationException("JWT secret key is missing or empty");
         }
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_config["MyContext:JwtSecret"]!);
+        // Get Jwt secret
+        string jwtSecret = _config["MyContext:JwtSecret"]!;
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)); //Encoding.ASCII.GetBytes();
+
+        // Create claims
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.id.ToString()), // User Id
+            new Claim(ClaimTypes.Name, user.username) // Username
+        };
+        if (!string.IsNullOrEmpty(user.email))
+            claims.Add(new Claim(ClaimTypes.Email, user.email)); // Email
+        if (!string.IsNullOrEmpty(user.fullname))
+            claims.Add(new Claim("full_name", user.fullname)); // Fullname (custom claim type)
+
+        // Token creation
+        JwtSecurityTokenHandler tokenHandler = new();
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.id.ToString()) // User's ID
-            }),
+            Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddDays(1),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
