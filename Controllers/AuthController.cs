@@ -17,12 +17,14 @@ public class AuthController : ControllerBase
     private readonly ILogger<AuthController> _logger;
     private readonly MarkaSkorContext _db;
     private readonly IUtilityService _util;
+    private readonly IJwtService _jwtUtil;
 
-    public AuthController(ILogger<AuthController> logger, MarkaSkorContext db, IUtilityService util)
+    public AuthController(ILogger<AuthController> logger, MarkaSkorContext db, IUtilityService util, IJwtService jwtUtil)
     {
         _logger = logger;
         _db = db;
         _util = util; // Utility methods
+        _jwtUtil = jwtUtil;
     }
 
     [HttpGet]
@@ -135,15 +137,15 @@ public class AuthController : ControllerBase
         try
         {
             // Validate input
-            if (string.IsNullOrEmpty(userid) || string.IsNullOrEmpty(code))
+            if (string.IsNullOrWhiteSpace(userid) || string.IsNullOrWhiteSpace(code))
             {
                 return BadRequest("Invalid input data");
             }
 
             // Find verification record
-            var verificationRecord = await _db.UserVerifications
-                .FirstOrDefaultAsync(a => a.userId == Convert.ToInt32(userid) && a.verficationCode == code && a.expirationDate > DateTime.UtcNow);
-            if (verificationRecord == null)
+            if (!await _db.UserVerifications.AnyAsync(a =>
+                a.userId == Convert.ToInt32(userid) &&
+                a.verficationCode == code && a.expirationDate > DateTime.UtcNow))
             {
                 return BadRequest("Invalid verification code or expired.");
             }
@@ -284,7 +286,7 @@ public class AuthController : ControllerBase
 
 
             // Get the list of claims in a presentable format and send to front end for testing
-            List<ClaimKeyVal> claimArray = new List<ClaimKeyVal>();
+            List<ClaimKeyVal> claimArray = new();
             foreach (var claim in claims)
             {
                 claimArray.Add(new ClaimKeyVal
@@ -301,6 +303,66 @@ public class AuthController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
+
+
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginUserDto userDto)
+    {
+        try
+        {
+            // Validate input
+            if (userDto == null || (string.IsNullOrWhiteSpace(userDto.username) && string.IsNullOrWhiteSpace(userDto.email)))
+            {
+                return BadRequest("Invalid input data.");
+            }
+
+            // Check user credentials
+            var query = _db.Users.AsNoTracking();
+            if (!string.IsNullOrWhiteSpace(userDto.username))
+            {
+                // If user uses username to login
+                query = query.Where(u => u.username == userDto.username && u.password == userDto.password);
+            }
+            else if (!string.IsNullOrWhiteSpace(userDto.email))
+            {
+                // If user uses verified email to login
+                query = query.Where(u => u.email == userDto.email && u.email_valid == true && u.password == userDto.password);
+            }
+
+            // Get user id if the user exists
+            var userId = await query
+                .Select(u => (int?)u.id)
+                .FirstOrDefaultAsync();
+
+            // Give error if user doesn't exist
+            if (userId == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Get JWT created by if login is a success. Then send it to user
+            UserClaims claims = new()
+            {
+                id = Convert.ToInt32(userId)
+            };
+            var JWT = _jwtUtil.GenerateJWT(claims);
+
+            // Error if JWT is null (Possible if secret isn't found in config)
+            if (JWT == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok(new { message = "Login is successful", token = JWT });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred during login.");
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
+
 
 
 

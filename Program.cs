@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<MarkaSkorContext>();
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
@@ -20,6 +21,7 @@ builder.Services.AddCors(options =>
         });
 });
 builder.Services.AddScoped<IUtilityService, UtilityService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 
 var app = builder.Build();

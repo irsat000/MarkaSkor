@@ -1,6 +1,5 @@
-using System.Security.Cryptography;
-using System.Text;
 
+using System.Text;
 
 namespace MarkaSkor.Services;
 
@@ -20,8 +19,8 @@ public class UtilityService : IUtilityService
     public string GenerateRandom(int length, string? type)
     {
         string allowedChars = type == "code" ? "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" : "1234567890";
-        StringBuilder result = new StringBuilder(length);
-        Random random = new Random();
+        StringBuilder result = new(length);
+        Random random = new();
         for (int i = 0; i < length; i++)
         {
             int randomIndex = random.Next(allowedChars.Length);
