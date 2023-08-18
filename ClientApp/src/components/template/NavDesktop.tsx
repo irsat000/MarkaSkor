@@ -12,7 +12,7 @@ export const NavDesktop = () => {
             <ul className='nav_useful_links'>
                 <li>
                     <div className='nav_link_icon-cont'><Newspaper /></div>
-                    <span>Haberler</span>
+                    <Link to='/haberler'>Haberler</Link>
                 </li>
                 <li>
                     <div className='nav_link_icon-cont'><Gear /></div>

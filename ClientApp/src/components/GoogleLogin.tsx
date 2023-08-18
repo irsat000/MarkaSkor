@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { handleError, defaultFetchPost } from '../utility/fetchUtils';
 
-const googleSuccess = async (credentialResponse: any) => {
+const googleSuccess = async (credentialResponse: any, toggleLoginModal: (() => void) | null) => {
 
     const payloadGoogleAuth = {
         credential: credentialResponse.credential
@@ -27,6 +27,12 @@ const googleSuccess = async (credentialResponse: any) => {
         })
         .then((data) => {
             console.log(data);
+
+            // Closes login modal if the GoogleLogin is inside login modal
+            // This might be unnecessary when we refresh the page to sign in the user
+            if (toggleLoginModal != null) {
+                toggleLoginModal();
+            }
         }).catch(handleError);
 }
 
@@ -34,10 +40,12 @@ const googleFailure = () => {
     throw new Error('Login Failed');
 }
 
-export const LoginWithGoogle = () => {
+export const LoginWithGoogle: React.FC<{
+    toggleLoginModal: (() => void) | null
+}> = ({ toggleLoginModal }) => {
     return (
         <GoogleLogin
-            onSuccess={googleSuccess}
+            onSuccess={(credentialResponse) => googleSuccess(credentialResponse, toggleLoginModal)}
             onError={googleFailure}
         />
     )

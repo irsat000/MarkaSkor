@@ -1,74 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, List, PersonCircle, CaretDownFill, Gear, Shuffle, Newspaper, ArrowLeftShort } from 'react-bootstrap-icons';
+import { Search, List, PersonCircle, CaretDownFill, Gear } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+import { Drawer } from './Drawer';
+import { LoginModal } from './LoginModal';
 
 
 
-const Drawer = (props: {
-    drawerActive: boolean,
-    toggleDrawer: () => void,
-    closeDrawer: () => void,
-}) => {
-    const refDrawer = useRef<any>(null);
 
-    const handleClickOutsideDrawer = (event: any) => {
-        if (refDrawer.current && !refDrawer.current.contains(event.target)) {
-            props.closeDrawer();
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutsideDrawer);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutsideDrawer);
-        };
-    }, []);
-
-    return (
-        <div className={`drawer-cont${props.drawerActive ? ' active' : ''}`} id='mobile_drawer'>
-            <nav className='drawer' ref={refDrawer}>
-                <div className='dr-account-cont'>
-                    <div className='dr-closeDrawer' onClick={props.toggleDrawer}>
-                        <ArrowLeftShort />
-                    </div>
-                    <div className='dr-profilePic-cont'>
-                        <img src={require('../../assets/images/SiteIcon.png')} alt="MarkaSkor Icon" />
-                    </div>
-                    <div className='dr-account_info'>
-                        <span className='dr-account_username'>Muhammedİrşat</span>
-                        <span className='dr-account_email'>irsat000@gmail.com</span>
-                    </div>
-                </div>
-                <div className='dr-link_groups-cont'>
-                    <span className='dr-group_heading'>Account</span>
-                    <ul className='dr-group_account'>
-                        <li><a href='/'><PersonCircle className='dr-link_icon' /><span>Giriş yap</span></a></li>
-                        <li><Link to='/kaydol'><PersonCircle className='dr-link_icon' /><span>Kayıt ol</span></Link></li>
-                    </ul>
-                    <span className='dr-group_heading'>Genel</span>
-                    <ul className='dr-group_general'>
-                        <li><a href='/'><Shuffle className='dr-link_icon' /><span>Marka kıyasla</span></a></li>
-                        <li><a href='/'><Newspaper className='dr-link_icon' /><span>Haberler</span></a></li>
-                        <li><a href='/'><Gear className='dr-link_icon' /><span>Ayarlar</span></a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    )
-};
-
-
-const DesktopHeader = (props: {
-    page: String
-}) => {
-    const [dropdownMenuActive, setDropdownMenuActive] = useState(false);
+const DesktopHeader: React.FC<{
+    page: String,
+    toggleLoginModal: () => void,
+    dropdownMenuActive: boolean,
+    setDropdownMenuActive: (e: any) => void
+}> = ({ page, toggleLoginModal, dropdownMenuActive, setDropdownMenuActive }) => {
+    // To check where the click even happened so we can on/off the dropdown menu
     const refDropdownMenu = useRef<any>(null);
     const refMenuBtn = useRef<any>(null);
 
+    // Clicking on dropdown menu button toggles the menu
     const toggleDropdownMenu = () => {
         setDropdownMenuActive(!dropdownMenuActive);
     };
 
+    // Clicking anywhere else than the menu or the menu toggle button closes the dropdown menu
     const handleClickOutsideDM = (event: any) => {
         if (refDropdownMenu.current && !refDropdownMenu.current.contains(event.target)
             && refMenuBtn.current && !refMenuBtn.current.contains(event.target)) {
@@ -76,6 +30,7 @@ const DesktopHeader = (props: {
         }
     };
 
+    // Required for registering all click event
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutsideDM);
         return () => {
@@ -86,10 +41,10 @@ const DesktopHeader = (props: {
     return (
         <div className='desktop_header'>
             <div className='page_title'>
-                <span>{props.page}</span>
+                <span>{page}</span>
             </div>
             <div className='header_actions'>
-                {props.page !== 'Anasayfa' ?
+                {page !== 'Anasayfa' ?
                     <div className='search-header_desktop-cont'>
                         <input type='text' placeholder='Marka ara' />
                         <Search className='search_input-icon' />
@@ -103,9 +58,9 @@ const DesktopHeader = (props: {
                         <CaretDownFill />
                     </div>
                 </div>
-                <ul ref={refDropdownMenu} className={`dropdown_menu${dropdownMenuActive ? ' active' : ''}`}>
+                <ul ref={refDropdownMenu} className={`dropdown_menu ${dropdownMenuActive ? 'active' : ''}`}>
                     <li>
-                        <a>
+                        <a onClick={toggleLoginModal}>
                             <div className='dm_icon-cont'><PersonCircle /></div>
                             <span>Giriş yap</span>
                         </a>
@@ -129,17 +84,22 @@ const DesktopHeader = (props: {
 }
 
 
-export const AppHeader = (props: {
+export const AppHeader: React.FC<{
     page: String
-}) => {
+}> = ({ page }) => {
+    const [dropdownMenuActive, setDropdownMenuActive] = useState(false);
     const [drawerActive, setDrawerActive] = useState(false);
+    const [loginModalActive, setLoginModalActive] = useState(false);
 
     const toggleDrawer = () => {
         setDrawerActive(!drawerActive);
     };
-    const closeDrawer = () => {
+
+    const toggleLoginModal = () => {
+        setLoginModalActive(!loginModalActive);
+        setDropdownMenuActive(false);
         setDrawerActive(false);
-    }
+    };
 
     return (
         <header className='app_header'>
@@ -147,7 +107,7 @@ export const AppHeader = (props: {
                 <div className='drawerBtn-cont' onClick={toggleDrawer}>
                     <List />
                 </div>
-                {props.page !== 'Anasayfa' ?
+                {page !== 'Anasayfa' ?
                     <>
                         <div className='logo-mobile-cont'>
                             <span>MarkaSkor</span>
@@ -158,8 +118,9 @@ export const AppHeader = (props: {
                     </> : null
                 }
             </div>
-            <DesktopHeader page={props.page} />
-            <Drawer drawerActive={drawerActive} toggleDrawer={toggleDrawer} closeDrawer={closeDrawer} />
+            <DesktopHeader page={page} toggleLoginModal={toggleLoginModal} dropdownMenuActive={dropdownMenuActive} setDropdownMenuActive={setDropdownMenuActive} />
+            <Drawer drawerActive={drawerActive} toggleDrawer={toggleDrawer} toggleLoginModal={toggleLoginModal} />
+            <LoginModal modalActive={loginModalActive} toggleLoginModal={toggleLoginModal} />
         </header>
     )
 };

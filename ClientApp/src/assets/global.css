@@ -323,6 +323,9 @@ header .drawer-cont .drawer .dr-account-cont .dr-closeDrawer {
   display: flex;
   padding: 10px;
 }
+header .drawer-cont .drawer .dr-account-cont .dr-profilePic-cont {
+  align-self: flex-start;
+}
 header .drawer-cont .drawer .dr-account-cont .dr-profilePic-cont img {
   width: 3.4rem;
   height: 3.4rem;
@@ -373,6 +376,123 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_account li a span,
 header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   font-size: 1.4rem;
   font-family: "Shantell Sans", cursive;
+}
+header .login-modal-cont.active {
+  display: flex;
+}
+header .login-modal-cont {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.3764705882);
+  z-index: 405;
+}
+header .login-modal-cont .login-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 460px;
+  max-height: 90%;
+  border-radius: 12px;
+  background-color: var(--loginmodal-bgcolor);
+  border: 1px solid var(--loginmodal-bordercolor);
+  padding: 56px 3% 20px;
+  font-size: 16px;
+}
+header .login-modal-cont .login-modal .lm-close-icon {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.1s ease;
+  cursor: pointer;
+}
+header .login-modal-cont .login-modal .lm-close-icon:hover {
+  background-color: var(--loginmodal_close-hover-bgcolor);
+}
+header .login-modal-cont .login-modal .lm-header {
+  text-align: center;
+  padding-bottom: 20px;
+  font-size: 1.4rem;
+  font-family: "Montserrat", sans-serif;
+}
+header .login-modal-cont .login-modal .lm-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+header .login-modal-cont .login-modal .lm-body input {
+  outline: transparent;
+  padding: 10px;
+  background-color: var(--loginmodal-input-bgcolor);
+  border: 1px solid var(--loginmodal-bordercolor);
+  border-radius: 4px;
+  color: var(--font-color1);
+  font-size: 1.2rem;
+  font-family: "Shantell Sans", cursive;
+}
+header .login-modal-cont .login-modal .lm-body .lm-action-cont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+header .login-modal-cont .login-modal .lm-body .lm-action-cont a {
+  font-size: 0.9rem;
+  font-family: "Mali", cursive;
+}
+header .login-modal-cont .login-modal .lm-body .lm-action-cont a:hover {
+  text-decoration: underline;
+}
+header .login-modal-cont .login-modal .lm-body .lm-action-cont button {
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  align-self: center;
+  padding: 10px 30px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  background-color: var(--loginmodal_button-bgcolor);
+  transition: background-color 0.1s ease;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+header .login-modal-cont .login-modal .lm-body .lm-action-cont button:hover {
+  background-color: var(--loginmodal_button-hover-bgcolor);
+}
+header .login-modal-cont .login-modal .lm-oauth-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 0 10px;
+}
+header .login-modal-cont .login-modal .lm-oauth-header div {
+  flex-grow: 1;
+  border-bottom: 1px solid var(--loginmodal-bordercolor);
+}
+header .login-modal-cont .login-modal .lm-oauth-header span {
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 0 10px;
+  font-family: "Mina", sans-serif;
+}
+header .login-modal-cont .login-modal .lm-oauth-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main-index {
@@ -661,7 +781,7 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   display: flex;
   justify-content: center;
   gap: 20px;
-  border-bottom: 1px solid var(--reviewSection_bordercolor);
+  border-bottom: 1px solid var(--reviewSection-bordercolor);
 }
 .main-brand .review_section .brand_subpage_nav span {
   padding: 10px 20px 0;
@@ -671,7 +791,7 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   font-family: "Laila", sans-serif;
 }
 .main-brand .review_section .brand_subpage_nav span:hover {
-  border-bottom: 2px solid var(--reviewSection_bordercolor);
+  border-bottom: 2px solid var(--reviewSection-bordercolor);
 }
 .main-brand .review_section .brand_subpage_nav span.active {
   border-bottom: 2px solid #2595ae;
@@ -885,7 +1005,7 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   gap: 8px;
   padding-bottom: 14px;
   margin-bottom: 16px;
-  border-bottom: 1px solid var(--reviewSection_bordercolor);
+  border-bottom: 1px solid var(--reviewSection-bordercolor);
 }
 .main-brand .review_section .brand_subpage .b_reviews .b_reviewList .b_review_item .b_r_header {
   padding: 0 10px;
@@ -992,8 +1112,8 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   outline: transparent;
   border-radius: 4px;
   font-size: 1.2rem;
-  border: 1px solid var(--registerInputs_bordercolor);
-  background-color: var(--registerInputs_bgcolor);
+  border: 1px solid var(--registerInputs-bordercolor);
+  background-color: var(--registerInputs-bgcolor);
   color: var(--font-color1);
 }
 .main-register .register_form .re-user_info .re-row > select {
@@ -1002,8 +1122,8 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   outline: transparent;
   border-radius: 4px;
   font-size: 1.2rem;
-  border: 1px solid var(--registerInputs_bordercolor);
-  background-color: var(--registerInputs_bgcolor);
+  border: 1px solid var(--registerInputs-bordercolor);
+  background-color: var(--registerInputs-bgcolor);
   color: var(--font-color1);
 }
 .main-register .register_form .re-user_info input.input_error {
@@ -1022,14 +1142,14 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
   outline: transparent;
   border-radius: 4px;
   font-size: 1.4rem;
-  border: 1px solid var(--registerInputs_bordercolor);
-  background-color: var(--registerInputs_bgcolor);
+  border: 1px solid var(--registerInputs-bordercolor);
+  background-color: var(--registerInputs-bgcolor);
   color: var(--font-color1);
   cursor: pointer;
   transition: background-color 0.1s ease;
 }
 .main-register .register_form .re-finish button:hover {
-  background-color: var(--registerInputs_hover_bgcolor);
+  background-color: var(--registerInputs-hover-bgcolor);
 }
 
 @media (min-width: 281px) {
@@ -1123,12 +1243,12 @@ header .drawer-cont .drawer .dr-link_groups-cont .dr-group_general li a span {
     min-width: 80%;
     max-width: 90%;
     border-radius: 6px;
-    background-color: var(--brandPrimary_bgcolor);
-    border: 1px solid var(--brandPrimary_bordercolor);
+    background-color: var(--brandPrimary-bgcolor);
+    border: 1px solid var(--brandPrimary-bordercolor);
   }
   .main-brand .brand_info_section .brand_primary .b_logo {
     max-width: 90%;
-    border-bottom: 1px solid var(--brandPrimary_bordercolor);
+    border-bottom: 1px solid var(--brandPrimary-bordercolor);
   }
   .main-brand .brand_info_section .brand_primary .b_name,
   .main-brand .brand_info_section .brand_primary .b_details-cont,

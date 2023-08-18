@@ -10,8 +10,12 @@ import { cleanEmail } from '../utility/helperUtils';
 // DEPRECATED
 // Phone number input that takes care of formatting.
 // With this method, user can safely enter their number without making mistakes.
-const PhoneNumberInput: React.FC<{ formData: any, setFormData: (e: any) => void, phoneNumberError: boolean, handleChange: (e: any) => void }> = ({ formData, setFormData, phoneNumberError, handleChange }) => {
-
+const PhoneNumberInput: React.FC<{
+    formData: any,
+    setFormData: (e: any) => void,
+    phoneNumberError: boolean,
+    handleChange: (e: any) => void
+}> = ({ formData, setFormData, phoneNumberError, handleChange }) => {
     const formatPhoneNumber = (input: string) => {
         const cleanedInput = input.replace(/\D/g, '');
         let formattedValue = '';
@@ -63,7 +67,11 @@ const PhoneNumberInput: React.FC<{ formData: any, setFormData: (e: any) => void,
 /*<PhoneNumberInput formData={formData} setFormData={setFormData} phoneNumberError={formErrors.phoneNumber} handleChange={handleChange}/>*/
 
 
-const RegistrationForm: React.FC<{ formData: any, setFormData: (a: any) => void, activateAForm: () => void }> = ({ formData, setFormData, activateAForm }) => {
+const RegistrationForm: React.FC<{
+    formData: any,
+    setFormData: (a: any) => void,
+    activateAForm: () => void
+}> = ({ formData, setFormData, activateAForm }) => {
     const navigate = useNavigate();
 
     const [formErrors, setFormErrors] = useState({
@@ -221,14 +229,17 @@ const RegistrationForm: React.FC<{ formData: any, setFormData: (a: any) => void,
             </div>
             <div className='re-finish'>
                 <button type='submit'>Kayıt ol</button>
-                <LoginWithGoogle />
+                <LoginWithGoogle toggleLoginModal={null} />
             </div>
         </form>
     );
 }
 
 // DEPRECATED
-const SmsActivationForm: React.FC<{ formData: any, activateRForm: () => void }> = ({ formData, activateRForm }) => {
+const SmsActivationForm: React.FC<{
+    formData: any,
+    activateRForm: () => void
+}> = ({ formData, activateRForm }) => {
     return (
         <form>
         </form>

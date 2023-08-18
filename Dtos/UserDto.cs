@@ -17,9 +17,7 @@ public class RegisterUserDto
 
 public class LoginUserDto
 {
-    public string? username { get; set; }
-
-    public string? email { get; set; }
+    public string userIdentifier { get; set; } = null!;
 
     public string password { get; set; } = null!;
 }

@@ -250,9 +250,9 @@ public class AuthController : ControllerBase
                 // If user is non-existent, register it
 
                 // Create the first part of username
-                string newUsername = (firstName ?? "") + (lastName ?? "") + "_";
-                if (newUsername == "_")
-                    newUsername = "user_";
+                string newUsername = (firstName ?? "") + (lastName ?? "");
+                if (newUsername == "")
+                    newUsername = "user";
 
                 // Creating unique username because user will not
                 // Set the max amount of tries before giving up
@@ -326,26 +326,16 @@ public class AuthController : ControllerBase
         try
         {
             // Validate input
-            if (userDto == null || (string.IsNullOrWhiteSpace(userDto.username) && string.IsNullOrWhiteSpace(userDto.email)))
+            if (userDto == null || string.IsNullOrWhiteSpace(userDto.userIdentifier) || string.IsNullOrWhiteSpace(userDto.password))
             {
                 return BadRequest("Invalid input data.");
             }
 
-            // Check user credentials
-            var query = _db.Users.AsNoTracking();
-            if (!string.IsNullOrWhiteSpace(userDto.username))
-            {
-                // If user uses username to login
-                query = query.Where(u => u.username == userDto.username);
-            }
-            else if (!string.IsNullOrWhiteSpace(userDto.email))
-            {
-                // If user uses verified email to login
-                query = query.Where(u => u.email == userDto.email && u.email_valid == true);
-            }
-
             // Get user id if the user exists
-            var checkUser = await query
+            // userIdentifier can be username or email, it will check if it's username first
+            var checkUser = await _db.Users.AsNoTracking().Where(u =>
+                    u.username == userDto.userIdentifier ||
+                    (u.email == userDto.userIdentifier && u.email_valid))
                 .Select(u => new { u.id, u.password, u.username, u.email, u.fullname })
                 .FirstOrDefaultAsync();
 

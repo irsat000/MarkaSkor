@@ -1,5 +1,6 @@
 using MarkaSkor.Entities;
 using MarkaSkor.Services;
+using Microsoft.AspNetCore.CookiePolicy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,15 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader();
         });
 });
+/*
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+    options.HttpOnly = HttpOnlyPolicy.None; // Adjust this as needed
+    options.Secure = CookieSecurePolicy.Always; // For HTTPS connections
+});
+*/
+
 builder.Services.AddScoped<IUtilityService, UtilityService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 

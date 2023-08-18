@@ -5,17 +5,33 @@
     --body-bg: #292929;
 
     //template
+
+    //nav
     --nav-border: #5b5b5b;
     --nav-usefullinks-bgcolor: #303030;
     --nav-usefullinks-hover-bgcolor: #373737;
+    //header - index
     --search-bgcolor: #3d3d3d;
     --search-bordercolor: #585858;
     --account-icon: #EFEFEF;
+    //dropdown
     --dropdownMenu-bgcolor: #3d3d3d;
     --dropdownMenu-hover-bgcolor: #525252;
     --dropdownMenu-bordercolor: #6b6b6b;
     --dropdownMenu-fontcolor: #cecece;
+    //drawer
     --drawer-bgcolor: #292929;
+    //login
+    --loginmodal-bgcolor: #292929;
+    --loginmodal_input-bgcolor: #2f2f2f;
+    --loginmodal-bordercolor: #5b5b5b;
+    --loginmodal_close-hover-bgcolor: #4b4b4b;
+    --loginmodal_button-bgcolor: #31986d;
+    --loginmodal_button-hover-bgcolor: #42b383;
+
+
+
+
     //home
     --sectorItem-bgcolor: #343434;
     --sectorItem-bordercolor: #545454;
@@ -28,18 +44,18 @@
     --brand-hover-bgcolor: #373737;
     --brand-bordercolor: #5b5b5b;
     //brand
-    --brandPrimary_bgcolor: #2f2f2f;
-    --brandPrimary_bordercolor: #454545;
-    --reviewSection_bordercolor: #404040;
+    --brandPrimary-bgcolor: #2f2f2f;
+    --brandPrimary-bordercolor: #454545;
+    --reviewSection-bordercolor: #404040;
     --reviewSection_comment-bgcolor: #343434;
     --reviewSection_comment-bordercolor: #545454;
     --reviewSection_button-bgcolor: #31986d;
     --reviewSection_button-hover-bgcolor: #42b383;
     --reviewSection_ratingsBar-bgcolor: #5b5b5b;
     //register
-    --registerInputs_bgcolor: #2f2f2f;
-    --registerInputs_bordercolor: #5b5b5b;
-    --registerInputs_hover_bgcolor: #414141;
+    --registerInputs-bgcolor: #2f2f2f;
+    --registerInputs-bordercolor: #5b5b5b;
+    --registerInputs-hover-bgcolor: #414141;
 }
 
 .lightmode {
@@ -48,17 +64,33 @@
     --body-bg: #EFEEF3;
 
     //template
+
+    //nav
     --nav-border: #c4c4c4;
     --nav-usefullinks-bgcolor: #f6f6f6;
     --nav-usefullinks-hover-bgcolor: #ffffff;
+    //header - index
     --search-bgcolor: #EFEFEF;
     --search-bordercolor: #a2a2a2;
     --account-icon: #656565;
+    //dropdown
     --dropdownMenu-bgcolor: #f5f5f5;
     --dropdownMenu-hover-bgcolor: #ffffff;
     --dropdownMenu-bordercolor: #c0c0c0;
     --dropdownMenu-fontcolor: #6f6f6f;
+    //drawer
     --drawer-bgcolor: #EFEEF3;
+    //login
+    --loginmodal-bgcolor: #efefef;
+    --loginmodal_input-bgcolor: #dddddd;
+    --loginmodal-bordercolor: #d0d0d0;
+    --loginmodal_close-hover-bgcolor: #dddddd;
+    --loginmodal_button-bgcolor: #47C08D;
+    --loginmodal_button-hover-bgcolor: #3ba579;
+
+
+
+
     //home
     --sectorItem-bgcolor: #FBFBFB;
     --sectorItem-bordercolor: #dddddd;
@@ -71,16 +103,16 @@
     --brand-hover-bgcolor: #ffffff;
     --brand-bordercolor: #c4c4c4;
     //brand
-    --brandPrimary_bgcolor: #f7f7f7;
-    --brandPrimary_bordercolor: #dfdfdf;
-    --reviewSection_bordercolor: #d4d4d4;
+    --brandPrimary-bgcolor: #f7f7f7;
+    --brandPrimary-bordercolor: #dfdfdf;
+    --reviewSection-bordercolor: #d4d4d4;
     --reviewSection_comment-bgcolor: #FBFBFB;
     --reviewSection_comment-bordercolor: #dddddd;
     --reviewSection_button-bgcolor: #47C08D;
     --reviewSection_button-hover-bgcolor: #3ba579;
     --reviewSection_ratingsBar-bgcolor: #c4c4c4;
     //register
-    --registerInputs_bgcolor: #efefef;
-    --registerInputs_bordercolor: #d0d0d0;
-    --registerInputs_hover_bgcolor: #f7f7f7;
+    --registerInputs-bgcolor: #efefef;
+    --registerInputs-bordercolor: #d0d0d0;
+    --registerInputs-hover-bgcolor: #f7f7f7;
 }
