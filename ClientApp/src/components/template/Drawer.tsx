@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import { PersonCircle, Gear, Shuffle, Newspaper, ArrowLeftShort } from 'react-bootstrap-icons';
 import { useNavigate, Link } from 'react-router-dom';
+import { UserContext } from '../../context/AuthContext';
 
 export const Drawer: React.FC<{
     drawerActive: boolean,
@@ -8,6 +9,7 @@ export const Drawer: React.FC<{
     toggleLoginModal: () => void
 }> = ({ drawerActive, toggleDrawer, toggleLoginModal }) => {
     const navigate = useNavigate();
+    const { userData, setUserData } = useContext(UserContext);
 
     // To check where the click even happened so we can on/off the drawer
     const refDrawer = useRef<any>(null);
@@ -30,12 +32,16 @@ export const Drawer: React.FC<{
                         <img src={require('../../assets/images/SiteIcon.png')} alt="MarkaSkor Icon" />
                     </div>
                     <div className='dr-account_info'>
-                        <span className='dr-account_username'>Muhammedİrşat</span>
-                        <span className='dr-account_email'>irsat000@gmail.com</span>
+                        <span className='dr-account_username'>
+                            {userData != null ? userData.fullname ?? userData.unique_name : ''}
+                        </span>
+                        <span className='dr-account_email'>
+                            {userData != null ? userData.email : ''}
+                        </span>
                     </div>
                 </div>
                 <div className='dr-link_groups-cont'>
-                    <span className='dr-group_heading'>Account</span>
+                    <span className='dr-group_heading'>Hesap</span>
                     <ul className='dr-group_account'>
                         <li><a onClick={toggleLoginModal}><PersonCircle className='dr-link_icon' /><span>Giriş yap</span></a></li>
                         <li><Link to='/kaydol'><PersonCircle className='dr-link_icon' /><span>Kayıt ol</span></Link></li>

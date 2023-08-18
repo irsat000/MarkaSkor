@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie';
 import jwt_decode from "jwt-decode";
-import { IUserData } from '../context/AuthContext';
 
 export const loginUser = (jwt: string) => {
     Cookies.set('jwt', jwt, {
@@ -24,6 +23,5 @@ export const readUser = () => {
 }
 
 export const checkUser = () => {
-    return null;
     return Cookies.get('jwt') != null;
 }
