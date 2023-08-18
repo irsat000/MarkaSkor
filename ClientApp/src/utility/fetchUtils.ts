@@ -3,9 +3,11 @@ export const handleError = (err: any) => { throw new Error(err); };
 
 
 export const defaultFetchPost = (payload: any) => {
+    const token = "";
     return {
         method: 'POST',
         headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json; charset=utf-8'
         },
         body: JSON.stringify(payload)

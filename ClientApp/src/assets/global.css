@@ -323,10 +323,10 @@ header .drawer-cont .drawer .dr-account-cont .dr-closeDrawer {
   display: flex;
   padding: 10px;
 }
-header .drawer-cont .drawer .dr-account-cont .dr-profilePic-cont {
+header .drawer-cont .drawer .dr-account-cont .dr-pageicon-cont {
   align-self: flex-start;
 }
-header .drawer-cont .drawer .dr-account-cont .dr-profilePic-cont img {
+header .drawer-cont .drawer .dr-account-cont .dr-pageicon-cont img {
   width: 3.4rem;
   height: 3.4rem;
 }

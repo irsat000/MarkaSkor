@@ -26,7 +26,7 @@ export const Drawer: React.FC<{
                     <div className='dr-closeDrawer' onClick={toggleDrawer}>
                         <ArrowLeftShort />
                     </div>
-                    <div className='dr-profilePic-cont' onClick={() => navigate("/")}>
+                    <div className='dr-pageicon-cont' onClick={() => navigate("/")}>
                         <img src={require('../../assets/images/SiteIcon.png')} alt="MarkaSkor Icon" />
                     </div>
                     <div className='dr-account_info'>

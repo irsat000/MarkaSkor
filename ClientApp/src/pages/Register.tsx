@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
 import { LoginWithGoogle } from '../components/GoogleLogin';
 import { handleError, defaultFetchPost } from '../utility/fetchUtils';
 import { cleanEmail } from '../utility/helperUtils';
+import { loginUser, checkUser, logoutUser, readUser } from '../utility/authUtils';
+import { UserContext } from '../context/AuthContext';
 
 
 // DEPRECATED
@@ -73,6 +75,8 @@ const RegistrationForm: React.FC<{
     activateAForm: () => void
 }> = ({ formData, setFormData, activateAForm }) => {
     const navigate = useNavigate();
+    
+    const { userData, setUserData } = useContext(UserContext);
 
     const [formErrors, setFormErrors] = useState({
         username: false,
@@ -154,14 +158,21 @@ const RegistrationForm: React.FC<{
                 }
             })
             .then((data) => {
-                /*setFormData({
-                    username: '',
-                    emailPrefix: '',
-                    emailDomain: '@gmail.com',
-                    password: '',
-                    fullName: ''
-                });*/
-                console.log(data);
+                // Logout if a user is already logged in
+                if (checkUser()) {
+                    logoutUser();
+                }
+                // Write the token as cookie
+                loginUser(data.token);
+                // Decode user data from cookie jwt
+                const readUserData = readUser() as any;
+                // Set user data to UserContext for centralizing
+                setUserData({
+                    unique_name: readUserData.unique_name,
+                    email: readUserData.email,
+                    full_name: readUserData.full_name
+                });
+                // Go to homepage
                 navigate("/");
             }).catch(handleError);
 
