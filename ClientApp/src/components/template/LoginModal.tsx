@@ -12,7 +12,7 @@ export const LoginModal: React.FC<{
     modalActive: boolean,
     toggleLoginModal: () => void
 }> = ({ modalActive, toggleLoginModal }) => {
-    const { userData, setUserData } = useContext(UserContext);
+    const { setUserData } = useContext(UserContext);
 
     // To check where the click even happened so we can on/off the login modal
     const refLoginModal = useRef<any>(null);
@@ -80,6 +80,11 @@ export const LoginModal: React.FC<{
                     unique_name: readUserData.unique_name,
                     email: readUserData.email,
                     full_name: readUserData.full_name
+                });
+                // Reset form
+                setFormData({
+                    userIdentifier: '',
+                    password: ''
                 });
             }).catch(handleError);
     }

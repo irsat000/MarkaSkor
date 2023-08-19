@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { handleError, defaultFetchPost } from '../utility/fetchUtils';
+import { loginUser, readUser } from '../utility/authUtils';
+import { UserContext } from '../context/AuthContext';
 
-const googleSuccess = async (credentialResponse: any, toggleLoginModal: (() => void) | null) => {
+const googleSuccess = async (credentialResponse: any, toggleLoginModal: (() => void) | null, setUserData: any) => {
 
     const payloadGoogleAuth = {
         credential: credentialResponse.credential
@@ -26,13 +28,20 @@ const googleSuccess = async (credentialResponse: any, toggleLoginModal: (() => v
             }
         })
         .then((data) => {
-            console.log(data);
-
             // Closes login modal if the GoogleLogin is inside login modal
-            // This might be unnecessary when we refresh the page to sign in the user
             if (toggleLoginModal != null) {
                 toggleLoginModal();
             }
+            // Write the token as cookie
+            loginUser(data.token);
+            // Decode user data from cookie jwt
+            const readUserData = readUser() as any;
+            // Set user data to UserContext for centralizing
+            setUserData({
+                unique_name: readUserData.unique_name,
+                email: readUserData.email,
+                full_name: readUserData.full_name
+            });
         }).catch(handleError);
 }
 
@@ -43,9 +52,10 @@ const googleFailure = () => {
 export const LoginWithGoogle: React.FC<{
     toggleLoginModal: (() => void) | null
 }> = ({ toggleLoginModal }) => {
+    const { setUserData } = useContext(UserContext);
     return (
         <GoogleLogin
-            onSuccess={(credentialResponse) => googleSuccess(credentialResponse, toggleLoginModal)}
+            onSuccess={(credentialResponse) => googleSuccess(credentialResponse, toggleLoginModal, setUserData)}
             onError={googleFailure}
         />
     )

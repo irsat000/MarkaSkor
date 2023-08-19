@@ -1,8 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Search, List, PersonCircle, CaretDownFill, Gear } from 'react-bootstrap-icons';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import { Search, List, PersonCircle, CaretDownFill, Gear, BoxArrowRight } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import { Drawer } from './Drawer';
 import { LoginModal } from './LoginModal';
+import { UserContext } from '../../context/AuthContext';
+import { logoutUser } from '../../utility/authUtils';
 
 
 
@@ -13,6 +15,7 @@ const DesktopHeader: React.FC<{
     dropdownMenuActive: boolean,
     setDropdownMenuActive: (e: any) => void
 }> = ({ page, toggleLoginModal, dropdownMenuActive, setDropdownMenuActive }) => {
+    const { userData, setUserData } = useContext(UserContext);
     // To check where the click even happened so we can on/off the dropdown menu
     const refDropdownMenu = useRef<any>(null);
     const refMenuBtn = useRef<any>(null);
@@ -59,18 +62,33 @@ const DesktopHeader: React.FC<{
                     </div>
                 </div>
                 <ul ref={refDropdownMenu} className={`dropdown_menu ${dropdownMenuActive ? 'active' : ''}`}>
-                    <li>
-                        <a onClick={toggleLoginModal}>
-                            <div className='dm_icon-cont'><PersonCircle /></div>
-                            <span>Giriş yap</span>
-                        </a>
-                    </li>
-                    <li>
-                        <Link to='/kaydol'>
-                            <div className='dm_icon-cont'><PersonCircle /></div>
-                            <span>Kayıt ol</span>
-                        </Link>
-                    </li>
+                    {userData != null ? <>
+                        <li>
+                            <Link to='/profil'>
+                                <div className='dm_icon-cont'><PersonCircle /></div>
+                                <span>{userData.full_name ?? userData.unique_name}</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <a onClick={() => logoutUser(setUserData)}>
+                                <div className='dm_icon-cont'><BoxArrowRight /></div>
+                                <span>Çıkış yap</span>
+                            </a>
+                        </li>
+                    </> : <>
+                        <li>
+                            <a onClick={toggleLoginModal}>
+                                <div className='dm_icon-cont'><PersonCircle /></div>
+                                <span>Giriş yap</span>
+                            </a>
+                        </li>
+                        <li>
+                            <Link to='/kaydol'>
+                                <div className='dm_icon-cont'><PersonCircle /></div>
+                                <span>Kayıt ol</span>
+                            </Link>
+                        </li>
+                    </>}
                     <li>
                         <Link to='/ayarlar'>
                             <div className='dm_icon-cont'><Gear /></div>

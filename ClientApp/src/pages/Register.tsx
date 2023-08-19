@@ -76,7 +76,7 @@ const RegistrationForm: React.FC<{
 }> = ({ formData, setFormData, activateAForm }) => {
     const navigate = useNavigate();
     
-    const { userData, setUserData } = useContext(UserContext);
+    const { setUserData } = useContext(UserContext);
 
     const [formErrors, setFormErrors] = useState({
         username: false,
@@ -160,7 +160,7 @@ const RegistrationForm: React.FC<{
             .then((data) => {
                 // Logout if a user is already logged in
                 if (checkUser()) {
-                    logoutUser();
+                    logoutUser(setUserData);
                 }
                 // Write the token as cookie
                 loginUser(data.token);

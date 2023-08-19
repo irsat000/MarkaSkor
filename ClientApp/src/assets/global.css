@@ -436,7 +436,7 @@ header .login-modal-cont .login-modal .lm-body {
 header .login-modal-cont .login-modal .lm-body input {
   outline: transparent;
   padding: 10px;
-  background-color: var(--loginmodal-input-bgcolor);
+  background-color: var(--loginmodal_input-bgcolor);
   border: 1px solid var(--loginmodal-bordercolor);
   border-radius: 4px;
   color: var(--font-color1);

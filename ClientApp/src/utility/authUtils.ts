@@ -8,8 +8,9 @@ export const loginUser = (jwt: string) => {
     });
 }
 
-export const logoutUser = () => {
+export const logoutUser = (setUserData: any) => {
     Cookies.remove('jwt');
+    setUserData(null);
 }
 
 export const readUser = () => {
@@ -20,6 +21,10 @@ export const readUser = () => {
     } else {
         return null
     }
+}
+
+export const readUserJwt = () => {
+    return Cookies.get('jwt');
 }
 
 export const checkUser = () => {
