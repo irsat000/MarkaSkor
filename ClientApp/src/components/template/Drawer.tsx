@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useContext } from 'react';
-import { PersonCircle, Gear, Shuffle, Newspaper, ArrowLeftShort, BoxArrowRight } from 'react-bootstrap-icons';
+import { Gear, Shuffle, Newspaper, ArrowLeftShort, BoxArrowRight, Person, PersonAdd } from 'react-bootstrap-icons';
 import { useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../../context/AuthContext';
 import { logoutUser } from '../../utility/authUtils';
@@ -45,11 +45,11 @@ export const Drawer: React.FC<{
                     <span className='dr-group_heading'>Hesap</span>
                     <ul className='dr-group_account'>
                         {userData != null ? <>
-                            <li><Link to='/profile'><PersonCircle className='dr-link_icon' /><span>{userData.full_name ?? userData.unique_name}</span></Link></li>
+                            <li><Link to='/profile'><Person className='dr-link_icon' /><span>{userData.full_name ?? userData.unique_name}</span></Link></li>
                             <li><a onClick={() => logoutUser(setUserData)}><BoxArrowRight className='dr-link_icon' /><span>Çıkış yap</span></a></li>
                         </> : <>
-                            <li><a onClick={toggleLoginModal}><PersonCircle className='dr-link_icon' /><span>Giriş yap</span></a></li>
-                            <li><Link to='/kaydol'><PersonCircle className='dr-link_icon' /><span>Kayıt ol</span></Link></li>
+                            <li><a onClick={toggleLoginModal}><Person className='dr-link_icon' /><span>Giriş yap</span></a></li>
+                            <li><Link to='/kaydol'><PersonAdd className='dr-link_icon' /><span>Kayıt ol</span></Link></li>
                         </>}
                     </ul>
                     <span className='dr-group_heading'>Genel</span>

@@ -1,4 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MarkaSkor.Dtos;
+using MarkaSkor.Entities;
+using MarkaSkor.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace MarkaSkor.Controllers;
 
@@ -12,6 +17,17 @@ public class HomeController : ControllerBase
     {
         _logger = logger;
     }
-    
+
     //end points
+
+
+    // Example for Authorize - Tested with postman
+    [Authorize]
+    [HttpGet("rate-brand")]
+    public IActionResult RateBrand()
+    {
+        var userEmailClaim = User.FindFirst(ClaimTypes.Email)!.Value;
+
+        return Ok(new { message = "Success!", value = userEmailClaim });
+    }
 }

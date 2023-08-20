@@ -55,8 +55,10 @@ public class JwtService : IJwtService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddDays(1),
-            SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
+            Expires = DateTime.UtcNow.AddDays(10),
+            SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
+            Issuer = "MarkaSkorApi",
+            Audience = "MarkaSkor"
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);

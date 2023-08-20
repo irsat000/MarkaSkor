@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Search, List, PersonCircle, CaretDownFill, Gear, BoxArrowRight } from 'react-bootstrap-icons';
+import { Search, List, CaretDownFill, Gear, BoxArrowRight, Person, PersonCheck, PersonAdd } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import { Drawer } from './Drawer';
 import { LoginModal } from './LoginModal';
@@ -55,7 +55,7 @@ const DesktopHeader: React.FC<{
                 }
                 <div ref={refMenuBtn} className='menu-cont' onClick={toggleDropdownMenu}>
                     <div className='account'>
-                        <PersonCircle />
+                        {userData != null ? <PersonCheck /> : <Person />}
                     </div>
                     <div className='dropdown_menu-btn'>
                         <CaretDownFill />
@@ -65,7 +65,7 @@ const DesktopHeader: React.FC<{
                     {userData != null ? <>
                         <li>
                             <Link to='/profil'>
-                                <div className='dm_icon-cont'><PersonCircle /></div>
+                                <div className='dm_icon-cont'><Person /></div>
                                 <span>{userData.full_name ?? userData.unique_name}</span>
                             </Link>
                         </li>
@@ -78,13 +78,13 @@ const DesktopHeader: React.FC<{
                     </> : <>
                         <li>
                             <a onClick={toggleLoginModal}>
-                                <div className='dm_icon-cont'><PersonCircle /></div>
+                                <div className='dm_icon-cont'><Person /></div>
                                 <span>Giriş yap</span>
                             </a>
                         </li>
                         <li>
                             <Link to='/kaydol'>
-                                <div className='dm_icon-cont'><PersonCircle /></div>
+                                <div className='dm_icon-cont'><PersonAdd /></div>
                                 <span>Kayıt ol</span>
                             </Link>
                         </li>
