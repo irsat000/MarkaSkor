@@ -3,6 +3,7 @@ import { Tag, Pentagon, Calendar, Star, StarHalf, StarFill, ListUl, ChatLeft } f
 import { useParams, Link } from 'react-router-dom';
 import { AppHeader } from '../components/template/Header';
 import { NavDesktop } from '../components/template/NavDesktop';
+import Template from './Template';
 
 
 
@@ -216,52 +217,48 @@ export const Page_Brand = () => {
     //document.querySelector('.brand_primary').style.paddingTop = ((document.querySelector('.b_logo').offsetHeight / 2) + 10) + 'px';
 
     return (
-        <div className='page_content'>
-            <NavDesktop />
-            <section>
-                <AppHeader page="Marka" />
-                <main className='main-brand'>
-                    <div className='brand_info_section'>
-                        <div className='brand_primary'>
-                            <div className='b_logo'>
-                                <img src={require('../assets/images/brands_temp/cocacola.png')} alt='Coca Cola logo' />
+        <Template pageName='Marka'>
+            <main className='main-brand'>
+                <div className='brand_info_section'>
+                    <div className='brand_primary'>
+                        <div className='b_logo'>
+                            <img src={require('../assets/images/brands_temp/cocacola.png')} alt='Coca Cola logo' />
+                        </div>
+                        <div className='b_name'>
+                            <Tag className='icon' />
+                            <span>Coca Cola</span>
+                        </div>
+                        <div className='b_details-cont'>
+                            <div className='b_category'>
+                                <Pentagon className='icon' />
+                                <span>Tüketim - Gıda</span>
                             </div>
-                            <div className='b_name'>
-                                <Tag className='icon' />
-                                <span>Coca Cola</span>
+                            <div className='b_date'>
+                                <Calendar className='icon' />
+                                <span>08 / 05 / 1886</span>
                             </div>
-                            <div className='b_details-cont'>
-                                <div className='b_category'>
-                                    <Pentagon className='icon' />
-                                    <span>Tüketim - Gıda</span>
-                                </div>
-                                <div className='b_date'>
-                                    <Calendar className='icon' />
-                                    <span>08 / 05 / 1886</span>
-                                </div>
-                            </div>
-                            <div className='b_rating_min'>
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarFill className='icon' />
-                                <StarHalf className='icon' />
-                                <Star className='icon' />
-                            </div>
+                        </div>
+                        <div className='b_rating_min'>
+                            <StarFill className='icon' />
+                            <StarFill className='icon' />
+                            <StarFill className='icon' />
+                            <StarHalf className='icon' />
+                            <Star className='icon' />
                         </div>
                     </div>
-                    <div className='review_section'>
-                        <div className='brand_subpage_nav'>
-                            <span className={`b_reviewing-btn ${userRActive ? 'active' : ''}`} onClick={switchReviewSection}>Oyla</span>
-                            <span className={`b_showReviews-btn ${showRActive ? 'active' : ''}`} onClick={switchReviewSection}>Skor</span>
-                        </div>
-                        <div className={`brand_subpage`}>
-                            {userRActive && <UserReview_Section />}
-                            {showRActive && <Reviews_Section />}
-                        </div>
+                </div>
+                <div className='review_section'>
+                    <div className='brand_subpage_nav'>
+                        <span className={`b_reviewing-btn ${userRActive ? 'active' : ''}`} onClick={switchReviewSection}>Oyla</span>
+                        <span className={`b_showReviews-btn ${showRActive ? 'active' : ''}`} onClick={switchReviewSection}>Skor</span>
                     </div>
-                </main>
-            </section>
-        </div>
+                    <div className={`brand_subpage`}>
+                        {userRActive && <UserReview_Section />}
+                        {showRActive && <Reviews_Section />}
+                    </div>
+                </div>
+            </main>
+        </Template>
     )
 };
 

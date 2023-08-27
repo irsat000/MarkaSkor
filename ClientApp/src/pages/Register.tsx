@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { AppHeader } from '../components/template/Header';
-import { NavDesktop } from '../components/template/NavDesktop';
 import { LoginWithGoogle } from '../components/GoogleLogin';
 import { handleError, defaultFetchPost } from '../utility/fetchUtils';
 import { cleanEmail } from '../utility/helperUtils';
 import { loginUser, checkUser, logoutUser, readUser } from '../utility/authUtils';
 import { UserContext } from '../context/AuthContext';
+import Template from './Template';
 
 
 // DEPRECATED
@@ -75,7 +74,7 @@ const RegistrationForm: React.FC<{
     activateAForm: () => void
 }> = ({ formData, setFormData, activateAForm }) => {
     const navigate = useNavigate();
-    
+
     const { setUserData } = useContext(UserContext);
 
     const [formErrors, setFormErrors] = useState({
@@ -282,16 +281,12 @@ export const Page_Register = () => {
     };
 
     return (
-        <div className='page_content'>
-            <NavDesktop />
-            <section>
-                <AppHeader page="Kayıt Ol" />
-                <main className='main-register'>
-                    {rForm && <RegistrationForm formData={formData} setFormData={setFormData} activateAForm={activateAForm} />}
-                    {aForm && <SmsActivationForm formData={formData} activateRForm={activateRForm} />}
-                </main>
-            </section>
-        </div>
+        <Template pageName="Kayıt Ol">
+            <main className='main-register'>
+                {rForm && <RegistrationForm formData={formData} setFormData={setFormData} activateAForm={activateAForm} />}
+                {aForm && <SmsActivationForm formData={formData} activateRForm={activateRForm} />}
+            </main>
+        </Template>
     )
 };
 

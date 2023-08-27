@@ -10,11 +10,11 @@ import { logoutUser } from '../../utility/authUtils';
 
 
 const DesktopHeader: React.FC<{
-    page: String,
+    pageName: String,
     toggleLoginModal: () => void,
     dropdownMenuActive: boolean,
     setDropdownMenuActive: (e: any) => void
-}> = ({ page, toggleLoginModal, dropdownMenuActive, setDropdownMenuActive }) => {
+}> = ({ pageName, toggleLoginModal, dropdownMenuActive, setDropdownMenuActive }) => {
     const { userData, setUserData } = useContext(UserContext);
     // To check where the click even happened so we can on/off the dropdown menu
     const refDropdownMenu = useRef<any>(null);
@@ -44,10 +44,10 @@ const DesktopHeader: React.FC<{
     return (
         <div className='desktop_header'>
             <div className='page_title'>
-                <span>{page}</span>
+                <span>{pageName}</span>
             </div>
             <div className='header_actions'>
-                {page !== 'Anasayfa' ?
+                {pageName !== 'Anasayfa' ?
                     <div className='search-header_desktop-cont'>
                         <input type='text' placeholder='Marka ara' />
                         <Search className='search_input-icon' />
@@ -103,8 +103,8 @@ const DesktopHeader: React.FC<{
 
 
 export const AppHeader: React.FC<{
-    page: String
-}> = ({ page }) => {
+    pageName: String
+}> = ({ pageName }) => {
     const [dropdownMenuActive, setDropdownMenuActive] = useState(false);
     const [drawerActive, setDrawerActive] = useState(false);
     const [loginModalActive, setLoginModalActive] = useState(false);
@@ -125,7 +125,7 @@ export const AppHeader: React.FC<{
                 <div className='drawerBtn-cont' onClick={toggleDrawer}>
                     <List />
                 </div>
-                {page !== 'Anasayfa' ?
+                {pageName !== 'Anasayfa' ?
                     <>
                         <div className='logo-mobile-cont'>
                             <span>MarkaSkor</span>
@@ -136,7 +136,7 @@ export const AppHeader: React.FC<{
                     </> : null
                 }
             </div>
-            <DesktopHeader page={page} toggleLoginModal={toggleLoginModal} dropdownMenuActive={dropdownMenuActive} setDropdownMenuActive={setDropdownMenuActive} />
+            <DesktopHeader pageName={pageName} toggleLoginModal={toggleLoginModal} dropdownMenuActive={dropdownMenuActive} setDropdownMenuActive={setDropdownMenuActive} />
             <Drawer drawerActive={drawerActive} toggleDrawer={toggleDrawer} toggleLoginModal={toggleLoginModal} />
             <LoginModal modalActive={loginModalActive} toggleLoginModal={toggleLoginModal} />
         </header>

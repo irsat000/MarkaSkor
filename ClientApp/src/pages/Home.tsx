@@ -1,42 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'react-bootstrap-icons';
-import { AppHeader } from '../components/template/Header';
-import { NavDesktop } from '../components/template/NavDesktop';
+import Template from './Template';
 import sectorsData from '../data/sectors.json';
 
 export const Page_Home = () => {
     return (
-        <div className='page_content'>
-            <NavDesktop />
-            <section>
-                <AppHeader page='Anasayfa' />
-                <main className='main-index'>
-                    <div className='mainpage_heading'>
-                        <span>MarkaSkor</span>
-                    </div>
-                    <div className='search-main-cont'>
-                        <input type='text' placeholder='Marka ara' />
-                        <Search className='search_input-icon' />
-                    </div>
-                    <div className='sectors_heading'>
-                        <span>Sektörler</span>
-                    </div>
-                    <article>
-                        {sectorsData.map((sector) => {
-                            return (
-                                <Link to={`/sektor/${sector.sectorKey}`} className='sector_item' key={sector.id}>
-                                    <div className='sector_item_img-cont'>
-                                        <img src={require(`../assets/images/sectors/${sector.img}`)} alt={sector.sectorName} />
-                                    </div>
-                                    <span>{sector.sectorName}</span>
-                                </Link>
-                            )
-                        })}
-                    </article>
-                </main>
-            </section>
-        </div>
+        <Template pageName="Anasayfa">
+            <main className='main-index'>
+                <div className='mainpage_heading'>
+                    <span>MarkaSkor</span>
+                </div>
+                <div className='search-main-cont'>
+                    <input type='text' placeholder='Marka ara' />
+                    <Search className='search_input-icon' />
+                </div>
+                <div className='sectors_heading'>
+                    <span>Sektörler</span>
+                </div>
+                <article>
+                    {sectorsData.map((sector) => {
+                        return (
+                            <Link to={`/sektor/${sector.sectorKey}`} className='sector_item' key={sector.id}>
+                                <div className='sector_item_img-cont'>
+                                    <img src={require(`../assets/images/sectors/${sector.img}`)} alt={sector.sectorName} />
+                                </div>
+                                <span>{sector.sectorName}</span>
+                            </Link>
+                        )
+                    })}
+                </article>
+            </main>
+        </Template>
     )
 };
 
