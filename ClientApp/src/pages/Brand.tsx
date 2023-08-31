@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Tag, Pentagon, Calendar, Star, StarHalf, StarFill, ListUl, ChatLeft } from 'react-bootstrap-icons';
 import { useParams, Link } from 'react-router-dom';
-import { AppHeader } from '../components/template/Header';
-import { NavDesktop } from '../components/template/NavDesktop';
-import Template from './Template';
+import Template from '../components/template/Template';
 
 
 

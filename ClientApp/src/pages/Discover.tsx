@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tag, Pentagon } from 'react-bootstrap-icons';
 import { Link, useParams } from 'react-router-dom';
+import Template from '../components/template/Template';
 import sectorsData from '../data/sectors.json';
-import Template from './Template';
 
 
 export const Page_Discover = () => {

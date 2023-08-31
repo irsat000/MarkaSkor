@@ -5,7 +5,7 @@ import { handleError, defaultFetchPost } from '../utility/fetchUtils';
 import { cleanEmail } from '../utility/helperUtils';
 import { loginUser, checkUser, logoutUser, readUser } from '../utility/authUtils';
 import { UserContext } from '../context/AuthContext';
-import Template from './Template';
+import Template from '../components/template/Template';
 
 
 // DEPRECATED

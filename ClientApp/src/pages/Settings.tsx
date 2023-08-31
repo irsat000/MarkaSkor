@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import Template from './Template';
+import Template from '../components/template/Template';
 
 
 

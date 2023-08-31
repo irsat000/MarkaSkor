@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'react-bootstrap-icons';
-import Template from './Template';
+import Template from '../components/template/Template';
 import sectorsData from '../data/sectors.json';
 
 export const Page_Home = () => {

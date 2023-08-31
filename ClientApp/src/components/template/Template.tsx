@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppHeader } from '../components/template/Header';
-import { NavDesktop } from '../components/template/NavDesktop';
+import { AppHeader } from './Header';
+import { NavDesktop } from './NavDesktop';
 
 
 
